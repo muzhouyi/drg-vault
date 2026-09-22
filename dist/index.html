@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="在浏览器本地查看、比较和调整《深岩银河》Steam 存档。" />
+    <meta name="color-scheme" content="dark" />
+    <title>矿工档案库 · DRG 存档编辑器</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b1016'/%3E%3Cpath d='M12 43 28 12h8l16 31-8 9H20z' fill='%23f0a928'/%3E%3Cpath d='M27 25h10l5 15H22z' fill='%230b1016'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="noise" aria-hidden="true"></div>
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="矿工档案库首页">
+        <span class="brand-mark" aria-hidden="true">MV</span>
+        <span><strong>矿工档案库</strong><small>MINER VAULT / LOCAL SAVE LAB</small></span>
+      </a>
+      <div class="top-actions">
+        <span class="privacy"><i></i> 存档仅在本机处理</span>
+        <button class="button ghost" id="reset-button" disabled>撤销全部</button>
+        <button class="button primary" id="export-button" disabled>导出修改版</button>
+      </div>
+    </header>
+
+    <main class="shell">
+      <aside class="sidebar" aria-label="编辑器导航">
+        <button class="nav-item active" data-view="overview"><span>01</span>档案总览</button>
+        <button class="nav-item" data-view="resources"><span>02</span>资源与进度</button>
+        <button class="nav-item" data-view="classes"><span>03</span>职业配装</button>
+        <button class="nav-item" data-view="cores"><span>04</span>核心与超频</button>
+        <button class="nav-item" data-view="skins"><span>05</span>武器涂装</button>
+        <div class="sidebar-note">
+          <b>安全模式</b>
+          <p>所有改动先进入待应用清单。导出新文件前不会触碰原存档。</p>
+        </div>
+      </aside>
+
+      <section class="workspace">
+        <div class="workspace-heading">
+          <div>
+            <p class="eyebrow">DEEP ROCK GALACTIC / SAVE CONTROL</p>
+            <h1>把矿工生涯摊在桌面上。</h1>
+            <p class="lede">查看已拥有、待锻造和仍未获得的内容，再按需要生成一份新的存档。</p>
+          </div>
+          <div class="file-chip" id="file-chip"><span>未载入</span><small>等待 .sav 文件</small></div>
+        </div>
+
+        <section class="drop-panel" id="drop-panel">
+          <input id="save-input" type="file" accept=".sav,application/octet-stream" hidden />
+          <div class="drop-icon" aria-hidden="true">⇩</div>
+          <div>
+            <h2>载入 Player.sav</h2>
+            <p>拖到这里，或从电脑中选择。文件不会离开浏览器。</p>
+          </div>
+          <button class="button primary" id="choose-button">选择存档</button>
+        </section>
+
+        <section class="catalog-strip" aria-label="可识别内容">
+          <article><span>24</span><p>职业武器</p></article>
+          <article><span>300+</span><p>超频与核心奖励</p></article>
+          <article><span>12</span><p>武器框架系列</p></article>
+          <article><span>6</span><p>职业配装槽</p></article>
+        </section>
+
+        <section id="view-root" class="view-root" aria-live="polite">
+          <div class="empty-state">
+            <p class="eyebrow">READY FOR INSERTION</p>
+            <h2>载入存档后，这里会显示完整清单</h2>
+            <p>你会看到当前数值、四职业进度，以及每项收藏的已拥有／未获得状态。</p>
+          </div>
+        </section>
+      </section>
+
+      <aside class="changes" aria-label="待应用改动">
+        <div class="changes-head"><span>待应用改动</span><b id="change-count">0</b></div>
+        <div class="changes-empty" id="changes-list">
+          <span>✓</span>
+          <p>还没有调整任何内容</p>
+        </div>
+        <div class="changes-foot"><p>导出时会生成新文件，原存档保持不变。</p></div>
+      </aside>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
