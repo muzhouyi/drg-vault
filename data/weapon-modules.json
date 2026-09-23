@@ -1,0 +1,2564 @@
+[
+  {
+    "id": "b41b7d5e937ea144962df79591fa3aad",
+    "weapon": "'Bulldog' Heavy Revolver",
+    "name": "Perfect Weight Balance",
+    "description": "Improved Accuracy",
+    "tier": 1
+  },
+  {
+    "id": "989a3f1293dacd4ea3c7dd2507f41381",
+    "weapon": "'Bulldog' Heavy Revolver",
+    "name": "Quickfire Ejector",
+    "description": "Experience, training, and a couple of under-the-table design \"adjustments\" means your gun can be reloaded significantly faster.",
+    "tier": 1
+  },
+  {
+    "id": "d501b4e64204e149aab01f9abe0939ec",
+    "weapon": "'Bulldog' Heavy Revolver",
+    "name": "Expanded Ammo Bags",
+    "description": "Expanded Ammo Bags",
+    "tier": 2
+  },
+  {
+    "id": "d4d2219514b4854986db57c11c009fee",
+    "weapon": "'Bulldog' Heavy Revolver",
+    "name": "Floating Barrel",
+    "description": "Sweet, sweet optimization. We called in a few friends and managed to significantly improve the stability of this gun.",
+    "tier": 2
+  },
+  {
+    "id": "e9d4a50b31341d429cd521e81d0745a7",
+    "weapon": "'Bulldog' Heavy Revolver",
+    "name": "Increased Caliber Rounds",
+    "description": "The good folk in R&D have been busy. The overall damage of your weapon is increased.",
+    "tier": 2
+  },
+  {
+    "id": "dc5d3df27c1f1949a592ebba512aaef1",
+    "weapon": "'Bulldog' Heavy Revolver",
+    "name": "Explosive Rounds",
+    "description": "Bullet detonates creating a radius of damage",
+    "tier": 3
+  },
+  {
+    "id": "8d416cecb1b6264e9a3316dff6578342",
+    "weapon": "'Bulldog' Heavy Revolver",
+    "name": "Explosive Rounds",
+    "description": "Bullet detonates creating a radius of damage but deals less direct damage.",
+    "tier": 3
+  },
+  {
+    "id": "af95f71df9d80148a0be5e5d3eb537d7",
+    "weapon": "'Bulldog' Heavy Revolver",
+    "name": "Hollow-Point Bullets",
+    "description": "Hit 'em where it hurts! Literally! We've upped the damage you'll be able to do to any creature's fleshy bits. You're welcome.",
+    "tier": 3
+  },
+  {
+    "id": "83fa1620ddd62f448fca424bb41f8812",
+    "weapon": "'Bulldog' Heavy Revolver",
+    "name": "Stun",
+    "description": "Hit 'em so hard they can't recover! Every shot has a chance to stop the target in its tracks.",
+    "tier": 3
+  },
+  {
+    "id": "2bf48f7a336e4c44a6c43b850311eb52",
+    "weapon": "'Bulldog' Heavy Revolver",
+    "name": "Super Blowthrough Rounds",
+    "description": "Shaped projectiles designed to over-penetrate targets with a minimal loss of energy. In other words: Fire straight through several enemies at once!",
+    "tier": 3
+  },
+  {
+    "id": "3a16177cb1509543919ab1ae600b2e65",
+    "weapon": "'Bulldog' Heavy Revolver",
+    "name": "Expanded Ammo Bags",
+    "description": "You had to give up some sandwich-storage, but your total ammo capacity is increased!",
+    "tier": 4
+  },
+  {
+    "id": "3b70cb6cc0b30c4586eebb5730511d5c",
+    "weapon": "'Bulldog' Heavy Revolver",
+    "name": "High Velocity Rounds",
+    "description": "The good folk in R&D have been busy. The overall damage of your weapon is increased.",
+    "tier": 4
+  },
+  {
+    "id": "780518514b078f4f823d837b42ee65a7",
+    "weapon": "'Bulldog' Heavy Revolver",
+    "name": "Dead-Eye",
+    "description": "No aim penalty while moving",
+    "tier": 5
+  },
+  {
+    "id": "c585c79d01a7e441821a935ee322d4a6",
+    "weapon": "'Bulldog' Heavy Revolver",
+    "name": "Dead-Eye",
+    "description": "No aim penalty while moving",
+    "tier": 5
+  },
+  {
+    "id": "11fceb369a7a5e46acc42d35015ee098",
+    "weapon": "'Bulldog' Heavy Revolver",
+    "name": "Glyphid Neurotoxin Coating",
+    "description": "Bonus damage against Glyphids",
+    "tier": 5
+  },
+  {
+    "id": "b3508a4ea3ba694e9a1f2066304495b5",
+    "weapon": "'Bulldog' Heavy Revolver",
+    "name": "Neurotoxin Coating",
+    "description": "Chance to poison your target. Affected creatures move slower and take damage over time.",
+    "tier": 5
+  },
+  {
+    "id": "45d457c3a040f24e84733cc7a99928be",
+    "weapon": "'Hurricane' Guided Rocket System",
+    "name": "Increased Blast Radius",
+    "description": "R&D improved the fuel consumption rate of your missiles, leaving more fuel on impact and causing a bigger explosion.",
+    "tier": 1
+  },
+  {
+    "id": "a04cc28dac625e4187b24dbda8eb57de",
+    "weapon": "'Hurricane' Guided Rocket System",
+    "name": "Missile Belts",
+    "description": "Extra missiles stored in fancy belts. One for each shoulder!",
+    "tier": 1
+  },
+  {
+    "id": "fabdddc2de4c3e488df6e2284e8dfbab",
+    "weapon": "'Hurricane' Guided Rocket System",
+    "name": "Pressurized Gas Cylinder",
+    "description": "With gas cylinders filled to the brim your missiles really pack a punch!",
+    "tier": 1
+  },
+  {
+    "id": "be65ce6fc69abf4da98527c85d8c86cc",
+    "weapon": "'Hurricane' Guided Rocket System",
+    "name": "Anti-Tank Missiles",
+    "description": "These anti-tank missiles will crack those big bugs' plating like an egg!",
+    "tier": 2
+  },
+  {
+    "id": "056eaf25b7669c48b061274e94fce4b6",
+    "weapon": "'Hurricane' Guided Rocket System",
+    "name": "Bigger Jet Engine",
+    "description": "The engines in your missiles have been replaced with more powerful variants, increasing their max velocity and turn rate.",
+    "tier": 2
+  },
+  {
+    "id": "3aeab159e89a5d4d895981941cc0900f",
+    "weapon": "'Hurricane' Guided Rocket System",
+    "name": "Improved Feed Mechanism",
+    "description": "R&D improved the feed mechanism of this bad boy, making it fire faster!",
+    "tier": 3
+  },
+  {
+    "id": "07cac4243c953a43af0bcdf80042b74f",
+    "weapon": "'Hurricane' Guided Rocket System",
+    "name": "Nano Missiles",
+    "description": "Half the size, but just as lethal. Your magazines can store a lot more missiles now.",
+    "tier": 3
+  },
+  {
+    "id": "4437ac2be65048458a14b23df60bdf48",
+    "weapon": "'Hurricane' Guided Rocket System",
+    "name": "Shrapnel Load",
+    "description": "R&D packed a little surprise in the missile heads that will tear those creatures' fleshy bits to shreds.",
+    "tier": 4
+  },
+  {
+    "id": "0d0202adfdf212498bcbfb369634ca9b",
+    "weapon": "'Hurricane' Guided Rocket System",
+    "name": "Zip Fuel",
+    "description": "With this high energy fuel the impact force of your missiles hit like a truck.",
+    "tier": 4
+  },
+  {
+    "id": "1cf539bc0ddb0c49a67b00c1c5437be2",
+    "weapon": "'Hurricane' Guided Rocket System",
+    "name": "Napalm-Infused Rounds",
+    "description": "33% damage converted to heat. This will reduce direct damage, but can set enemies on fire.",
+    "tier": 5
+  },
+  {
+    "id": "66fd69b43abc054fbeab09a334500ed1",
+    "weapon": "'Hurricane' Guided Rocket System",
+    "name": "Nitroglycerin Compound",
+    "description": "With a pinch of nitroglycerin added to the fuel your missiles become ticking time-bombs, doing increased damage the longer they stay in the air.",
+    "tier": 5
+  },
+  {
+    "id": "b4e0127a46c0ba4786acc9c5b3cc506e",
+    "weapon": "'Hurricane' Guided Rocket System",
+    "name": "Uncontrolled Decompression",
+    "description": "R&D furiously hit each missile with a wrench to give the impact shockwaves some extra oomph.",
+    "tier": 5
+  },
+  {
+    "id": "ff3cf07107b3ce4c9658f5e4c445e660",
+    "weapon": "'Lead Storm' Powered Minigun",
+    "name": "Improved Motor",
+    "description": "Increased rate of fire and faster gyro stabilization",
+    "tier": 1
+  },
+  {
+    "id": "38892a69ccab63419aa03f98624882f2",
+    "weapon": "'Lead Storm' Powered Minigun",
+    "name": "Improved Platform Stability",
+    "description": "Increased Accuracy",
+    "tier": 1
+  },
+  {
+    "id": "0bdd0a44fb08a743ac6084dcb137fae2",
+    "weapon": "'Lead Storm' Powered Minigun",
+    "name": "Improved Platform Stability",
+    "description": "Increased Accuracy",
+    "tier": 1
+  },
+  {
+    "id": "9bd6f83a6668b048ad4dc187db4ae1c2",
+    "weapon": "'Lead Storm' Powered Minigun",
+    "name": "Magnetic Refrigeration",
+    "description": "Increases the cooling rate",
+    "tier": 1
+  },
+  {
+    "id": "3e3625aa92a6304391ab3575fed2ac3c",
+    "weapon": "'Lead Storm' Powered Minigun",
+    "name": "Magnetic Refrigeration",
+    "description": "Increases the cooling rate and cooldown begins almost immediately after you stop firing.",
+    "tier": 1
+  },
+  {
+    "id": "00d9625f9c9ebb42b699f533a4c4a18f",
+    "weapon": "'Lead Storm' Powered Minigun",
+    "name": "Magnetic Refrigeration",
+    "description": "Increases the cooling rate",
+    "tier": 1
+  },
+  {
+    "id": "7de27db5a822604e90ada1e6fc12e1a9",
+    "weapon": "'Lead Storm' Powered Minigun",
+    "name": "High Velocity Rounds",
+    "description": "The good folk in R&D have been busy. The overall damage of your weapon is increased.",
+    "tier": 2
+  },
+  {
+    "id": "562027c361ed46429057233141aa13ca",
+    "weapon": "'Lead Storm' Powered Minigun",
+    "name": "Oversized Drum",
+    "description": "Expanded Ammo Bags",
+    "tier": 2
+  },
+  {
+    "id": "d46f7621e060c84a9e89b8c25ce48ecc",
+    "weapon": "'Lead Storm' Powered Minigun",
+    "name": "Blowthrough Rounds",
+    "description": "Shaped bullets capable of passing through a target!",
+    "tier": 3
+  },
+  {
+    "id": "fe03eabca9a66f49bd9840957545e9bd",
+    "weapon": "'Lead Storm' Powered Minigun",
+    "name": "Hardened Rounds",
+    "description": "Improved armor breaking",
+    "tier": 3
+  },
+  {
+    "id": "541c40908383a44ba38770c96d8c9753",
+    "weapon": "'Lead Storm' Powered Minigun",
+    "name": "Improved Stun",
+    "description": "Stun enemies more often and for a longer time!",
+    "tier": 3
+  },
+  {
+    "id": "1864381a3616b84bbbecbf8cdab3717f",
+    "weapon": "'Lead Storm' Powered Minigun",
+    "name": "Lighter Barrel Assembly",
+    "description": "Start killing things sooner with a shorter spinup time",
+    "tier": 4
+  },
+  {
+    "id": "b5bd496d2e46cc448f7090c2c15a2f17",
+    "weapon": "'Lead Storm' Powered Minigun",
+    "name": "Magnetic Bearings",
+    "description": "Barrels keep spinning for a longer time after firing, keeping the gun stable for longer",
+    "tier": 4
+  },
+  {
+    "id": "492c7eb6352b5b48ada088740227a83f",
+    "weapon": "'Lead Storm' Powered Minigun",
+    "name": "Magnetic Bearings",
+    "description": "Barrels keep spinning for a longer time after firing, keeping the gun stable for longer",
+    "tier": 4
+  },
+  {
+    "id": "cfdf0fe4287d47449136db4daefe6c40",
+    "weapon": "'Lead Storm' Powered Minigun",
+    "name": "Variable Chamber Pressure",
+    "description": "Damage increase when fully stabilized",
+    "tier": 4
+  },
+  {
+    "id": "405ca0ad9c818f4885727e81448e3780",
+    "weapon": "'Lead Storm' Powered Minigun",
+    "name": "Aggressive Venting",
+    "description": "Burn everything around you and send enemies running when the weapon overheats. The extreme heat dumping method also helps to significantly shorten downtime.",
+    "tier": 5
+  },
+  {
+    "id": "02638e18edc0aa478075de5d09da575d",
+    "weapon": "'Lead Storm' Powered Minigun",
+    "name": "Cold As The Grave",
+    "description": "Every kill cools the gun",
+    "tier": 5
+  },
+  {
+    "id": "5f9e4e578c4fe14497cb9152b7517e25",
+    "weapon": "'Lead Storm' Powered Minigun",
+    "name": "Hot Bullets",
+    "description": "Rounds fired when the heat meter is red will burn the target",
+    "tier": 5
+  },
+  {
+    "id": "0655d330ff0e3e40b72988480c7dd212",
+    "weapon": "'Stubby' Voltaic SMG",
+    "name": "Expanded Ammo Bags",
+    "description": "You had to give up some sandwich-storage, but your total ammo capacity is increased!",
+    "tier": 1
+  },
+  {
+    "id": "8c1c66326eb6514183aad471ccd8a10c",
+    "weapon": "'Stubby' Voltaic SMG",
+    "name": "Increased Caliber Rounds",
+    "description": "The good folk in R&D have been busy. The overall damage of your weapon is increased.",
+    "tier": 1
+  },
+  {
+    "id": "ea01e605d5fc054c80934290e0e9aea3",
+    "weapon": "'Stubby' Voltaic SMG",
+    "name": "Upgraded Capacitors",
+    "description": "Better chance to electrocute target",
+    "tier": 1
+  },
+  {
+    "id": "e2cbff3df5ce0845905126fe60894d57",
+    "weapon": "'Stubby' Voltaic SMG",
+    "name": "Floating Barrel",
+    "description": "Sweet, sweet optimization. We called in a few friends and managed to significantly improve the stability of this gun.",
+    "tier": 2
+  },
+  {
+    "id": "b70d51659224d444b3b89a7ffaa4ae0f",
+    "weapon": "'Stubby' Voltaic SMG",
+    "name": "High Capacity Magazine",
+    "description": "The good thing about clips, magazines, ammo drums, fuel tanks ...you can always get bigger variants.",
+    "tier": 2
+  },
+  {
+    "id": "4c6068c254ff694c91a06025e680c080",
+    "weapon": "'Stubby' Voltaic SMG",
+    "name": "Improved Gas System",
+    "description": "We overclocked your gun. It fires faster. Don't ask. Just enjoy. Also probably don't tell Management, please.",
+    "tier": 2
+  },
+  {
+    "id": "0ce5cbfa3d03f24bb5fc085b902f3232",
+    "weapon": "'Stubby' Voltaic SMG",
+    "name": "Recoil Dampener",
+    "description": "Quality engineering, the best lasercut parts, the tender loving care of a dedicated R&D Department. The recoil of your gun is drastically reduced.",
+    "tier": 2
+  },
+  {
+    "id": "5963743acc505b44ad38c40b146f7c3e",
+    "weapon": "'Stubby' Voltaic SMG",
+    "name": "Expanded Ammo Bags",
+    "description": "You had to give up some sandwich-storage, but your total ammo capacity is increased!",
+    "tier": 3
+  },
+  {
+    "id": "22f188e5637650499d00edb962723768",
+    "weapon": "'Stubby' Voltaic SMG",
+    "name": "High Velocity Rounds",
+    "description": "The good folk in R&D have been busy. The overall damage of your weapon is increased.",
+    "tier": 3
+  },
+  {
+    "id": "d599973e06e6c04f800bb178472819f7",
+    "weapon": "'Stubby' Voltaic SMG",
+    "name": "Conductive Bullets",
+    "description": "More damage to targets that are in an electric field",
+    "tier": 4
+  },
+  {
+    "id": "66a6d71008ed94439bdd661bb5957a69",
+    "weapon": "'Stubby' Voltaic SMG",
+    "name": "Hardened Rounds",
+    "description": "We're proud of this one. Armor shredding. Tear through that high-impact plating of those big buggers like butter. What could be finer?",
+    "tier": 4
+  },
+  {
+    "id": "b689568c7376474ebbda9ae0a62fd81f",
+    "weapon": "'Stubby' Voltaic SMG",
+    "name": "Hollow-Point Bullets",
+    "description": "Hit 'em where it hurts! Literally! We've upped the damage you'll be able to do to any creature's fleshy bits. You're welcome.",
+    "tier": 4
+  },
+  {
+    "id": "6507c2b559c4ab4aa96b8709319b9977",
+    "weapon": "'Stubby' Voltaic SMG",
+    "name": "Overcharged Rounds",
+    "description": "More electric damage",
+    "tier": 4
+  },
+  {
+    "id": "d2f7c91f9e9b3b4ba0c970c4e6b016ed",
+    "weapon": "'Stubby' Voltaic SMG",
+    "name": "Electric Arc",
+    "description": "Chance for electrocution to arc from one target to others",
+    "tier": 5
+  },
+  {
+    "id": "dc4636aec257b348bb6d7ffc3e510343",
+    "weapon": "'Stubby' Voltaic SMG",
+    "name": "Improved Accuracy",
+    "description": "Better alignment and weight distribution means more shots hitting your target.",
+    "tier": 5
+  },
+  {
+    "id": "14116fc92ebd364f9d44057084e15576",
+    "weapon": "'Stubby' Voltaic SMG",
+    "name": "Magazine capacity tweak",
+    "description": "Greatly increased magazine capacity",
+    "tier": 5
+  },
+  {
+    "id": "51a636fb3e8e5342bbf0b40c7d14dbcd",
+    "weapon": "'Thunderhead' Heavy Autocannon",
+    "name": "Expanded Ammo Bags",
+    "description": "You had to give up some sandwich-storage, but your total ammo capacity is increased!",
+    "tier": 1
+  },
+  {
+    "id": "7490c8e495b77b4db2ae04950132c131",
+    "weapon": "'Thunderhead' Heavy Autocannon",
+    "name": "High Capacity Magazine",
+    "description": "The good thing about clips, magazines, ammo drums, fuel tanks ...you can always get bigger variants.",
+    "tier": 1
+  },
+  {
+    "id": "6f4208c19553e946b576f5e440df6d8b",
+    "weapon": "'Thunderhead' Heavy Autocannon",
+    "name": "Increased Caliber Rounds",
+    "description": "The good folk in R&D have been busy. The overall damage of your weapon is increased.",
+    "tier": 1
+  },
+  {
+    "id": "2c810ae2bd7bcc40b08f4758129e3d67",
+    "weapon": "'Thunderhead' Heavy Autocannon",
+    "name": "Improved Gas System",
+    "description": "We overclocked your gun. It fires faster. Don't ask. Just enjoy. Also probably don't tell Management, please.",
+    "tier": 2
+  },
+  {
+    "id": "4f3872c9065c5643a310518fa2bf8751",
+    "weapon": "'Thunderhead' Heavy Autocannon",
+    "name": "Lighter Barrel Assembly",
+    "description": "Reach the max rate of fire faster",
+    "tier": 2
+  },
+  {
+    "id": "2a8d065f80cc5e41acc15ab7d1a10f57",
+    "weapon": "'Thunderhead' Heavy Autocannon",
+    "name": "Tighter Barrel Alignment",
+    "description": "Improved Accuracy",
+    "tier": 2
+  },
+  {
+    "id": "013687d05cec3d418118801ce4f61ad9",
+    "weapon": "'Thunderhead' Heavy Autocannon",
+    "name": "Tighter Barrel Alignment",
+    "description": "Improved Accuracy",
+    "tier": 2
+  },
+  {
+    "id": "239b4826b375ef46b1f4b285a9c25b9c",
+    "weapon": "'Thunderhead' Heavy Autocannon",
+    "name": "High Velocity Rounds",
+    "description": "The good folk in R&D have been busy. The overall damage of your weapon is increased.",
+    "tier": 3
+  },
+  {
+    "id": "39396c94b786da4691c23555ea000a69",
+    "weapon": "'Thunderhead' Heavy Autocannon",
+    "name": "Loaded Rounds",
+    "description": "Increased splash damage",
+    "tier": 3
+  },
+  {
+    "id": "a11787ef5d7ac24a8be2847ef00c0d8d",
+    "weapon": "'Thunderhead' Heavy Autocannon",
+    "name": "Supercharged Feed Mechanism",
+    "description": "We overclocked your gun. It fires faster. Don't ask. Just enjoy. Also probably don't tell Management, please.",
+    "tier": 3
+  },
+  {
+    "id": "093fe39d7e2a1144a5b8af9cec4bc7f9",
+    "weapon": "'Thunderhead' Heavy Autocannon",
+    "name": "Hardened Rounds",
+    "description": "We're proud of this one. Armor shredding. Tear through that high-impact plating of those big buggers like butter. What could be finer?",
+    "tier": 4
+  },
+  {
+    "id": "906baffd3c01504cbded8e71d8acff8a",
+    "weapon": "'Thunderhead' Heavy Autocannon",
+    "name": "Shrapnel Rounds",
+    "description": "Greater splash damage radius",
+    "tier": 4
+  },
+  {
+    "id": "c6caf62633997944aa2c28442dc5a89f",
+    "weapon": "'Thunderhead' Heavy Autocannon",
+    "name": "Stun",
+    "description": "Hit 'em so hard they can't recover! Every shot has a chance to stop the target in its tracks.",
+    "tier": 4
+  },
+  {
+    "id": "e670e9c4eab15d4fb25cf68d3e5a501c",
+    "weapon": "'Thunderhead' Heavy Autocannon",
+    "name": "Damage Resistance at Full RoF",
+    "description": "Take significantly less damage when at max rate of fire.",
+    "tier": 5
+  },
+  {
+    "id": "03cc88a5ebf68544aa9ae14debe2862d",
+    "weapon": "'Thunderhead' Heavy Autocannon",
+    "name": "Feedback Loop",
+    "description": "Increased damage when at max rate of fire",
+    "tier": 5
+  },
+  {
+    "id": "d8e76a969ff675408b12ac4bd61cb543",
+    "weapon": "'Thunderhead' Heavy Autocannon",
+    "name": "Supressive Fire",
+    "description": "Chance to scare creatures next to a bullet impact",
+    "tier": 5
+  },
+  {
+    "id": "26437bc06958064ab8cf80c108ebcc80",
+    "weapon": "'Warthog' Auto 210",
+    "name": "Overstuffed Magazine",
+    "description": "The good thing about clips, magazines, ammo drums, fuel tanks ...you can always get bigger variants.",
+    "tier": 1
+  },
+  {
+    "id": "bd65d23baf4d7e4eb292039eea64c389",
+    "weapon": "'Warthog' Auto 210",
+    "name": "Supercharged Feed Mechanism",
+    "description": "We overclocked your gun. It fires faster. Don't ask. Just enjoy. Also probably don't tell Management, please.",
+    "tier": 1
+  },
+  {
+    "id": "9748899382b1ce46bd720af0f469c5b6",
+    "weapon": "'Warthog' Auto 210",
+    "name": "Choke",
+    "description": "Decreased shot spread",
+    "tier": 2
+  },
+  {
+    "id": "5310bbc131f9e64e90b69adc436afd8d",
+    "weapon": "'Warthog' Auto 210",
+    "name": "Expanded Ammo Bags",
+    "description": "You had to give up some sandwich-storage, but your total ammo capacity is increased!",
+    "tier": 2
+  },
+  {
+    "id": "471ce655d90d894297673527b6f8b3d4",
+    "weapon": "'Warthog' Auto 210",
+    "name": "Loaded Shells",
+    "description": "More pellets in each shell",
+    "tier": 2
+  },
+  {
+    "id": "e0ea817bd12e4b40ae285bf947df6c15",
+    "weapon": "'Warthog' Auto 210",
+    "name": "High Capacity Magazine",
+    "description": "The good thing about clips, magazines, ammo drums, fuel tanks ...you can always get bigger variants.",
+    "tier": 3
+  },
+  {
+    "id": "f35674898cda964698eec1bb952fda47",
+    "weapon": "'Warthog' Auto 210",
+    "name": "Quickfire Ejector",
+    "description": "Experience, training, and a couple of under-the-table design \"adjustments\" means your gun can be reloaded significantly faster.",
+    "tier": 3
+  },
+  {
+    "id": "0aee969ec2129346961971d10948464b",
+    "weapon": "'Warthog' Auto 210",
+    "name": "Recoil Dampener",
+    "description": "Quality engineering, the best lasercut parts, the tender loving care of a dedicated R&D Department. The recoil of your gun is drastically reduced.",
+    "tier": 3
+  },
+  {
+    "id": "f261aebc3745234db12c612e39739025",
+    "weapon": "'Warthog' Auto 210",
+    "name": "Bigger Pellets",
+    "description": "The good folk in R&D have been busy. The overall damage of your weapon is increased.",
+    "tier": 4
+  },
+  {
+    "id": "102162bbb807ee43b60d93e7fdaca93c",
+    "weapon": "'Warthog' Auto 210",
+    "name": "Improved Stun",
+    "description": "Stun enemies more often and for a longer time!",
+    "tier": 4
+  },
+  {
+    "id": "a93addfb9337884783e2d7b3d424355f",
+    "weapon": "'Warthog' Auto 210",
+    "name": "Tungsten Coated Buckshot",
+    "description": "We're proud of this one. Armor shredding. Tear through that high-impact plating of those big buggers like butter. What could be finer?",
+    "tier": 4
+  },
+  {
+    "id": "e13c2e4e06a67a408d81fedcd1723b5e",
+    "weapon": "'Warthog' Auto 210",
+    "name": "Miner Adjustments",
+    "description": "Fully automatic with an increased rate of fire",
+    "tier": 5
+  },
+  {
+    "id": "c72c0a4eaf0c204b94c9b1e2e30255de",
+    "weapon": "'Warthog' Auto 210",
+    "name": "Turret Whip",
+    "description": "Shoot your turrets to make them create an overloaded shot",
+    "tier": 5
+  },
+  {
+    "id": "daa9dafd75cd7042a4388e31e3a3117c",
+    "weapon": "Armskore Coil Gun",
+    "name": "Extra Coil",
+    "description": "Putting an extra coil in the barrel of your weapon makes it apply more force to projectiles, which greatly increases their damage output",
+    "tier": 1
+  },
+  {
+    "id": "0dcc74d69745b24abe8e773a9ec37e4b",
+    "weapon": "Armskore Coil Gun",
+    "name": "Larger Battery",
+    "description": "You had to give up some sandwich-storage, but your total ammo capacity is increased!",
+    "tier": 1
+  },
+  {
+    "id": "07c0ce69c8d0da4880d25eb3beedd78a",
+    "weapon": "Armskore Coil Gun",
+    "name": "Resonance Tuning",
+    "description": "Careful tuning results in a trail that is able to sustain itself for a longer period of time.",
+    "tier": 1
+  },
+  {
+    "id": "a6f5e128da3b654ca7bc2306a1618f60",
+    "weapon": "Armskore Coil Gun",
+    "name": "Controlled Magnetic Flow",
+    "description": "By controlling the magnetic flow of the coil you can fire as soon as the gun charges a single bar and any point after with both damage and energy consumption scaled to amount charged.",
+    "tier": 2
+  },
+  {
+    "id": "76e877f0828e3b4e9ba32a0204f023b8",
+    "weapon": "Armskore Coil Gun",
+    "name": "Improved Feeding System",
+    "description": "With some minor tweaks to the feeding chamber the process of reloading has become much smoother, improving reload time significantly",
+    "tier": 2
+  },
+  {
+    "id": "9eebcda6de0161438a126273b0aa71b6",
+    "weapon": "Armskore Coil Gun",
+    "name": "Optimized Magnetic Circuit",
+    "description": "R&D improved the magnetic flux of your circuits to avoid energy loss, resulting in a vastly improved charge rate",
+    "tier": 2
+  },
+  {
+    "id": "4731bcfaf5d5df4fb95ead30e37e6b02",
+    "weapon": "Armskore Coil Gun",
+    "name": "Overcharger",
+    "description": "Rerouting the excess energy back into the magnetic flux keeps the coils charging way over their limit, increasing damage the longer you hold a full charge.",
+    "tier": 2
+  },
+  {
+    "id": "12806b159a7e274f8d2eefefce17331a",
+    "weapon": "Armskore Coil Gun",
+    "name": "Concussive Shockwave",
+    "description": "Modifications to the projectile enhance the sonic shockwaves potentially stunning nearby enemies.",
+    "tier": 3
+  },
+  {
+    "id": "60bed7fafb384c45ac407866f8f11e2e",
+    "weapon": "Armskore Coil Gun",
+    "name": "Fear Trajectory",
+    "description": "Projectiles release sonic impulses as they fly, sending all creatures within the trajectory effect radius fleeing in terror.",
+    "tier": 3
+  },
+  {
+    "id": "c82dc35cc8d7604fb6b158e58c885b74",
+    "weapon": "Armskore Coil Gun",
+    "name": "Defence Enhancement",
+    "description": "The excess energy created from the spinning coils feeds into your armor and enhances its protective capabilities",
+    "tier": 4
+  },
+  {
+    "id": "df556437e7b5374fa63bb5ce15b8cbca",
+    "weapon": "Armskore Coil Gun",
+    "name": "Shockwave",
+    "description": "Directing the waste energy forward through some careful modifications causes a shockwave that hurts any enemies ",
+    "tier": 4
+  },
+  {
+    "id": "43d70453d35f724891354f000d2f227b",
+    "weapon": "Armskore Coil Gun",
+    "name": "Dilated Injector System",
+    "description": "Increasing the amount of injector liquid used on launch causes projectiles to leave behind a wider damage trail",
+    "tier": 5
+  },
+  {
+    "id": "dfada36cb4aaca44b470da85e6d6cac5",
+    "weapon": "Armskore Coil Gun",
+    "name": "Dilated Injector System",
+    "description": "Increasing the amount of injector liquid used on launch causes projectiles to leave behind a wider damage trail",
+    "tier": 5
+  },
+  {
+    "id": "3ee747e80e0d2148a4f2d008576d6871",
+    "weapon": "Armskore Coil Gun",
+    "name": "Electric Trail",
+    "description": "R&D spent hours to fitting your projectiles with titanium wiring that enables them to transfer some of the electric energy from the gun to the damage trail.",
+    "tier": 5
+  },
+  {
+    "id": "b6014077fc77b741a331a2384bf9ae68",
+    "weapon": "Armskore Coil Gun",
+    "name": "Necro-Thermal Catalyst",
+    "description": "Killing a burning enemy turns them into a large explosion of fire and gore, burning anything nearby. The special compound also improves direct damage against burning targets.",
+    "tier": 5
+  },
+  {
+    "id": "ab753742f7f1f74481216a447af19d98",
+    "weapon": "Breach Cutter",
+    "name": "Armor Breaking",
+    "description": "Improves armor breaking capabilities",
+    "tier": 1
+  },
+  {
+    "id": "80f2c92374847948baff418ce6ea1f89",
+    "weapon": "Breach Cutter",
+    "name": "Concussive Blast",
+    "description": "Staggers creatures within the blast radius",
+    "tier": 1
+  },
+  {
+    "id": "452f35c17276ee46b8a8221f9c1ecda7",
+    "weapon": "Breach Cutter",
+    "name": "High Capacity Magazine",
+    "description": "The good thing about clips, magazines, ammo drums, fuel tanks ...you can always get bigger variants.",
+    "tier": 1
+  },
+  {
+    "id": "050e6f35da64024586164d3b8748be01",
+    "weapon": "Breach Cutter",
+    "name": "High Velocity Energy",
+    "description": "We souped up the ejection mechanisms of your gun, so the projectiles are now fired at a much higher velocity.",
+    "tier": 1
+  },
+  {
+    "id": "3f797e3f80c3884e953705609c59714c",
+    "weapon": "Breach Cutter",
+    "name": "Improved Ejector",
+    "description": "Reload time -0.5 seconds",
+    "tier": 1
+  },
+  {
+    "id": "377243975d150e4fa86cec0b373a8458",
+    "weapon": "Breach Cutter",
+    "name": "Prolonged Power Generation",
+    "description": "The projectile is able to travel for a longer period of time before collapsing",
+    "tier": 1
+  },
+  {
+    "id": "b54d7f9a6601274c92d3ff89415fba80",
+    "weapon": "Breach Cutter",
+    "name": "Condensed Plasma",
+    "description": "The good folk in R&D have been busy. The overall damage of your weapon is increased.",
+    "tier": 2
+  },
+  {
+    "id": "5b3bb843b6b8ec409ad5932a2453f4c6",
+    "weapon": "Breach Cutter",
+    "name": "Expanded Ammo Bags",
+    "description": "You had to give up some sandwich-storage, but your total ammo capacity is increased!",
+    "tier": 2
+  },
+  {
+    "id": "ac91905bb243cd4cbc058b2dcb3bc417",
+    "weapon": "Breach Cutter",
+    "name": "Loosened Node Cohesion",
+    "description": "Get a significantly wider plasma line that can hit more targets at once.",
+    "tier": 2
+  },
+  {
+    "id": "f7708f7d62c89e48b16ec258cbc91393",
+    "weapon": "Breach Cutter",
+    "name": "Improved Case Ejector",
+    "description": "A heavily preloaded spring combined with a smaller latch shorten the time it takes to reload.",
+    "tier": 3
+  },
+  {
+    "id": "23b891a36602cc40b5ab6696a505ce9f",
+    "weapon": "Breach Cutter",
+    "name": "Quick Deploy",
+    "description": "The line projectile opens almost immediately and can hit multiple targets at very close range.",
+    "tier": 3
+  },
+  {
+    "id": "25b040518511ca4e9f99e6c531c29919",
+    "weapon": "Breach Cutter",
+    "name": "Armor Breaking",
+    "description": "Greatly improves the armor breaking capabilities of the plasma beam.",
+    "tier": 4
+  },
+  {
+    "id": "33697f4cb582e54e93cb5d07dfaa92f8",
+    "weapon": "Breach Cutter",
+    "name": "Disruptive Frequency Tuning",
+    "description": "The plasma beam will stun most of the denizens of Hoxxes on contact.",
+    "tier": 4
+  },
+  {
+    "id": "0c550515e6b38e4da36aa3b14ac0d2d9",
+    "weapon": "Breach Cutter",
+    "name": "Expanded Ammo Bags",
+    "description": "You had to give up some sandwich-storage, but your total ammo capacity is increased!",
+    "tier": 4
+  },
+  {
+    "id": "22895aa0358d23499f21c1c136e4ef21",
+    "weapon": "Breach Cutter",
+    "name": "Expanded Magazine",
+    "description": "The good thing about clips, magazines, ammo drums, fuel tanks ...you can always get bigger variants.",
+    "tier": 4
+  },
+  {
+    "id": "35a3362ea7444b4caedf9f6a03e26476",
+    "weapon": "Breach Cutter",
+    "name": "Increased Line Size",
+    "description": "Longer plasma line",
+    "tier": 4
+  },
+  {
+    "id": "2ec7244ca9da7c4ab51c53c0970ba67d",
+    "weapon": "Breach Cutter",
+    "name": "Refined Plasma Flow",
+    "description": "The good folk in R&D have been busy. The overall damage of your weapon is increased.",
+    "tier": 4
+  },
+  {
+    "id": "c93553f204d9184889ce257db850306f",
+    "weapon": "Breach Cutter",
+    "name": "Explosive Goodbye",
+    "description": "The projectile explodes at the end of its lifecycle when the nodes collapse damaging anything unlucky enough to be nearby and leaving a residual plasma field for a short time. You can also manually trigger the explosion by pulling the trigger a second time while the projectile is in flight.",
+    "tier": 5
+  },
+  {
+    "id": "ea5a1046b85db042abd55fa8363e0955",
+    "weapon": "Breach Cutter",
+    "name": "Plasma Trail",
+    "description": "The beam leaves behind a residual trail of plasma that will continuously damage any enemy that gets too close.",
+    "tier": 5
+  },
+  {
+    "id": "15cbd610090602448c1be86bb7bd7937",
+    "weapon": "Breach Cutter",
+    "name": "Triple Split Line",
+    "description": "The plasma beam is split into 3 lines that cover a taller area making it possible to hit multiple targets at various heights.",
+    "tier": 5
+  },
+  {
+    "id": "30a4556dd27de14fa32c57e5887faa56",
+    "weapon": "BRT7 Burst Fire Gun",
+    "name": "Blowthrough Rounds",
+    "description": "Shaped projectiles designed to over-penetrate targets with a minimal loss of energy. In other words: Fire straight through an enemy!",
+    "tier": 1
+  },
+  {
+    "id": "3f673e5e4e72724aa0bbd4b8bbd52860",
+    "weapon": "BRT7 Burst Fire Gun",
+    "name": "Floating Barrel",
+    "description": "Sweet, sweet optimization. We called in a few friends and managed to significantly improve the stability of this gun.",
+    "tier": 1
+  },
+  {
+    "id": "421017c70d2d6140b34412b611c4397c",
+    "weapon": "BRT7 Burst Fire Gun",
+    "name": "High Velocity Rounds",
+    "description": "The good folk in R&D have been busy. The overall damage of your weapon is increased.",
+    "tier": 1
+  },
+  {
+    "id": "1e0a91e19f963a4fba41f1cede59ae7f",
+    "weapon": "BRT7 Burst Fire Gun",
+    "name": "Disabled Safety",
+    "description": "Shorter delay between bursts",
+    "tier": 2
+  },
+  {
+    "id": "8113d52ddf56ca4ebcc8922f8f2a3687",
+    "weapon": "BRT7 Burst Fire Gun",
+    "name": "Quickfire Ejector",
+    "description": "Experience, training, and a couple of under-the-table design \"adjustments\" means your gun can be reloaded significantly faster.",
+    "tier": 2
+  },
+  {
+    "id": "01186471e23eed43aaf4aa16fac43f95",
+    "weapon": "BRT7 Burst Fire Gun",
+    "name": "Recoil Dampener",
+    "description": "Quality engineering, the best lasercut parts, the tender loving care of a dedicated R&D Department. The recoil of your gun is drastically reduced.",
+    "tier": 2
+  },
+  {
+    "id": "8d70e3c6a4b6ff48b79e9444a9db4162",
+    "weapon": "BRT7 Burst Fire Gun",
+    "name": "High Capacity Magazine",
+    "description": "The good thing about clips, magazines, ammo drums, fuel tanks ...you can always get bigger variants.",
+    "tier": 3
+  },
+  {
+    "id": "709f4ba766ccda4281dcf9f7b09fd8f9",
+    "weapon": "BRT7 Burst Fire Gun",
+    "name": "Increased Caliber Rounds",
+    "description": "The good folk in R&D have been busy. The overall damage of your weapon is increased.",
+    "tier": 3
+  },
+  {
+    "id": "f3b1dee73e1bc547bb131f90d6473ae2",
+    "weapon": "BRT7 Burst Fire Gun",
+    "name": "Expanded Ammo Bags",
+    "description": "You had to give up some sandwich-storage, but your total ammo capacity is increased!",
+    "tier": 4
+  },
+  {
+    "id": "f89821e6652b6647a6249fd9255a36a2",
+    "weapon": "BRT7 Burst Fire Gun",
+    "name": "Hardened Rounds",
+    "description": "We're proud of this one. Armor shredding. Tear through that high-impact plating of those big buggers like butter. What could be finer?",
+    "tier": 4
+  },
+  {
+    "id": "5f87d6d891626c4e88009c305f18edb1",
+    "weapon": "BRT7 Burst Fire Gun",
+    "name": "Hollow-Point Bullets",
+    "description": "Hit 'em where it hurts! Literally! We've upped the damage you'll be able to do to any creature's fleshy bits. You're welcome.",
+    "tier": 4
+  },
+  {
+    "id": "b68e0fc054fe21419c646fd0ceb01b8e",
+    "weapon": "BRT7 Burst Fire Gun",
+    "name": "Burst Damage",
+    "description": "Damage bonus on last bullet if the first two hit",
+    "tier": 5
+  },
+  {
+    "id": "97d3c8c27cac6c46a8f73b1a03ae5a2f",
+    "weapon": "BRT7 Burst Fire Gun",
+    "name": "Burst Stun",
+    "description": "Stun target if all shots in a burst hit",
+    "tier": 5
+  },
+  {
+    "id": "9a68924bad62df4c8a57617ab13f9bbf",
+    "weapon": "BRT7 Burst Fire Gun",
+    "name": "Longer Burst",
+    "description": "More bullets faster! Fire more rounds in each burst and at a higher rate.",
+    "tier": 5
+  },
+  {
+    "id": "05981d06b7eb8e4fa77a467f0cef01ac",
+    "weapon": "BRT7 Burst Fire Gun",
+    "name": "Longer Burst",
+    "description": "More bullets, faster! Fire more rounds at a higher rate in each burst.",
+    "tier": 5
+  },
+  {
+    "id": "3fb32578967ae44eadb15ef1cb1201cf",
+    "weapon": "Colette Wave Cooker",
+    "name": "Concave Lens",
+    "description": "A concave lens that curves the microwaves outward and increases their impact radius",
+    "tier": 1
+  },
+  {
+    "id": "7e9dcb8fac57574898b7f8d082dfa2dc",
+    "weapon": "Colette Wave Cooker",
+    "name": "Convex Lens",
+    "description": "A convex lens that focuses the microwaves and increases their damage output",
+    "tier": 1
+  },
+  {
+    "id": "8b9e2cde5daabd4c8ffcfe6665c01c44",
+    "weapon": "Colette Wave Cooker",
+    "name": "Magnetron Tube",
+    "description": "Adding a powerful magnetron tube and a new capacitor increases the total ammo",
+    "tier": 1
+  },
+  {
+    "id": "33fce6f155b7e440809c061c4c491898",
+    "weapon": "Colette Wave Cooker",
+    "name": "Heat Sink",
+    "description": "Jamming a heat pipe into the magnetron seemed unsafe and irresponsible initially, but it really helped reduce heat build up!",
+    "tier": 2
+  },
+  {
+    "id": "3d9cbc420148c4438b5ee7dabc866297",
+    "weapon": "Colette Wave Cooker",
+    "name": "Larger power supply",
+    "description": "By simply exchanging your power supply for a bigger model your rate of fire is increased",
+    "tier": 2
+  },
+  {
+    "id": "71e720b1034f2a4caa7727c422eb9ff0",
+    "weapon": "Colette Wave Cooker",
+    "name": "Thermoelectric Cooler",
+    "description": "R&D fitted your weapon with a thermoelectric cooler, increasing its ability to cool down faster",
+    "tier": 2
+  },
+  {
+    "id": "c51aa429f20ba94e9d2eb9fe8d8d5eb0",
+    "weapon": "Colette Wave Cooker",
+    "name": "Densification Ray",
+    "description": "Tweaking the transmitter wavelength causes microwaves to densify organic matter temporarily, making it harder for targets to move",
+    "tier": 3
+  },
+  {
+    "id": "d3c155c7f3b63f42a3ac45b081b90b7c",
+    "weapon": "Colette Wave Cooker",
+    "name": "Temperature Amplifier",
+    "description": "A new hybrid circuit makes microwaves compensate for sudden changes in temperature, causing them to heat or cool burning or frozen targets further and radiate some of their temperature to surrounding enemies",
+    "tier": 3
+  },
+  {
+    "id": "b679bc245c343d49a640b99e2c9db98b",
+    "weapon": "Colette Wave Cooker",
+    "name": "Power Supply Overdrive",
+    "description": "Push reload to put the power supply into overdrive, significantly increasing rate of fire. To compensate for the power flow the waves are focused inward at the cost of AoE radius. Push reload to deactivate it.",
+    "tier": 4
+  },
+  {
+    "id": "7a9d972dc979fd44951f6cdc779dd56b",
+    "weapon": "Colette Wave Cooker",
+    "name": "Wide Lens Add-on",
+    "description": "Push reload to activate the Wide Lens Add-on which curves the microwaves further, but the power required to use it takes a toll on the cooler, increasing heat per shot. Push reload to deactivate it.",
+    "tier": 4
+  },
+  {
+    "id": "0f60578b9e993f40be8574afecd2dedb",
+    "weapon": "Colette Wave Cooker",
+    "name": "Boiler Ray",
+    "description": "Exposure to the microwaves cause the liquids within biological targets to expand, giving them a chance to explode.",
+    "tier": 5
+  },
+  {
+    "id": "1748f1cb02cd094aa3d2b4707a96458b",
+    "weapon": "Colette Wave Cooker",
+    "name": "Contagion Transmitter",
+    "description": "A transmitter that enables rays to destroy poisoned and corroded cells in hit targets, increasing damage output with a chance to spread a poisonous vapor to nearby enemies.",
+    "tier": 5
+  },
+  {
+    "id": "f835d4e7ff290348801a69a369c7ed2e",
+    "weapon": "Colette Wave Cooker",
+    "name": "Exothermic Reactor",
+    "description": "R&D has plugged in a temperature scrambler that makes the microwaves cause quick shifts in temperatures of burning or freezing targets with a chance of triggering a temperature shock that spreads a mist of extreme heat or cold.",
+    "tier": 5
+  },
+  {
+    "id": "1750c389c81dd943a4bf14ad7db5420f",
+    "weapon": "Corrosive Sludge Pump",
+    "name": "Air Sensitive Compound",
+    "description": "When the goo is exposed to air it expands, making puddles cover a larger area on impact.",
+    "tier": 1
+  },
+  {
+    "id": "a80e7262bec13e4984b62093114fdd6c",
+    "weapon": "Corrosive Sludge Pump",
+    "name": "Better Air Pressurizer",
+    "description": "The air pressurizer is improved, making the projectiles travel faster and further.",
+    "tier": 1
+  },
+  {
+    "id": "742eb9d36f7fcf4cbd4d935eb7b5f24d",
+    "weapon": "Corrosive Sludge Pump",
+    "name": "High Capacity Tanks",
+    "description": "The good thing about clips, magazines, ammo drums, fuel tanks ...you can always get bigger variants.",
+    "tier": 1
+  },
+  {
+    "id": "308a98f649f7c74995be814dd17d3259",
+    "weapon": "Corrosive Sludge Pump",
+    "name": "Atomizer Nozzle",
+    "description": "With the Atomizer Nozzle your charged shot will leave behind more fragments on impact.",
+    "tier": 2
+  },
+  {
+    "id": "48c016f2e3fa27449f8aa42a76e66e6d",
+    "weapon": "Corrosive Sludge Pump",
+    "name": "Dyse Nozzle",
+    "description": "With the Dyse Nozzle your charged shot is launched with more force, making it more damaging on impact.",
+    "tier": 2
+  },
+  {
+    "id": "7a3988fb6abff341a2389d59b0a7529b",
+    "weapon": "Corrosive Sludge Pump",
+    "name": "Potent Goo Mix",
+    "description": "Normal shots do more damage on impact.",
+    "tier": 2
+  },
+  {
+    "id": "bda06d7432792446b04eff68f3912157",
+    "weapon": "Corrosive Sludge Pump",
+    "name": "More Goo Canisters",
+    "description": "You had to give up some sandwich-storage, but your total ammo capacity is increased!",
+    "tier": 3
+  },
+  {
+    "id": "fcdd55a1eacb1f4492549a9a55318781",
+    "weapon": "Corrosive Sludge Pump",
+    "name": "Supersaturation",
+    "description": "The goo goes through a process of supersaturation after impact, making the effects and puddles last longer.",
+    "tier": 3
+  },
+  {
+    "id": "41dfce2ce8d6cf42a06012e9d063424a",
+    "weapon": "Corrosive Sludge Pump",
+    "name": "Improved Spooling Mechanism",
+    "description": "The spooling mechanism has been improved and can get you to a full charge faster!",
+    "tier": 4
+  },
+  {
+    "id": "5cefa59c5923b8419a895d6f3d34c93d",
+    "weapon": "Corrosive Sludge Pump",
+    "name": "Spillback Extension",
+    "description": "With the Spillback Extension added to the nozzle you spend less goo when charging.",
+    "tier": 4
+  },
+  {
+    "id": "fdef5c2ccecc81479884bac170618126",
+    "weapon": "Corrosive Sludge Pump",
+    "name": "Fluoroantimonic Acid",
+    "description": "A new and improved goo recipe with very aggressive properties makes every second in it more hellish!",
+    "tier": 5
+  },
+  {
+    "id": "beb4d82d9fea1b4a90b1ccf1473e0f36",
+    "weapon": "Corrosive Sludge Pump",
+    "name": "Ingredient X",
+    "description": "R&D mixed the goo with a nasty secret ingredient that melts away the plating of goo covered enemies in record time!",
+    "tier": 5
+  },
+  {
+    "id": "81af86e2b1d35b4ebfce83a761bd020f",
+    "weapon": "Corrosive Sludge Pump",
+    "name": "Protein Disruption Mix",
+    "description": "Disrupting the protein molecules in the goo mix has made it more rigid and harder for creatures to move through greatly increasing enemy slowdown from both direct hits and puddles.",
+    "tier": 5
+  },
+  {
+    "id": "86594bc172402a4abbd74cc5e84cd1db",
+    "weapon": "CRSPR Flamethrower",
+    "name": "High Capacity Tanks",
+    "description": "The good thing about clips, magazines, ammo drums, fuel tanks ...you can always get bigger variants.",
+    "tier": 1
+  },
+  {
+    "id": "d1193c1f7e500049a0722c2997eacd9b",
+    "weapon": "CRSPR Flamethrower",
+    "name": "High-Pressure Ejector",
+    "description": "Increases the range of the flame for long distance incineration.",
+    "tier": 1
+  },
+  {
+    "id": "19ee101eaa1d5e47856ff22330822b1d",
+    "weapon": "CRSPR Flamethrower",
+    "name": "Sticky Flame Duration",
+    "description": "Sticky flames duration increase",
+    "tier": 2
+  },
+  {
+    "id": "0b3773fe77dc9346a975e5ef5c3f75cd",
+    "weapon": "CRSPR Flamethrower",
+    "name": "Triple Filtered Fuel",
+    "description": "Fire it up! You set things ablaze much faster. Time to watch the world burn...!",
+    "tier": 2
+  },
+  {
+    "id": "96d92b2d424f9d4f80678c4a8dfcb001",
+    "weapon": "CRSPR Flamethrower",
+    "name": "Unfiltered Fuel",
+    "description": "The good folk in R&D have been busy. The overall damage of your weapon is increased.",
+    "tier": 2
+  },
+  {
+    "id": "10277466500c204eaac6f6a012d6af51",
+    "weapon": "CRSPR Flamethrower",
+    "name": "More Fuel",
+    "description": "You had to give up some sandwich-storage, but your total ammo capacity is increased!",
+    "tier": 3
+  },
+  {
+    "id": "5d298708a3561440b88b947fc3a00616",
+    "weapon": "CRSPR Flamethrower",
+    "name": "Oversized Valves",
+    "description": "Increased fuel consumption rate for more damage ",
+    "tier": 3
+  },
+  {
+    "id": "460c716d79f070428ca189140d208dab",
+    "weapon": "CRSPR Flamethrower",
+    "name": "Sticky Flame Slowdown",
+    "description": "Creatures moving through sticky flames are slowed",
+    "tier": 3
+  },
+  {
+    "id": "314f656d863ded4c8e496ae61d423329",
+    "weapon": "CRSPR Flamethrower",
+    "name": "It Burns!",
+    "description": "A chance that your target will flee in terror for every second that it is in your flame.",
+    "tier": 4
+  },
+  {
+    "id": "19103d6343fe1046a2630c2d6c8282f6",
+    "weapon": "CRSPR Flamethrower",
+    "name": "More Fuel",
+    "description": "You had to give up some sandwich-storage, but your total ammo capacity is increased!",
+    "tier": 4
+  },
+  {
+    "id": "722b5097498ee243ae507e54d23c567f",
+    "weapon": "CRSPR Flamethrower",
+    "name": "Sticky Flame Duration",
+    "description": "Sticky flames duration increase",
+    "tier": 4
+  },
+  {
+    "id": "5b59677a8c65804487f9cf7df7d3a102",
+    "weapon": "CRSPR Flamethrower",
+    "name": "Heat Radiance",
+    "description": "Burn everything around you",
+    "tier": 5
+  },
+  {
+    "id": "9ba2fd986b69b64296677dbe1ba2af7b",
+    "weapon": "CRSPR Flamethrower",
+    "name": "Targets Explode",
+    "description": "Targets killed from direct damage have a chance to explode",
+    "tier": 5
+  },
+  {
+    "id": "17b448ced6907e478da2e1d4335536ad",
+    "weapon": "Cryo Cannon",
+    "name": "Faster Turbine Spinup",
+    "description": "Start freezing things as soon as you pull the trigger with a near-instant turbine response.",
+    "tier": 1
+  },
+  {
+    "id": "f2ca4e766990d24690cc7d4be9e52638",
+    "weapon": "Cryo Cannon",
+    "name": "Larger Pressure Chamber",
+    "description": "Lets you shoot for a longer time before needing to refill the pressure chamber.",
+    "tier": 1
+  },
+  {
+    "id": "91763a16983c9849bc918da7d3c10743",
+    "weapon": "Cryo Cannon",
+    "name": "Stronger Cooling Unit",
+    "description": "Freeze things at a faster rate.",
+    "tier": 1
+  },
+  {
+    "id": "d3f276bf7b69ec49836c197408d7510e",
+    "weapon": "Cryo Cannon",
+    "name": "Stronger Cooling Unit",
+    "description": "Freeze things at a faster rate.",
+    "tier": 1
+  },
+  {
+    "id": "632d011893761846a536a61bd6eecc98",
+    "weapon": "Cryo Cannon",
+    "name": "Bypassed Integrity Check",
+    "description": "If you completely empty the pressure chamber, the weapon will immediately start repressurizing, safety be damned!",
+    "tier": 2
+  },
+  {
+    "id": "f46c9ed1198bd54e96746402ae3ad929",
+    "weapon": "Cryo Cannon",
+    "name": "Larger Reserve Tank",
+    "description": "You had to give up some sandwich-storage, but your total ammo capacity is increased!",
+    "tier": 2
+  },
+  {
+    "id": "54fc5a97338e2d47945e718d9c5b7472",
+    "weapon": "Cryo Cannon",
+    "name": "Overclocked Ejection Turbine",
+    "description": "Increases the effective range of the weapon.",
+    "tier": 2
+  },
+  {
+    "id": "18fe75139ce4fc418d94bf4de7b08554",
+    "weapon": "Cryo Cannon",
+    "name": "Improved Pump",
+    "description": "Refill the pressure chamber faster.",
+    "tier": 3
+  },
+  {
+    "id": "817b825751d7d94fbf7a473159b103b3",
+    "weapon": "Cryo Cannon",
+    "name": "Increased Chamber Pressure",
+    "description": "Shoot longer before needing to repressurize.",
+    "tier": 3
+  },
+  {
+    "id": "d6e3f72592d4e34abd6ac4e91b4b19c9",
+    "weapon": "Cryo Cannon",
+    "name": "Increased Flow Volume",
+    "description": "We overclocked your gun. It fires faster. Don't ask. Just enjoy. Also probably don't tell Management, please.",
+    "tier": 3
+  },
+  {
+    "id": "b5f749c8b341cf428b30c8b44bba0264",
+    "weapon": "Cryo Cannon",
+    "name": "Sticky Flame Slowdown",
+    "description": "Creatures moving through sticky flames are slowed",
+    "tier": 3
+  },
+  {
+    "id": "68a94fd7ae26fe4fa65bfd9eccbc0483",
+    "weapon": "Cryo Cannon",
+    "name": "Sticky Flame Slowdown",
+    "description": "Creatures moving through sticky flames are slowed",
+    "tier": 3
+  },
+  {
+    "id": "17f669426c7f5c4dad1be18cd1352214",
+    "weapon": "Cryo Cannon",
+    "name": "Sticky Flame Slowdown",
+    "description": "Creatures moving through sticky flames are slowed",
+    "tier": 3
+  },
+  {
+    "id": "e42f8c93b8ff9b40b98385b99b265534",
+    "weapon": "Cryo Cannon",
+    "name": "Hard Mixture",
+    "description": "Promotes ice-crystal formation in the stream resulting in more direct damage.",
+    "tier": 4
+  },
+  {
+    "id": "1f7d588f5ffac24685833eebe4227f26",
+    "weapon": "Cryo Cannon",
+    "name": "Hard Mixture",
+    "description": "Promotes ice-crystal formation in the stream resulting in more direct damage.",
+    "tier": 4
+  },
+  {
+    "id": "ecc3d96e43c2384a9c64348e3bcf90d4",
+    "weapon": "Cryo Cannon",
+    "name": "Larger Reserve Tank",
+    "description": "You had to give up some sandwich-storage, but your total ammo capacity is increased!",
+    "tier": 4
+  },
+  {
+    "id": "118a1d45f643a74d8e53dc576f89e78d",
+    "weapon": "Cryo Cannon",
+    "name": "Supercooling Mixture",
+    "description": "Improves the heat capacity of the stream so you can freeze things at a faster rate.",
+    "tier": 4
+  },
+  {
+    "id": "60d2fb0fca60f54b895119995a7723f3",
+    "weapon": "Cryo Cannon",
+    "name": "Supercooling Mixture",
+    "description": "Improves the heat capacity of the stream so you can freeze things at a faster rate.",
+    "tier": 4
+  },
+  {
+    "id": "7fe722099ac26644878c378e9e6e9a27",
+    "weapon": "Cryo Cannon",
+    "name": "Cold Radiance",
+    "description": "Any enemy that strays close to you while firing the Cryo Cannon will start to freeze.",
+    "tier": 5
+  },
+  {
+    "id": "9b084552f941fb4cb8a276312bb16895",
+    "weapon": "Cryo Cannon",
+    "name": "Fragile",
+    "description": "There is a chance that frozen targets will spontaneously shatter!",
+    "tier": 5
+  },
+  {
+    "id": "56c1a7eb9444a44d967493e39f08a32d",
+    "weapon": "Deepcore 40mm PGL",
+    "name": "Extra Ammo",
+    "description": "Expanded Ammo Bags",
+    "tier": 1
+  },
+  {
+    "id": "d2b83c01bd3b3c46b828e7c8daa56d1e",
+    "weapon": "Deepcore 40mm PGL",
+    "name": "Fragmentary Shell",
+    "description": "Damage radius increase.",
+    "tier": 1
+  },
+  {
+    "id": "01a08b1ded9d90469c23988cbca189c5",
+    "weapon": "Deepcore 40mm PGL",
+    "name": "HE Compound",
+    "description": "The good folk in R&D have been busy. The overall damage of your weapon is increased.",
+    "tier": 1
+  },
+  {
+    "id": "794e9dd333dbbc47ac17aad180bdf7ea",
+    "weapon": "Deepcore 40mm PGL",
+    "name": "Expanded Ammo Bags",
+    "description": "You had to give up some sandwich-storage, but your total ammo capacity is increased!",
+    "tier": 2
+  },
+  {
+    "id": "31a8a17f601edf4095a0eac6a1239165",
+    "weapon": "Deepcore 40mm PGL",
+    "name": "Larger Payload",
+    "description": "More bang for the buck! Increases the damage done within the Area of Effect!",
+    "tier": 2
+  },
+  {
+    "id": "8db7fab1a2bc704ba0cdc41c7147246d",
+    "weapon": "Deepcore 40mm PGL",
+    "name": "High Velocity Grenades",
+    "description": "We souped up the ejection mechanisms of your gun, so the projectiles are now fired at a much higher velocity.",
+    "tier": 3
+  },
+  {
+    "id": "2a0b04d3fc3b4d4895a1a80f583158d8",
+    "weapon": "Deepcore 40mm PGL",
+    "name": "Incendiary Compound",
+    "description": "50% damage converted to heat. This will reduce direct damage, but will set enemies on fire.",
+    "tier": 3
+  },
+  {
+    "id": "95676a7945ec544db1ac69f52a0c8e09",
+    "weapon": "Deepcore 40mm PGL",
+    "name": "Pressure Wave",
+    "description": "We're proud of this one. Armor shredding. Tear through that high-impact plating of those big buggers like butter. What could be finer?",
+    "tier": 3
+  },
+  {
+    "id": "7b4070cd19ce424389b8c85c0fc5de37",
+    "weapon": "Deepcore 40mm PGL",
+    "name": "Concussive Blast",
+    "description": "Stuns creatures within the blast radius",
+    "tier": 4
+  },
+  {
+    "id": "189bcf4770b71f44b4cc33d53af24f33",
+    "weapon": "Deepcore 40mm PGL",
+    "name": "Homebrew Explosive",
+    "description": "More bang for the buck! Increases the damage done within the Area of Effect!",
+    "tier": 4
+  },
+  {
+    "id": "0cda2d33577191409d1f879f5628d27c",
+    "weapon": "Deepcore 40mm PGL",
+    "name": "Homebrew Explosive",
+    "description": "More damage on average but it's a bit inconsistent with a spread of 80% to 140%",
+    "tier": 4
+  },
+  {
+    "id": "c0d08a5e03982a43a6c4ce9eef2264f8",
+    "weapon": "Deepcore 40mm PGL",
+    "name": "Nails + Tape",
+    "description": "Fire in the hole! The Area of Effect is increased. (We advise keeping the term \"safe distance\" close to your heart)",
+    "tier": 4
+  },
+  {
+    "id": "d14b0c536e19f84493e8b733d96f6883",
+    "weapon": "Deepcore 40mm PGL",
+    "name": "Disabled Inertia Inhibitor",
+    "description": "This tweak ensures that the user's velocity is transferred to the projectile. Useful in high-speed applications but it requires doing more math in your head.",
+    "tier": 5
+  },
+  {
+    "id": "c816fcda72d0a446aa796d0df8b4de4d",
+    "weapon": "Deepcore 40mm PGL",
+    "name": "Proximity Trigger",
+    "description": "Launched grenades will only detonate when they are in close proximity to an enemy or after the projectile comes to a complete stop. Explosion range is also increased. Note: The trigger takes a moment to arm, indicated by a green light, and until then the grenade functions as usual.",
+    "tier": 5
+  },
+  {
+    "id": "e19da845f2e04347abecf3d224eccc07",
+    "weapon": "Deepcore 40mm PGL",
+    "name": "Proximity Trigger",
+    "description": "Launched grenades will only detonate when they are in close proximity to an enemy or after the projectile comes to a complete stop. Note: The trigger takes a moment to arm, indicated by a green light, and until then the grenade functions as usual.",
+    "tier": 5
+  },
+  {
+    "id": "87fa761228375d4aae2ccd8deb247133",
+    "weapon": "Deepcore 40mm PGL",
+    "name": "Spiky Grenade",
+    "description": "Deals damage on direct impact",
+    "tier": 5
+  },
+  {
+    "id": "89f8489a91219d4c80dfab41c5639a44",
+    "weapon": "Deepcore GK2",
+    "name": "Gyro Stabilisation",
+    "description": "Base accuracy improvement with pin-point accuracy on first shot.",
+    "tier": 1
+  },
+  {
+    "id": "6efd65ab3b20ba4da928f798c3bef0aa",
+    "weapon": "Deepcore GK2",
+    "name": "Quickfire Ejector",
+    "description": "Experience, training, and a couple of under-the-table design \"adjustments\" means your gun can be reloaded significantly faster.",
+    "tier": 1
+  },
+  {
+    "id": "0cac865f2c08aa4abf47f90c720bf188",
+    "weapon": "Deepcore GK2",
+    "name": "Supercharged Feed Mechanism",
+    "description": "We overclocked your gun. It fires faster. Don't ask. Just enjoy. Also probably don't tell Management, please.",
+    "tier": 1
+  },
+  {
+    "id": "f0a2069f40ade74e987105549ed42731",
+    "weapon": "Deepcore GK2",
+    "name": "Expanded Ammo Bags",
+    "description": "You had to give up some sandwich-storage, but your total ammo capacity is increased!",
+    "tier": 2
+  },
+  {
+    "id": "9954f1fa61935341811b12e7340e69cd",
+    "weapon": "Deepcore GK2",
+    "name": "Increased Caliber Rounds",
+    "description": "The good folk in R&D have been busy. The overall damage of your weapon is increased.",
+    "tier": 2
+  },
+  {
+    "id": "8849d0b64c912043a35ada2eecc800a1",
+    "weapon": "Deepcore GK2",
+    "name": "Floating Barrel",
+    "description": "Sweet, sweet optimization. We called in a few friends and managed to significantly improve the stability of this gun.",
+    "tier": 3
+  },
+  {
+    "id": "d9d2c784d075d44a9c0ef29b07744115",
+    "weapon": "Deepcore GK2",
+    "name": "High Capacity Magazine",
+    "description": "The good thing about clips, magazines, ammo drums, fuel tanks ...you can always get bigger variants.",
+    "tier": 3
+  },
+  {
+    "id": "e5cab7a87c84cf41aa9caf666057fc3f",
+    "weapon": "Deepcore GK2",
+    "name": "Improved Propellant",
+    "description": "The good folk in R&D have been busy. The overall damage of your weapon is increased.",
+    "tier": 3
+  },
+  {
+    "id": "5b510fb5d413a9449199a572978effde",
+    "weapon": "Deepcore GK2",
+    "name": "Hardened Rounds",
+    "description": "We're proud of this one. Armor shredding. Tear through that high-impact plating of those big buggers like butter. What could be finer?",
+    "tier": 4
+  },
+  {
+    "id": "f610a1f6b5ad8f4bbf17f760bf8699a2",
+    "weapon": "Deepcore GK2",
+    "name": "Hollow-Point Bullets",
+    "description": "Hit 'em where it hurts! Literally! We've upped the damage you'll be able to do to any creature's fleshy bits. You're welcome.",
+    "tier": 4
+  },
+  {
+    "id": "5d0f982c2686554dbf10bdc3ac6689a4",
+    "weapon": "Deepcore GK2",
+    "name": "Improved Gas System",
+    "description": "We overclocked your gun. It fires faster. Don't ask. Just enjoy. Also probably don't tell Management, please.",
+    "tier": 4
+  },
+  {
+    "id": "59d3dbacfcbc9044bd3b0047cf55c11e",
+    "weapon": "Deepcore GK2",
+    "name": "Battle Cool",
+    "description": "Killing an enemy increases accuracy",
+    "tier": 5
+  },
+  {
+    "id": "d52657e5c388ea429cd0c98aef989a2a",
+    "weapon": "Deepcore GK2",
+    "name": "Battle Frenzy",
+    "description": "Move faster for a short time after killing an enemy",
+    "tier": 5
+  },
+  {
+    "id": "a4a64c617606e24e8ec160c345d67305",
+    "weapon": "Deepcore GK2",
+    "name": "Battle Frenzy",
+    "description": "Improved Accuracy and Faster Movement whenever you kill an enemy",
+    "tier": 5
+  },
+  {
+    "id": "48bc3c32886cc646a34ee2cadcd7eacf",
+    "weapon": "Deepcore GK2",
+    "name": "Stun",
+    "description": "Increased chance to stun the target on a weakpoint hit",
+    "tier": 5
+  },
+  {
+    "id": "27237c20e6206d4e85e680a50edef7cc",
+    "weapon": "DRAK-25 Plasma Carbine",
+    "name": "High-volume Plasma Feed",
+    "description": "We overclocked your gun. It fires faster. Don't ask. Just enjoy. Also probably don't tell Management, please.",
+    "tier": 1
+  },
+  {
+    "id": "b107a0ca9634c341847abd16d7c9919e",
+    "weapon": "DRAK-25 Plasma Carbine",
+    "name": "Improved Thermals",
+    "description": "Less heat generated per shot.",
+    "tier": 1
+  },
+  {
+    "id": "f6b89d41369a074d89e1832b4eb0f794",
+    "weapon": "DRAK-25 Plasma Carbine",
+    "name": "Stronger Particle Accelerator",
+    "description": "Launches the plasma projectiles at a higher velocity.",
+    "tier": 1
+  },
+  {
+    "id": "61841f573417d644893ebe5cb03e22a3",
+    "weapon": "DRAK-25 Plasma Carbine",
+    "name": "Increased Particle Density",
+    "description": "The good folk in R&D have been busy. The overall damage of your weapon is increased.",
+    "tier": 2
+  },
+  {
+    "id": "8c066f2baf79fb4284fc61f416865db9",
+    "weapon": "DRAK-25 Plasma Carbine",
+    "name": "Larger Battery",
+    "description": "The good thing about clips, magazines, ammo drums, fuel tanks ...you can always get bigger variants.",
+    "tier": 2
+  },
+  {
+    "id": "5cbd1e152e912b46a9dd9359bcf324ae",
+    "weapon": "DRAK-25 Plasma Carbine",
+    "name": "Custom Coil Alignment",
+    "description": "Hand-aligned coils with a custom two phase acceleration profile improves accuracy and reduces spread.",
+    "tier": 3
+  },
+  {
+    "id": "e40e234df49961469dc032abb511b7a6",
+    "weapon": "DRAK-25 Plasma Carbine",
+    "name": "Gen 2 Cooling System",
+    "description": "The new and improved passive cooling system sheds heat faster when not firing.",
+    "tier": 3
+  },
+  {
+    "id": "e4e2333d07612d43b962b22c2234ac4e",
+    "weapon": "DRAK-25 Plasma Carbine",
+    "name": "Hot Feet",
+    "description": "The burning hot gases motivate you to move significantly faster after the weapon has overheated.",
+    "tier": 3
+  },
+  {
+    "id": "0455d6d1d13a1640a5bb547fc70f2dcd",
+    "weapon": "DRAK-25 Plasma Carbine",
+    "name": "Destructive Resonance Amp",
+    "description": "We're proud of this one. Armor shredding. Tear through that high-impact plating of those big buggers like butter. What could be finer?",
+    "tier": 4
+  },
+  {
+    "id": "d56bbda6000d494c99fc482954505f6c",
+    "weapon": "DRAK-25 Plasma Carbine",
+    "name": "Overcharged PCF",
+    "description": "The projectiles carry excess charge distributed across the containment field giving a small chance to electrocute the target on impact.",
+    "tier": 4
+  },
+  {
+    "id": "8186348d3dcab247b73c18a5950ef92e",
+    "weapon": "DRAK-25 Plasma Carbine",
+    "name": "Plasma Splash",
+    "description": "A simple modification to the containment field causes it to rupture outward on impact damaging all things in a small radius even through heavy armor.",
+    "tier": 4
+  },
+  {
+    "id": "1d5c1587ace73a4ba3276d75a70a0a6a",
+    "weapon": "DRAK-25 Plasma Carbine",
+    "name": "Manual Heat Dump",
+    "description": "Pressing the reload button will force the DRAK-25 into overheat mode letting you quickly cool the weapon. ",
+    "tier": 5
+  },
+  {
+    "id": "3c80ee64990b68439fffc42caadd8918",
+    "weapon": "DRAK-25 Plasma Carbine",
+    "name": "Thermal Feedback Loop",
+    "description": "Pumping excess heat back into the system results in a faster rate of fire when the weapon passes 50% heat.",
+    "tier": 5
+  },
+  {
+    "id": "9934a34dbc05d34ba60262ac902e4d40",
+    "weapon": "Experimental Plasma Charger",
+    "name": "Higher Charged Plasma Energy",
+    "description": "More bang for the buck! Increases both the direct and area damage of the charged projectile!",
+    "tier": 1
+  },
+  {
+    "id": "2450919ee7ff4249a150531c1078fc63",
+    "weapon": "Experimental Plasma Charger",
+    "name": "Increased Particle Density",
+    "description": "Improves the damage caused by the normal shots.",
+    "tier": 1
+  },
+  {
+    "id": "99c4d99206cabe4585665c726e7e1e10",
+    "weapon": "Experimental Plasma Charger",
+    "name": "Larger Battery",
+    "description": "The good thing about clips, magazines, ammo drums, fuel tanks ...you can always get bigger variants.",
+    "tier": 1
+  },
+  {
+    "id": "054b2ffb65a5fd42b4d93a5ca86cabdc",
+    "weapon": "Experimental Plasma Charger",
+    "name": "Heat Shield",
+    "description": "Reduces how fast the weapon overheats when holding a charged shot.",
+    "tier": 2
+  },
+  {
+    "id": "38d41d364f2c65479cf064480970aa14",
+    "weapon": "Experimental Plasma Charger",
+    "name": "Overcharged Plasma Accelerator",
+    "description": "You need to be a physicist to understand how it works but this little wonder increases the velocity of the EPC's normal projectile.",
+    "tier": 2
+  },
+  {
+    "id": "30358616f6c50d47813024c2165a89c8",
+    "weapon": "Experimental Plasma Charger",
+    "name": "Crystal Capacitors",
+    "description": "Prepare a charged shot much faster.",
+    "tier": 3
+  },
+  {
+    "id": "35b0f41ec11b884ea0741678af1b795d",
+    "weapon": "Experimental Plasma Charger",
+    "name": "Improved Charge Efficiency",
+    "description": "Each charged shot uses less energy.",
+    "tier": 3
+  },
+  {
+    "id": "838696877b169d449c7ab8370cc5382d",
+    "weapon": "Experimental Plasma Charger",
+    "name": "Tweaked Radiator",
+    "description": "Increases the rate at which the weapon sheds heat, letting you shoot more rounds before overheating and also recovering faster from an overheat.",
+    "tier": 3
+  },
+  {
+    "id": "d3ac6f82910e7b499ef5fd73f59ff4ec",
+    "weapon": "Experimental Plasma Charger",
+    "name": "Expanded Plasma Splash",
+    "description": "Greater damage radius for the charged projectile explosion.",
+    "tier": 4
+  },
+  {
+    "id": "88ae159a19464b49b4b91ef567057465",
+    "weapon": "Experimental Plasma Charger",
+    "name": "High Density Battery",
+    "description": "The good thing about clips, magazines, ammo drums, fuel tanks ...you can always get bigger variants.",
+    "tier": 4
+  },
+  {
+    "id": "117aa4f731de2542a8abfbe46e6b3f25",
+    "weapon": "Experimental Plasma Charger",
+    "name": "Reactive Shockwave",
+    "description": "More bang for the buck! Increases the damage done within the Area of Effect!",
+    "tier": 4
+  },
+  {
+    "id": "b561772b30896d48b460d79dfad1418e",
+    "weapon": "Experimental Plasma Charger",
+    "name": "Burning Nightmare",
+    "description": "A modified containment field causes regular and charged shots to heat up the target proportionally to the amount of damage dealt. The modification also makes the charged projectile pass through all enemies dealing damage while it flies but it no longer explodes on impact.",
+    "tier": 5
+  },
+  {
+    "id": "3a5c64d696729341a482e6034097ba3d",
+    "weapon": "Experimental Plasma Charger",
+    "name": "Flying Nightmare",
+    "description": "The charged projectile deals damage to nearby enemies as it flies.",
+    "tier": 5
+  },
+  {
+    "id": "e8ac5aeaddb90d44b58f2e5ebc3ae4b6",
+    "weapon": "Experimental Plasma Charger",
+    "name": "Plasma Burn",
+    "description": "A modified containment field causes regular shots to heat up the target proportionally to the amount of damage dealt.",
+    "tier": 5
+  },
+  {
+    "id": "7275fbc7d8116647afd7c0f764333df6",
+    "weapon": "Experimental Plasma Charger",
+    "name": "Plasma Splash",
+    "description": "A simple modification to the containment field causes it to rupture outward on impact damaging all things in a small radius even through heavy armor.",
+    "tier": 5
+  },
+  {
+    "id": "cffffb33b9d0194481a0d22406be03ba",
+    "weapon": "Experimental Plasma Charger",
+    "name": "Thin Containment Field",
+    "description": "A weaker containment field produces less heat for both charged and normal shots. Be aware that any high-energy impact will destabilize the charged projectile, causing a large area implosion.",
+    "tier": 5
+  },
+  {
+    "id": "6b6a9a3c7d1de74184ad4f1ad1162468",
+    "weapon": "Experimental Plasma Charger",
+    "name": "Unstable Containment Field",
+    "description": "Any high-energy impact will destabilize the Charged Projectile causing a large area implosion. The weak field takes less energy to create and so the weapon no longer overheats after each charged shot.",
+    "tier": 5
+  },
+  {
+    "id": "f16c53b85b604b4ab3ccf925b1dc5271",
+    "weapon": "Jury-Rigged Boomstick",
+    "name": "Double-sized Buckshot",
+    "description": "Bigger and heavier handcrafted specialist dwarf buckshot. Accept no substitute.",
+    "tier": 1
+  },
+  {
+    "id": "9d65452be608eb4f9387b350c4432f63",
+    "weapon": "Jury-Rigged Boomstick",
+    "name": "Expanded Ammo Bags",
+    "description": "You had to give up some sandwich-storage, but your total ammo capacity is increased!",
+    "tier": 1
+  },
+  {
+    "id": "a6375330f9f8ba4b9abd3997a43d8a71",
+    "weapon": "Jury-Rigged Boomstick",
+    "name": "Double Trigger",
+    "description": "Tweaked trigger mechanism allows you to unload both barrels in quick succession dealing massive damage to anything infront of you.",
+    "tier": 2
+  },
+  {
+    "id": "69d6374c063040489610e2cd86942054",
+    "weapon": "Jury-Rigged Boomstick",
+    "name": "Quickfire Ejector",
+    "description": "Experience, training, and a couple of under-the-table design \"adjustments\" means your gun can be reloaded significantly faster.",
+    "tier": 2
+  },
+  {
+    "id": "6c64b7e4d9cbb2479541c70718b9f34b",
+    "weapon": "Jury-Rigged Boomstick",
+    "name": "Expanded Ammo Bags",
+    "description": "You had to give up some sandwich-storage, but your total ammo capacity is increased!",
+    "tier": 3
+  },
+  {
+    "id": "034bc14091ab844887fe37c9ed4bfa40",
+    "weapon": "Jury-Rigged Boomstick",
+    "name": "High Capacity Shells",
+    "description": "It took some creative thinking, but we finally found out how to pack more buckshot into each shell. Just...handle with care, they're liable to take your eye out.",
+    "tier": 3
+  },
+  {
+    "id": "c89e462b6682a7499c941f3e5f7bb863",
+    "weapon": "Jury-Rigged Boomstick",
+    "name": "Improved Stun",
+    "description": "Stun enemies more often and for a longer time!",
+    "tier": 3
+  },
+  {
+    "id": "1bf409a236fcd34980db3ad7ef601bbe",
+    "weapon": "Jury-Rigged Boomstick",
+    "name": "Blast Wave",
+    "description": "Shockwave from the blast deals extra damage to any enemies unlucky enough to be in the area extending 4m infront of you.",
+    "tier": 4
+  },
+  {
+    "id": "3d49f4aecf7b5c46b46db08fcbb2642c",
+    "weapon": "Jury-Rigged Boomstick",
+    "name": "Improved Blast Wave",
+    "description": "The shockwave from the blast deals extra damage to any enemies unlucky enough to be in the area extending 4m in front of you.",
+    "tier": 4
+  },
+  {
+    "id": "d73fc0186dc92f4bb8affa5c0f582fd5",
+    "weapon": "Jury-Rigged Boomstick",
+    "name": "Super Blowthrough Rounds",
+    "description": "Shaped projectiles designed to over-penetrate targets with a minimal loss of energy. In other words: Fire straight through several enemies at once!",
+    "tier": 4
+  },
+  {
+    "id": "cff7e077fa41a14c9d3d592a87e86351",
+    "weapon": "Jury-Rigged Boomstick",
+    "name": "Tungsten Coated Buckshot",
+    "description": "We're proud of this one. Armor shredding. Tear through that high-impact plating of those big buggers like butter. What could be finer?",
+    "tier": 4
+  },
+  {
+    "id": "eaf82efc9382a74aa7d2c6b2af3540a9",
+    "weapon": "Jury-Rigged Boomstick",
+    "name": "Auto Reload",
+    "description": "Reloads automatically when unequipped for longer than 5 seconds",
+    "tier": 5
+  },
+  {
+    "id": "906acaa7a5cf8a408c262573fc475d23",
+    "weapon": "Jury-Rigged Boomstick",
+    "name": "Fear the Boomstick",
+    "description": "Chance to scare nearby creatures whenever you shoot",
+    "tier": 5
+  },
+  {
+    "id": "81bac945f7340549bee1f6f94c08cd4c",
+    "weapon": "Jury-Rigged Boomstick",
+    "name": "White Phosphorus Shells",
+    "description": "Convert some of the damage to Fire damage",
+    "tier": 5
+  },
+  {
+    "id": "bc8f6e94b3fd434e996421fd9796948d",
+    "weapon": "LOK-1 Smart Rifle",
+    "name": "Expanded Ammo Bags",
+    "description": "You had to give up some sandwich-storage, but your total ammo capacity is increased!",
+    "tier": 1
+  },
+  {
+    "id": "051feec31c667d42bdbde02ee4044cdb",
+    "weapon": "LOK-1 Smart Rifle",
+    "name": "Increased Caliber Rounds",
+    "description": "The good folk in R&D have been busy. The overall damage of your weapon is increased.",
+    "tier": 1
+  },
+  {
+    "id": "bdd4fafbbe00174c9e770476492b26d7",
+    "weapon": "LOK-1 Smart Rifle",
+    "name": "CCD Array Add-on",
+    "description": "The CCD Array Add-on enables the camera to keep track of enemies in a wider angle and also expands the angle at which new locks can be acquired.",
+    "tier": 2
+  },
+  {
+    "id": "578b619e06366f47863c989520bdad8f",
+    "weapon": "LOK-1 Smart Rifle",
+    "name": "Macro Lens",
+    "description": "The Macro Lens decreases the size of the lock on area for extra tight control and focused targeting.",
+    "tier": 2
+  },
+  {
+    "id": "84bad3c101b1824c809f31db4fcbe000",
+    "weapon": "LOK-1 Smart Rifle",
+    "name": "Macro Lens",
+    "description": "The Macro Lens decreases the size of the lock on area for extra tight control and focused targeting while also greatly extending the lock on range.",
+    "tier": 2
+  },
+  {
+    "id": "edb43a843a145a4190cef1c5e557a7c7",
+    "weapon": "LOK-1 Smart Rifle",
+    "name": "Zoom Lens",
+    "description": "The Zoom Lens increases the range of your camera, enabling you to lock on to targets farther away.",
+    "tier": 2
+  },
+  {
+    "id": "aebc57b6a7b5f04185f573e72d229a03",
+    "weapon": "LOK-1 Smart Rifle",
+    "name": "Electro-Chemical Rounds",
+    "description": "A simple copper wire and some reactive chemicals makes your rounds pack an extra punch in contact with electricity and high temperatures.",
+    "tier": 3
+  },
+  {
+    "id": "f4ebf84335e85b4eb8704da0bb53f0c3",
+    "weapon": "LOK-1 Smart Rifle",
+    "name": "SmЯt Targeting Software™",
+    "description": "This premium software update makes your camera prioritize targets with lower health and avoids placing more locks than necessary. Now that's SmЯt™!",
+    "tier": 3
+  },
+  {
+    "id": "f76afd44b68dcc418ec5d48f449d2cbe",
+    "weapon": "LOK-1 Smart Rifle",
+    "name": "Super Blowthrough Rounds",
+    "description": "Shaped projectiles designed to over-penetrate targets with a minimal loss of energy. In other words: Fire straight through several enemies at once!",
+    "tier": 3
+  },
+  {
+    "id": "7fe8a355bf8aea48bef5a430ed4dc04e",
+    "weapon": "LOK-1 Smart Rifle",
+    "name": "Aperture Extension",
+    "description": "The aperture extension helps the camera sort out more light and minimizes distortion, increasing the amount of lock ons you can place on targets.",
+    "tier": 4
+  },
+  {
+    "id": "c05800dd5b492d4bbfe214f7bb4ac197",
+    "weapon": "LOK-1 Smart Rifle",
+    "name": "Shutter Speed Sensor",
+    "description": "The shutter speed sensor reduces the time between lock ons, helping you reach a full lock on faster.",
+    "tier": 4
+  },
+  {
+    "id": "ebe105fd4c324d4c85e3ae558fc9fb5c",
+    "weapon": "LOK-1 Smart Rifle",
+    "name": "Electric Generator Mod",
+    "description": "An electrical generator has been wired into the lock on mechanism, turning rounds electrical when a lock on threshold is passed.",
+    "tier": 5
+  },
+  {
+    "id": "be471c7f93bf5747a91005aceb4f6dae",
+    "weapon": "LOK-1 Smart Rifle",
+    "name": "Fear Frequency",
+    "description": "Denting a cavity in the bullets cause them to emit a fear inducing sound when fired en masse affecting all enemies around the shooter. Both the strength of the effect and its range are affected by how many rounds are fired in the burst.",
+    "tier": 5
+  },
+  {
+    "id": "c7e7e965d82cfe47810ab41c723a3e9d",
+    "weapon": "LOK-1 Smart Rifle",
+    "name": "Unstable Lock Mechanism",
+    "description": "Loosening a screw in the lock on mechanism bypasses the safety at a full lock on, making your rounds do more damage.",
+    "tier": 5
+  },
+  {
+    "id": "88abba5714fc3e46881a81dba91dcbb9",
+    "weapon": "M1000 Classic",
+    "name": "Expanded Ammo Bags",
+    "description": "You had to give up some sandwich-storage, but your total ammo capacity is increased!",
+    "tier": 1
+  },
+  {
+    "id": "2404519ab55050469cde6bbadc7bead2",
+    "weapon": "M1000 Classic",
+    "name": "Increased Caliber Rounds",
+    "description": "The good folk in R&D have been busy. The overall damage of your weapon is increased.",
+    "tier": 1
+  },
+  {
+    "id": "9fe86cd22e51d241bfbe55edec534695",
+    "weapon": "M1000 Classic",
+    "name": "Better Weight Balance",
+    "description": "Improved hip-shot accuracy and stability",
+    "tier": 2
+  },
+  {
+    "id": "3214b3761cde3e4fa7c945fd7b953c31",
+    "weapon": "M1000 Classic",
+    "name": "Fast-charging Coils",
+    "description": "Focus faster when holding down the trigger.",
+    "tier": 2
+  },
+  {
+    "id": "09c581ee97c48b4e900795ce5cb2619c",
+    "weapon": "M1000 Classic",
+    "name": "Hardened Rounds",
+    "description": "We're proud of this one. Armor shredding. Tear through that high-impact plating of those big buggers like butter. What could be finer?",
+    "tier": 2
+  },
+  {
+    "id": "e370554343213e4caab4a53e18882121",
+    "weapon": "M1000 Classic",
+    "name": "Extended Clip",
+    "description": "The good thing about clips, magazines, ammo drums, fuel tanks ...you can always get bigger variants.",
+    "tier": 3
+  },
+  {
+    "id": "b922008a9d9db64d84d6f3fda6146427",
+    "weapon": "M1000 Classic",
+    "name": "Killer Focus",
+    "description": "Greater focus damage bonus",
+    "tier": 3
+  },
+  {
+    "id": "f7237cb9c186204ead1d8153763c1c29",
+    "weapon": "M1000 Classic",
+    "name": "Hollow-Point Bullets",
+    "description": "Hit 'em where it hurts! Literally! We've upped the damage you'll be able to do to any creature's fleshy bits. You're welcome.",
+    "tier": 4
+  },
+  {
+    "id": "9c017d72e8db294ebda5d17fc348b350",
+    "weapon": "M1000 Classic",
+    "name": "Super Blowthrough Rounds",
+    "description": "Shaped projectiles designed to over-penetrate targets with a minimal loss of energy. In other words: Fire straight through several enemies at once!",
+    "tier": 4
+  },
+  {
+    "id": "c656fd007ce24b4daa8a880c920b375e",
+    "weapon": "M1000 Classic",
+    "name": "Hitting where it hurts",
+    "description": "Focused shots stagger the target",
+    "tier": 5
+  },
+  {
+    "id": "aaa5398ba515384c8d0546838c756969",
+    "weapon": "M1000 Classic",
+    "name": "Killing Machine",
+    "description": "You can perform a lightning-fast reload right after killing an enemy.",
+    "tier": 5
+  },
+  {
+    "id": "4aa05a318d9be9419c0abef6083cdc5e",
+    "weapon": "M1000 Classic",
+    "name": "Precision Terror",
+    "description": "Killing your target with a focused shot to the weakspot will send nearby creatures fleeing with terror!",
+    "tier": 5
+  },
+  {
+    "id": "9a0a5659303070408c40f93aea82f453",
+    "weapon": "Nishanka Boltshark X-80",
+    "name": "Special Bolt Chemical Explosion",
+    "description": "A bolt filled with a volatile chemical that is injected into the target's bloodstream damaging them over time. More importantly, killing the target while it is affected causes it to violently explode, damaging all creatures in the area.",
+    "tier": 1
+  },
+  {
+    "id": "42305b42359a784fa95865aea322852a",
+    "weapon": "Nishanka Boltshark X-80",
+    "name": "Special Bolt Pheromone",
+    "description": "A bolt filled with a mixture of pheromones which releases in contact with targets, making its allies turn against it and increases the chance of a fight breaking out.",
+    "tier": 1
+  },
+  {
+    "id": "20e5ce16a2cdf548bebe44e7abb76d3c",
+    "weapon": "Nishanka Boltshark X-80",
+    "name": "Special Bolt Taser",
+    "description": "A bolt fitted with small generators that electrify targets and are able to connect to other nearby Taser Bolts through an electric arc. The electric surge renders the bolt unretrievable after use.",
+    "tier": 1
+  },
+  {
+    "id": "401fa372d7746a42be6a26ec899c3eb3",
+    "weapon": "Nishanka Boltshark X-80",
+    "name": "Special Bolt: Chemical Explosion",
+    "description": "A bolt filled with sulfuric acid that is injected into the target bloodstream on impact and creates a violent chemical reaction in contact with the benzoquinone compound of dying enemies.",
+    "tier": 1
+  },
+  {
+    "id": "e7f27b5cf266794e887f99292cc10f37",
+    "weapon": "Nishanka Boltshark X-80",
+    "name": "Special Bolt: Pheromone",
+    "description": "A dart filled with a mixture of pheromones which releases in contact with targets and makes allies turn against it. Although low on damage its size allows more to be carried at once.",
+    "tier": 1
+  },
+  {
+    "id": "c0ceef4958ef8848b26153be73587fdd",
+    "weapon": "Nishanka Boltshark X-80",
+    "name": "Special Bolt: Taser",
+    "description": "A bolt fitted with small generators that electrify targets and are able to connect to other nearby Taser Bolts through an electric arc",
+    "tier": 1
+  },
+  {
+    "id": "aae933aa1dedf44ead704cdac3a50666",
+    "weapon": "Nishanka Boltshark X-80",
+    "name": "Broadhead Bolts",
+    "description": "More mass, greater impact and able to dig just a tad deeper into enemies, increasing the overall damage.",
+    "tier": 2
+  },
+  {
+    "id": "86f1c0e8c958fa4093ffec0f24033478",
+    "weapon": "Nishanka Boltshark X-80",
+    "name": "Expanded Special Quiver",
+    "description": "It's a bit on the heavier side, but your total special bolt capacity is increased.",
+    "tier": 2
+  },
+  {
+    "id": "65f76211f2cde445861f5ed5fa0a6af8",
+    "weapon": "Nishanka Boltshark X-80",
+    "name": "Increased Quiver Capacity",
+    "description": "It took a bit of rearranging, but you can now carry more bolts.",
+    "tier": 2
+  },
+  {
+    "id": "7c4833acba876d44aa58d83c7121c1b6",
+    "weapon": "Nishanka Boltshark X-80",
+    "name": "Reinforced String",
+    "description": "A reinforced synthetic fiber string that increases the velocity of your bolts, making them travel faster and further.",
+    "tier": 3
+  },
+  {
+    "id": "6d5c2d8cf679314b808db53a7e61ff19",
+    "weapon": "Nishanka Boltshark X-80",
+    "name": "Stabilizing Arm Brace",
+    "description": "R&D has fitted you with an arm brace that stabilizes your arm, which enables flawless motion allowing you to reload and switch ammo types faster, without risk of injuries.",
+    "tier": 3
+  },
+  {
+    "id": "e14c59a0d4942845bb6fa57182c39394",
+    "weapon": "Nishanka Boltshark X-80",
+    "name": "Battle Frenzy",
+    "description": "Move faster for a short time after killing an enemy.",
+    "tier": 4
+  },
+  {
+    "id": "ae111957a5ea7d4fa5d759ddf1756c1c",
+    "weapon": "Nishanka Boltshark X-80",
+    "name": "Radio Transmitter Module",
+    "description": "All bolts and your crossbow are fitted with a small radio transmitter that allows calling back retrievable bolts from a distance by hovering your crosshair over them.",
+    "tier": 4
+  },
+  {
+    "id": "89821a4f90c739459ee7af298787d429",
+    "weapon": "Nishanka Boltshark X-80",
+    "name": "Stabilizing Arm Brace",
+    "description": "R&D has fitted you with an arm brace that stabilizes your arm, which enables flawless motion allowing you to reload and switch ammo types faster, without risk of injuries.",
+    "tier": 4
+  },
+  {
+    "id": "cd53a2a5dd2e624c8ed8316f497eeb48",
+    "weapon": "Nishanka Boltshark X-80",
+    "name": "Banshee Module",
+    "description": "Tiny devices are attached to your bolts that emit a fear inducing high pitched noise for a limited time. Can be reset and reused if picked up.",
+    "tier": 5
+  },
+  {
+    "id": "5c2292261854b347b57f7e6f5806aad1",
+    "weapon": "Nishanka Boltshark X-80",
+    "name": "Magnetic Shafts",
+    "description": "Bolt shafts made of a magnetic material that is attracted by electricity, pulling them towards electrified enemies or enemies affected by an electric field. The magnetic pull causes them to deal more damage on impact.",
+    "tier": 5
+  },
+  {
+    "id": "0f919841391f974bbb4fb4b190100480",
+    "weapon": "Nishanka Boltshark X-80",
+    "name": "Magnetic Shafts",
+    "description": "Bolt shafts are made of a magnetic material that is attracted by electricity, making them pull towards electrified enemies or enemies affected by an electric field.",
+    "tier": 5
+  },
+  {
+    "id": "facd6abaa308464786100163aaca792f",
+    "weapon": "Nishanka Boltshark X-80",
+    "name": "Potent Special Bolts",
+    "description": "A more potent version of your special bolt that increases its duration.",
+    "tier": 5
+  },
+  {
+    "id": "7c405dabf304b847882a83ac5dba6480",
+    "weapon": "Shard Diffractor",
+    "name": "Impact Splash",
+    "description": "Releasing a screw from the stability safety mechanism causes the beam to more forcefully rupture outward on impact, increasing area damage.",
+    "tier": 1
+  },
+  {
+    "id": "f920c1acc264c542905d033998e3e806",
+    "weapon": "Shard Diffractor",
+    "name": "Increased Energy Density",
+    "description": "The energy density of the beam is increased, improving direct damage.",
+    "tier": 1
+  },
+  {
+    "id": "d03fa7b09a3ff841a526975cd574ada5",
+    "weapon": "Shard Diffractor",
+    "name": "Larger Battery",
+    "description": "R&D custom fitted you with a larger battery, increasing the max capacity.",
+    "tier": 1
+  },
+  {
+    "id": "f129c36ff8d7754394b865f4762daf20",
+    "weapon": "Shard Diffractor",
+    "name": "Soft Tissue Disruption",
+    "description": "Hit 'em where it hurts! Literally! We've upped the damage you'll be able to do to any creature's fleshy bits. You're welcome.",
+    "tier": 1
+  },
+  {
+    "id": "8c2fdfc160047c45a3842f8b7731be72",
+    "weapon": "Shard Diffractor",
+    "name": "Open Structure Battery",
+    "description": "Opening the structure of the battery with a new experimental material enables much faster charging!",
+    "tier": 2
+  },
+  {
+    "id": "5208c07c5d4bc74bb451bc327cc8e400",
+    "weapon": "Shard Diffractor",
+    "name": "Particle Spattering",
+    "description": "By inducing a stronger gas flow through the beam particles the damage area around the impact zone is increased.",
+    "tier": 2
+  },
+  {
+    "id": "c933729faa6fec4687a0ed0c9fd26955",
+    "weapon": "Shard Diffractor",
+    "name": "Aluminum Foil DIY",
+    "description": "Placing a simple ball of aluminum foil between the battery and main capacitor was enough to transfer a lot more juice with each charge! Who even needs R&D anymore?",
+    "tier": 3
+  },
+  {
+    "id": "ba9e2d77c84fc2479f614321b8a7e642",
+    "weapon": "Shard Diffractor",
+    "name": "Manual Beam Controller",
+    "description": "Cut off the beam at any time by releasing the fire button.",
+    "tier": 3
+  },
+  {
+    "id": "d0b6bd23b917a44696fa8b67b50c3f23",
+    "weapon": "Shard Diffractor",
+    "name": "High-intensity Heating",
+    "description": "A tweaked beam oscillator increases the intensity of the thermal shockwaves on direct impact, transferring more heat to the target.",
+    "tier": 4
+  },
+  {
+    "id": "0b174cd7ebd9114a8a1b7948494b973f",
+    "weapon": "Shard Diffractor",
+    "name": "Nitrogen Vaporizer",
+    "description": "Rerouting nitrogen gas through the beam increases its pressure power density and enables it to melt armor plating.",
+    "tier": 4
+  },
+  {
+    "id": "3a5d6a078990274cb616ede61567b49d",
+    "weapon": "Shard Diffractor",
+    "name": "Bio-mass Converter",
+    "description": "An invention with the purpose of making war more energy-efficient has been added as a fancy attachment, enabling your weapon to extend the current beam duration with every kill.",
+    "tier": 5
+  },
+  {
+    "id": "82e41cf5321e954ea0439079facfa4a1",
+    "weapon": "Shard Diffractor",
+    "name": "Dazzler Module",
+    "description": "A special dazzler lens is attached to the weapon, making the beam emit a strong infrared light on impact, slowing down enemies in the area of effect.",
+    "tier": 5
+  },
+  {
+    "id": "e8630c572b51fe468e50431261e28b0e",
+    "weapon": "Shard Diffractor",
+    "name": "Hydrogen Rupturing",
+    "description": "By adding hydrogen to the gas mixture the beam molecules will be pushed apart on impact with electrocuted enemies, increasing damage dealt.",
+    "tier": 5
+  },
+  {
+    "id": "310e61fd35b2f1498a758972ae6f0408",
+    "weapon": "Subata 120",
+    "name": "High Capacity Magazine",
+    "description": "The good thing about clips, magazines, ammo drums, fuel tanks ...you can always get bigger variants.",
+    "tier": 1
+  },
+  {
+    "id": "39f926d5f43cb447826a40c5b8c85d53",
+    "weapon": "Subata 120",
+    "name": "Improved Alignment",
+    "description": "Expertly adjusted for pin-point accuracy on the first shot and a reduced maximum spread.",
+    "tier": 1
+  },
+  {
+    "id": "8bce531afa9b9149b7e15dc07a8ab1c1",
+    "weapon": "Subata 120",
+    "name": "Improved Gas System",
+    "description": "We overclocked your gun. It fires faster. Don't ask. Just enjoy. Also probably don't tell Management, please.",
+    "tier": 1
+  },
+  {
+    "id": "44aec31e0eec6e409784c346864eabf3",
+    "weapon": "Subata 120",
+    "name": "Expanded Ammo Bags",
+    "description": "You had to give up some sandwich-storage, but your total ammo capacity is increased!",
+    "tier": 2
+  },
+  {
+    "id": "b65be3f92fa6844790205965141269aa",
+    "weapon": "Subata 120",
+    "name": "Improved Propellant",
+    "description": "The good folk in R&D have been busy. The overall damage of your weapon is increased.",
+    "tier": 2
+  },
+  {
+    "id": "fd9b953b1b2b4c47a6097ce97761d33f",
+    "weapon": "Subata 120",
+    "name": "2-Round Burst",
+    "description": "A custom firing mechanism lets you fire two shots so fast that the recoil does not get to affect the accuracy of the second shot, though the base accuracy of the weapon still affects shot spread. The quick consecutive hits are also great at breaking armor. To prevent the gun from exploding in your hand there is a delay before you can fire the next burst.",
+    "tier": 3
+  },
+  {
+    "id": "16e1d8f9cdec1f40ac7d148a01a3e947",
+    "weapon": "Subata 120",
+    "name": "Improved Propellant",
+    "description": "The good folk in R&D have been busy. The overall damage of your weapon is increased.",
+    "tier": 3
+  },
+  {
+    "id": "9684d77441edc3458e22d554c56a1cd8",
+    "weapon": "Subata 120",
+    "name": "Quickfire Ejector",
+    "description": "Experience, training, and a couple of under-the-table design \"adjustments\" means your gun can be reloaded significantly faster.",
+    "tier": 3
+  },
+  {
+    "id": "cbcd68a85d0a3f42b781cf1e72736ccd",
+    "weapon": "Subata 120",
+    "name": "Recoil Compensator",
+    "description": "This little tweak reduces weapon recoil and spread per shot helping you hit consecutive shots.",
+    "tier": 3
+  },
+  {
+    "id": "5002b8ec27d43d46b6826eb2c13178ec",
+    "weapon": "Subata 120",
+    "name": "Expanded Ammo Bags",
+    "description": "You had to give up some sandwich-storage, but your total ammo capacity is increased!",
+    "tier": 4
+  },
+  {
+    "id": "10e55ba129386448b619b82cb5794232",
+    "weapon": "Subata 120",
+    "name": "High Velocity Rounds",
+    "description": "The good folk in R&D have been busy. The overall damage of your weapon is increased.",
+    "tier": 4
+  },
+  {
+    "id": "304b90be89dc0c4b8bf59523bc33ba8f",
+    "weapon": "Subata 120",
+    "name": "Hollow-Point Bullets",
+    "description": "Hit 'em where it hurts! Literally! We've upped the damage you'll be able to do to any creature's fleshy bits. You're welcome.",
+    "tier": 4
+  },
+  {
+    "id": "c6efba9adc0be440a10a57d590c119a9",
+    "weapon": "Subata 120",
+    "name": "Acid-tipped Bullets",
+    "description": "Bonus corrosive damage",
+    "tier": 5
+  },
+  {
+    "id": "f3fcba149d2ae744a12fa1dc2bb8be14",
+    "weapon": "Subata 120",
+    "name": "Blowthrough Rounds",
+    "description": "Shaped projectiles designed to over-penetrate targets with a minimal loss of energy. In other words: Fire straight through an enemy!",
+    "tier": 5
+  },
+  {
+    "id": "c178f8bb56d6f7429747c557cc8925df",
+    "weapon": "Subata 120",
+    "name": "Mactera Toxin-Coating",
+    "description": "Bonus damage against Mactera aliens",
+    "tier": 5
+  },
+  {
+    "id": "53c6d0e25c7cb4438695bd97e8f3a45d",
+    "weapon": "Subata 120",
+    "name": "Neuro-Corrosive Toxic Catalyst",
+    "description": "Causes a target affected by neurotoxins or corrosive sludge to temporarily take more damage over time. Any biological target that dies while affected will violently explode damaging everything in the vicinity. Multiple rounds increase the potency of the reaction and the size and power of the death explosion.",
+    "tier": 5
+  },
+  {
+    "id": "81fea15838b1754da89d7b203534ec97",
+    "weapon": "Subata 120",
+    "name": "Volatile Bullets",
+    "description": "Bonus fire damage to burning targets.",
+    "tier": 5
+  },
+  {
+    "id": "5769a361652ea948b44fce57be5f24ae",
+    "weapon": "Zhukov NUK17",
+    "name": "Expanded Ammo Bags",
+    "description": "You had to give up some sandwich-storage, but your total ammo capacity is increased!",
+    "tier": 1
+  },
+  {
+    "id": "414188ed6203004699b018445ee4293c",
+    "weapon": "Zhukov NUK17",
+    "name": "High Velocity Rounds",
+    "description": "The good folk in R&D have been busy. The overall damage of your weapon is increased.",
+    "tier": 1
+  },
+  {
+    "id": "5942eedc99833240977d4e2740859f6c",
+    "weapon": "Zhukov NUK17",
+    "name": "Better Weight Balance",
+    "description": "Base accuracy increase",
+    "tier": 2
+  },
+  {
+    "id": "c3635546d708a243986fa7ae6c675d6b",
+    "weapon": "Zhukov NUK17",
+    "name": "Blowthrough Rounds",
+    "description": "Shaped projectiles designed to over-penetrate targets with a minimal loss of energy. In other words: Fire straight through an enemy!",
+    "tier": 2
+  },
+  {
+    "id": "61e46e7e60568940960f28f7cdf20db6",
+    "weapon": "Zhukov NUK17",
+    "name": "High Capacity Magazine",
+    "description": "The good thing about clips, magazines, ammo drums, fuel tanks ...you can always get bigger variants.",
+    "tier": 2
+  },
+  {
+    "id": "bc5aab0df902564cb45a66c94aac50b1",
+    "weapon": "Zhukov NUK17",
+    "name": "Quickfire Ejector",
+    "description": "Experience, training, and a couple of under-the-table design \"adjustments\" means your gun can be reloaded significantly faster.",
+    "tier": 2
+  },
+  {
+    "id": "159a28391d776a40b060060ad7180c84",
+    "weapon": "Zhukov NUK17",
+    "name": "Supercharged Feed Mechanism",
+    "description": "We overclocked your gun. It fires faster. Don't ask. Just enjoy. Also probably don't tell Management, please.",
+    "tier": 2
+  },
+  {
+    "id": "67832afcbe071e4bb32bc33740f078c7",
+    "weapon": "Zhukov NUK17",
+    "name": "Better Weight Balance",
+    "description": "Base accuracy increase",
+    "tier": 3
+  },
+  {
+    "id": "3401233fb5e2e14bb089a6ff040eb412",
+    "weapon": "Zhukov NUK17",
+    "name": "High Capacity Magazine",
+    "description": "The good thing about clips, magazines, ammo drums, fuel tanks ...you can always get bigger variants.",
+    "tier": 3
+  },
+  {
+    "id": "c8c3fa32786ba7448859f6c172f0a4a5",
+    "weapon": "Zhukov NUK17",
+    "name": "Increased Caliber Rounds",
+    "description": "The good folk in R&D have been busy. The overall damage of your weapon is increased.",
+    "tier": 3
+  },
+  {
+    "id": "f0526afdece8644c81a991ed5c5382f5",
+    "weapon": "Zhukov NUK17",
+    "name": "Quickfire Ejector",
+    "description": "Experience, training, and a couple of under-the-table design \"adjustments\" means your gun can be reloaded significantly faster.",
+    "tier": 3
+  },
+  {
+    "id": "0fd97b166264c246ac5bcbd1c6677224",
+    "weapon": "Zhukov NUK17",
+    "name": "Blowthrough Rounds",
+    "description": "Shaped projectiles designed to over-penetrate targets with a minimal loss of energy. In other words: Fire straight through an enemy!",
+    "tier": 4
+  },
+  {
+    "id": "4f987d30f36f3e44a2659625ad921fec",
+    "weapon": "Zhukov NUK17",
+    "name": "Expanded Ammo Bags",
+    "description": "You had to give up some sandwich-storage, but your total ammo capacity is increased!",
+    "tier": 4
+  },
+  {
+    "id": "a57582badcae234eb07b7d5cdbece996",
+    "weapon": "Zhukov NUK17",
+    "name": "Hollow-Point Bullets",
+    "description": "Hit 'em where it hurts! Literally! We've upped the damage you'll be able to do to any creature's fleshy bits. You're welcome.",
+    "tier": 4
+  },
+  {
+    "id": "a7e888106673914eacfae22a8b5cff24",
+    "weapon": "Zhukov NUK17",
+    "name": "Stun",
+    "description": "Hit 'em so hard they can't recover! Every shot has a chance to stop the target in its tracks.",
+    "tier": 4
+  },
+  {
+    "id": "d0c7859625d61d4bae7934c4a0e232dc",
+    "weapon": "Zhukov NUK17",
+    "name": "Conductive Bullets",
+    "description": "More damage to targets that are in an electric field",
+    "tier": 5
+  },
+  {
+    "id": "e48c7537b04c334c9a6141aaa0d93c05",
+    "weapon": "Zhukov NUK17",
+    "name": "Get in, get out",
+    "description": "Temporary movement speed bonus after emptying clip",
+    "tier": 5
+  }
+]

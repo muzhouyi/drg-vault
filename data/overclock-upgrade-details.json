@@ -1,0 +1,482 @@
+{
+  "af945b93a7b9d64ca6dd00683627bc80": {
+    "description": "Stuff a few more of these compact rounds into each magazine and they have a bit less recoil as well."
+  },
+  "ff94b9e7834d774292daccca3ea023b9": {
+    "description": "Embedded capacitors electrocute targets from the inside when you reload. However all that tech reduces total ammo and magazine capacity."
+  },
+  "11f123e174103140957957506bd576d7": {
+    "description": "It's like it knows what you are going to do before you do it, compensating for all recoil and bullet spread. The system requires a lower rate of fire and the fin-stabilized rounds do less direct damage but give a bonus to weakpoint hits."
+  },
+  "4cdf41f3a0f8e4499d1bac6168347799": {
+    "description": "More damage on average but it's a bit inconsistent."
+  },
+  "c3060324ce482c4ab6dc44ed498cba39": {
+    "description": "More bullets faster and it kicks like a mule."
+  },
+  "f6e2e547f2eb674dbda591f47de6d017": {
+    "description": "Increases the weapon's rate of fire without affecting performance and helps with magazine ejection as well."
+  },
+  "7306221f1264b04b8c025db4de9d1667": {
+    "description": "Deal bonus damage to burning, stunned, electrocuted, frozen, or poisoned targets"
+  },
+  "86aa0dd13fd37e43b2fbf176ee5de815": {
+    "description": "Extensive tweaks give a huge bump in raw damage at the cost of ammo capacity and fire rate."
+  },
+  "8c0142a687637a4ea4cc8a7f84b9610a": {
+    "description": "A few tweaks here and there and the Autocannon can now shoot HE rounds! Direct damage is lower but the increased splash damage and range lets you saturate an area like no other weapon can."
+  },
+  "01e23067cbb9a6428ae4394c99f1d2bb": {
+    "description": "Lighter weight materials means you can carry even more ammo!"
+  },
+  "3dd5e8141c483e43aa3e0708ce75d663": {
+    "description": "Fancy custom ammo drums improve weapon balance making it more accurate and easier to handle on the move while the improved feed motor increases the speed with which the max fire rate is reached. All this however comes at the cost of magazine capacity."
+  },
+  "32654e9478165e4da3f0dbd33b180341": {
+    "description": "Channel your inner war criminal by mixing some neurotoxin into the explosive compound. The rounds deal less damage and you can carry fewer of them, but affected bugs move slower and take lots of damage over time."
+  },
+  "cb83fd6c13c63f4982dc87b9796311c8": {
+    "description": "Specially designed shells splinter into smaller pieces increasing the splash damage range."
+  },
+  "d006e3eee0540242a2b0bca8abcdb387": {
+    "description": "Increase clip capacity and speed up reloads by getting rid of dead weight on the clips."
+  },
+  "1073ceebecbc014e8370e259040eb71c": {
+    "description": "Take the M1000's focus mode to the extreme by supercooling the rounds before firing to improve their acceleration through the coils, but the extra coolant in the clips limits how much ammo you can bring."
+  },
+  "aac9b6e4458458478e50db87324097eb": {
+    "description": "Embedded capacitors in a copper core carry the electric charge from the EM coils used for focus shots and will electrocute the target at the cost of a reduced focus shot damage bonus."
+  },
+  "2a12358f750b704996c37d467ecf1d36": {
+    "description": "A less powerful round together with a rebalancing of weight distribution, enlarged vents and a reshaped grip result in a rifle that is more controllable when hip-firing in quick succession but at the cost of pure damage output. As an added bonus you can carry more of the new ammunition."
+  },
+  "8a0122e44e42104baaad6b4534a9de8f": {
+    "description": "Your movement slows down for a few seconds while using focus mode in the air."
+  },
+  "d1544b3528938a48964e8d9a6309d1da": {
+    "description": "Focus faster and without slowing down but all that fancy tech limits how quickly you can reload."
+  },
+  "6f26a8b49f967c4d999f734645eae2c4": {
+    "description": "Lighter rounds that permit a shorter delay between bursts and you can carry a few more of them as well. What's not to like?"
+  },
+  "2ff3d4c92d59304592009fa2e39bffc6": {
+    "description": "You can carry even more ammo but the rate of fire needs to be toned back to avoid a jam and please take more care while reloading."
+  },
+  "4a4f93fe1ac31e41b897c1f1b264a672": {
+    "description": "After impacting terrain, these high-tech bullets convert into electro minelets that will electrocute anything unfortunate enough to come close. However, they don't last forever and the rounds themselves take more space in the magazine and deal less direct damage."
+  },
+  "414916957ad3d0409b5fe3692a46dd19": {
+    "description": "Meticulous sealing lets you get a bit more power out of each round and the attention to detail improves how easily the magazine slots in."
+  },
+  "88abd40a78329942884c00d7f22dac90": {
+    "description": "A new shape to the bullet delivers a lot more damage but its odd size means fewer rounds in the clip and a bit less ammo overall."
+  },
+  "8f1c6a1a23a6df4cbca5510c4a19f221": {
+    "description": "Convert the BRT to fire small flechettes instead of slugs. Increases overall ammo and magazine size as well as reducing recoil but at the cost of raw damage."
+  },
+  "f1ae55cf592e7746a0001d61584bdf2a": {
+    "description": "It ain't pretty but this overclock will tear apart anything that gets close, though it gets a bit iffy at range."
+  },
+  "a0e018c45fe679418fd3730e6e9b631d": {
+    "description": "By channeling exhaust heat back into the charge chamber a shot can be charged faster while using less energy. Unfortunately this process generates a lot more heat."
+  },
+  "55bb52a0ecfa7c43b37bbbe640114196": {
+    "description": "Pushing the EPC to the limit will give you a significant increase in charge shot damage and a boost in the size of the explosion but at the cost of thermal efficiency and energy consumption."
+  },
+  "97822071d586ce45acd6489782b700fa": {
+    "description": "A masterwork of engineering that improves charge speed and energy efficiency without affecting overall performance!"
+  },
+  "f1e6cc307c11de4586b88b419e530abf": {
+    "description": "A high-tech solution to cleanly improve the cooling rate. The result is an increased number of shots that can be fired before overheating, a faster recovery from an overheat and an extended duration that a full charge can be maintained."
+  },
+  "39e43e13cc0dae4691dd51a11383e9e1": {
+    "description": "Some extensive tweaking to how the shots are prepared can increase the pure damage of the weapon but at the cost of more heat per shot and a reduced battery size."
+  },
+  "165cd93e660b8147bca2f86cde5cf8f7": {
+    "description": "By changing how the plasma is layered within the charged projectile a slow and persistent discharge can be achieved upon impact. Any enemy entering this field will be slowed while continuously taking damage. However, this does reduce the instant damage done."
+  },
+  "cd4eec38c029724e8317ccdc22d06057": {
+    "description": "It's amazing how much material can be removed without affecting anything and lighter magazines means more magazines and faster reloading."
+  },
+  "338dd238332a2e4ea5490208aad7f502": {
+    "description": "Heavier rounds allow for stun chance on all body parts, not just weakpoints. Shooting already stunned enemies with this overclock will deal extra damage."
+  },
+  "62d4c94c1367e8419691b677837da4fb": {
+    "description": "Smaller shells designed around a new charge type reduce recoil and increase overall ammo and magazine capacity at the cost of raw damage."
+  },
+  "70122ba2fbdabf4895dc09c90294e685": {
+    "description": "Heavy modification to the chamber greatly increases the maximum rate of fire and increases raw damage but reduces the weapon's accuracy and reload speed as a consequence."
+  },
+  "07e9279956bf9c418eea313e2dc59f8d": {
+    "description": "Electromagnets in the chamber greatly reduces shot spread and increase weakpoint damage at the cost of a slower rate of fire."
+  },
+  "ce660c4dd9980043a802a17a4569c0ac": {
+    "description": "Get all you can from your fuel and lose pressure slower from the main chamber."
+  },
+  "6adb23b3c8ed884086a88b8107c93cbe": {
+    "description": "Freeze things faster at the cost of a slower pump and turbine."
+  },
+  "88f8eab206ec7b46a31c8f034b44931a": {
+    "description": "A low volume high pressure chamber paired with a high power pump increase the flow rate and repressurization speed but lower the max duration of sustained flow."
+  },
+  "7b11755997b6564e97b1032a828eb90f": {
+    "description": "A change in the fuel mixture along with some heavy cooler unit tweaks means a lot more damage especially to frozen targets. However, freezing takes longer and the capacity of the pressure chamber is reduced."
+  },
+  "d518cb371a32a0449b345e4f58d34c91": {
+    "description": "Pressing the reload button dumps all the fluid in the chamber directly into the turbine, flash freezing it and launching an ice projectile. Side effects include an increased recharge delay and of course the large amount of fuel used."
+  },
+  "c1f16f970c9c1047af836bf6cbfebcad": {
+    "description": "Pressing the reload button shoots all the cryofuel in the chamber at once as an AoE cryo-projectile. Besides the very large amount of fuel consumed, the operation overloads the whole system resulting in a much longer delay before regaining pressure and the modifications restrict the total amount of fuel you can carry."
+  },
+  "43cd8d27eaeaaa4a8e6dc43e0438a10c": {
+    "description": "After impacting terrain, these high-tech bullets convert into cryo minelets that will super-cool anything that comes close. However, they don't last forever and the rounds themselves take more space in the magazine and deal less direct damage."
+  },
+  "24a286c31f45ea469a20102af4d741d3": {
+    "description": "Fit more of these custom rounds in each magazine but at small reduction in the rate of fire."
+  },
+  "828b2bbc50ec424385efd00ea6854597": {
+    "description": "Special hardened bullets combined with rerouting escaping gasses back into the chamber greatly increases the raw damage of the weapon but makes it more difficult to control and removes any bonus to weakpoint hits."
+  },
+  "faf35071ba63b2429855fbc8a09bffd0": {
+    "description": "Special bullets contain micro-explosives that detonate when you reload the weapon at the cost of total ammo, magazine capacity and direct damage."
+  },
+  "98a0452b235402459cff5cc3b34ccc69": {
+    "description": "By filing away unnecessary material from the magazines you've made them lighter, and that means they pop out faster when reloading. Also the rounds can move more freely increasing the max rate of fire slightly."
+  },
+  "71588d43a7589a4abe61a8de2eb449bf": {
+    "description": "The smaller mechanism allows for greater tank capacity and more fuel at the cost of reload speed and operational range."
+  },
+  "6431a8ddeaa6894b90c57bac7552a5ff": {
+    "description": "This crazy bit of tweaking will give a big boost in damage and flow rate but at the cost of operational range and tank capacity."
+  },
+  "c5057a9608cf5e4ba4aab32ad613ba3e": {
+    "description": "Lighter weight gear means more fuel and sandwiches."
+  },
+  "19e85d1c3585b349b151779cbd7303d9": {
+    "description": "Increases operational range but decreases the fuel flow rate."
+  },
+  "f28c3ee38a960d48965e9f69f56b3f19": {
+    "description": "Special fuel mixture extends the duration and damage of Sticky Flames but at the cost of tank capacity and total fuel."
+  },
+  "415f1d83a77e7a448dbf60383103fd6c": {
+    "description": "Special additive compound extends the Sticky Flame duration and increases direct damage."
+  },
+  "2e9fbfb43b7b554fb3728780f1334824": {
+    "description": "More space left for ammo at the cost of a reduced rate of fire."
+  },
+  "01d4653903832f498c50f7719d58e89b": {
+    "description": "Stuff more bullets into the ammo drum by thinning the material in non-critical areas."
+  },
+  "7cd10e2c55583041b577141c854bee62": {
+    "description": "Pushing things to the limit this overclock greatly increases damage output at the cost of consistently stunning targets and the kickback makes it almost impossible to move."
+  },
+  "fbb1014758606a41888e378f69e3cd61": {
+    "description": "Increases damage at a cost to accuracy."
+  },
+  "b55d6170eea5d743ac4b28293c0c4673": {
+    "description": "Get the most out of each shot without compromising any of the gun's systems."
+  },
+  "63156673f2174f449f598f8729ac0c65": {
+    "description": "Turn the area just in front of the minigun into an even worse place by venting all the combustion gasses forward. However, it does overheat rather quickly."
+  },
+  "ed4036806a69e848bc72dde3cdeac456": {
+    "description": "Special bullets that ricochet off all surfaces and even enemies going on to hit nearby targets. However they deal less damage and are less accurate overall."
+  },
+  "a97694e1a9b7484eb66e14dbf830db6b": {
+    "description": "You found a way to pack away two more rounds somewhere."
+  },
+  "ee5713fa91a0e245a1c0bfce15212074": {
+    "description": "Smaller and lighter rounds means more rounds in the pocket at the cost of the explosion's effective radius and damage."
+  },
+  "87d2434388d3fc45884e351dcbe70f7c": {
+    "description": "Big and deadly and dirty. Too bad plutonium is so heavy that you can only take a few rounds with you. And remember to take care with the fallout."
+  },
+  "b912059a3f86e44ba2985450d136ccb5": {
+    "description": "Increases the explosion radius and damage without any unwanted effects."
+  },
+  "db7ec788b46fce4c9800a25010a0e8ea": {
+    "description": "Use explosions to launch yourself and your teammates into the air."
+  },
+  "bc4cd684621bf6449607373a534a574f": {
+    "description": "New super-high velocity projectiles trade explosive range for raw damage in a tight area. The increased weight of the rounds also limits how many you can carry."
+  },
+  "96940c7cdcefa84084dd4d60d2e81b2d": {
+    "description": "Bring more ammo with you and slam those cases in faster!"
+  },
+  "3d7c9c85f6d3a549a2d6edb09918314b": {
+    "description": "By improving the node's efficiency you can up the raw damage without too much fuss and it lasts a bit longer too!"
+  },
+  "7fa184cb9d21874d82bf9ddafc7c91d7": {
+    "description": "By passing an electric current through the plasma, the beam electrocutes anything it touches but the bulky hardware limits magazine capacity."
+  },
+  "8ed912f8267b844482eeda86604451a5": {
+    "description": "Turn your Breach Cutter into a tool of burning death and destruction at the cost of direct damage and armor breaking. As a bonus the extreme internal heating keeps the targets burning for an extended period."
+  },
+  "744251ed25d4484aa38dfbdbf43bc5b9": {
+    "description": "Holding down the trigger after the line leaves the gun activates a remote connection which on the release of the trigger causes the line to change direction and move back towards the gun."
+  },
+  "05db2fa3b969e04f8644f5be6c204020": {
+    "description": "A few tweaks to the launcher cause it to add roll to the projectile after it is ejected thus covering a larger area as it travels. Holding down the trigger as the line leaves the gun activates a remote connection which lets you steer the projectile as long as the trigger is held down. On the release of the trigger the connection is broken and the projectile continues in a straight line. The projectile is also able to travel further before collapsing."
+  },
+  "340afbc6c306044281013181e0026e1b": {
+    "description": "These modified plasma nodes convert most of the forward momentum into angular momentum stretching out the beam and continuously doing damage to the immediate area where it was launched. The nodes run for a longer duration but deal less damage every second. Due to the weight both magazine and total capacity is greatly reduced."
+  },
+  "a4ab7c627af7fe4fa235e3aac398ed1f": {
+    "description": "Any shot that hits a weakspot has a chance to ricochet into a nearby enemy."
+  },
+  "f13e20c4e74976438e85c237ae071830": {
+    "description": "Custom magazine that can fit a lot more ammo but it's a bit unwieldy and takes longer to reload."
+  },
+  "2949a3be68ea2a4197d532af80549101": {
+    "description": "Micro-explosives that explode inside hit targets when you reload. However, these fancy bullets come at the cost of total ammo and magazine capacity."
+  },
+  "28a8e817e50a7346963e418ba08dfe18": {
+    "description": "Fully automatic action, watch out for the recoil."
+  },
+  "d57b542fbc793542b6bb5617c1a67229": {
+    "description": "More damage on average but it's a bit inconsistent."
+  },
+  "587488ba77b28d4da177400d995737a7": {
+    "description": "Part bullet, part syringe, these rounds are very effective at stunning most enemies and slowing down the rest."
+  },
+  "a937dc3938dee8418cd0641cce19b46a": {
+    "description": "An updated casing profile lets you squeeze 2 more rounds into the cylinder and take a few more rounds with you, but all that filing and drilling has compromised the accuracy of the weapon and it takes longer to reload."
+  },
+  "d53f94fbc05e0448b57bc9df6846267b": {
+    "description": "Heavy tweaking has made it possible to use modified autocannon rounds in the revolver! The damage is crazy but so is the recoil and you can't carry as many rounds. Also, only 3 rounds fit in the gun and reload time is a bit slower but base accuracy is improved."
+  },
+  "5885a33b15ae844591a66b65a2e5494e": {
+    "description": "Any shot that hits a weakspot has a high chance to ricochet into a nearby enemy."
+  },
+  "db02b4e77d43bf44a4749982c0879b77": {
+    "description": "Smaller, bouncy bullets ricochet off hard surfaces, hitting nearby enemies like magic! Overall, the damage of the weapon is reduced, but you can carry a few more rounds due to their compact size."
+  },
+  "cd6993f938e27c49ac69293bf942a8f0": {
+    "description": "More damage on average but it's a bit inconsistent."
+  },
+  "d1306cbc8421b248a4b95b332df3e056": {
+    "description": "Fuel on the fire! These rounds are extremely effective against burning targets but at the cost of direct damage dealt to unaffected creatures."
+  },
+  "ef0cac2aef57bd41a72155b4da395d47": {
+    "description": "Specially shaped shells result in a much tighter shot, but you can't carry quite as many of them."
+  },
+  "0b1a2ec60168c54e9e47ca764c3b70bd": {
+    "description": "These large shells pack a lot more charge for a big increase in damage but they also take up more space so total ammo is limited."
+  },
+  "3f68cb7c2fab2843b1446d133bd92c1d": {
+    "description": "With a bit of patience and some luck you can get one more pellet and a few more grains of powder into each shell without affecting the gun's performance or losing an eye in the process."
+  },
+  "5f090bb3efc96f4297f1bfc3f152c663": {
+    "description": "Unload both barrels at once, no regrets. As an added bonus the simultaneous firing of both shells has an amplifying effect on the blast wave."
+  },
+  "fa40ee4a1f8cb04fbfaf916469e4b167": {
+    "description": "You can carry a few more of these compact shells in your pockets and they are a bit faster to reload with."
+  },
+  "e6daf7d6065004439ef966d6fdbd69a6": {
+    "description": "Less like gunpowder and more like rocketfuel, this mixture gives a hell of a kick that you can use to get places."
+  },
+  "05b157a075e0734bb471ef8dae692865": {
+    "description": "They don't hit quite as hard, and can't handle fast fire rates but you sure can carry a lot more of them!"
+  },
+  "ce9490445b036b49b89db2bc8d18fd12": {
+    "description": "When you need a little more sustained damage."
+  },
+  "81b842310e01b847bf99774dbc3dc0dd": {
+    "description": "Use the electron circuit of the SMG to boost its fire rate and damage but the accuracy suffers as a result."
+  },
+  "13cf1c4a6992924a9aff5ceaf05b7106": {
+    "description": "Same power but in a smaller package giving slightly better accuracy and letting you fit a few more rounds in each magazine."
+  },
+  "0c1baa64b03cb94ebb77b7b55e7c6c87": {
+    "description": "Shoot a turret to turn it into the epicenter of an electric explosion! The bullet modifications unfortunately also lower the direct damage and magazine capacity."
+  },
+  "3c42dbea3021ee44af6d944a91314d75": {
+    "description": "Micro-conductors have been added to your bullets, enabling them to add electric currents to platforms and Sentries on impact. Additionally, electrified Sentries work as nodes, creating an electric arc between them. Conductor Bullets are bigger and require a modified firing mechanism, reducing ammo capacity and fire rate."
+  },
+  "1e41880c9e18fc439b82b69f19f0a191": {
+    "description": "With a thicker casing your missiles spread more fragments at higher speeds, increasing AoE efficiency"
+  },
+  "52de47b5a2579e418564f19382240866": {
+    "description": "Enables your weapon to load up to 9 missiles and launch them at once! As an added bonus the overloaded exhaust ports increase missile velocity and boost damage based on how many missiles are in the salvo. However the missiles in the salvo cannot be guided."
+  },
+  "8e6816c3daee2c49b93e8fa67cf13b1a": {
+    "description": "Unleash a torrent of small unguided rockets. What they lack in sophistication and explosive power is more than made up for in the sheer volume and rate of fire."
+  },
+  "c24639fb04a00949be8f00cd38462b84": {
+    "description": "Grandpa's recipe. Highly unstable and heavy, but works like a charm! Your missiles get a much higher top speed and reach it instantly. The extra energy greatly improves direct damage but all that extra fuel reduces the missile payload capacity. Due to the extra weight both magazine and total ammo capacity are also reduced."
+  },
+  "c873e29a463e4f4dad4821d92bc31fb4": {
+    "description": "When your missiles hit the ground they are planted as mines that explode when damaged or if enemies are in close proximity. When setup as mines the warheads explode with significantly more force over a larger area but keep in mind that these missiles do not have guidance. The total ammo capacity is slightly reduced."
+  },
+  "01cd9aad2398fb46818a3f6f6a96384a": {
+    "description": "Turn the battlefield into a plasma apocalypse with these penetrating multi-burst missiles! They fly slower, don't hit as hard, and there is a limit to how many can be controlled at one time, but in the right hands even a single missile can do a lot of damage."
+  },
+  "2a257648df688844ba3db091a3756ba5": {
+    "description": "With some slight tinkering, both your weapon and projectiles are faster."
+  },
+  "c1d77a8bafd433408e4a8397f1a63aec": {
+    "description": "Charged shots break apart into more fragments on impact and each fragment is more potent, however the initial damage of the charged projectile impact is reduced."
+  },
+  "4ccc7e994163a14aaac97ab3777ff1f9": {
+    "description": "The addition of finely tuned timed separation compounds cause the charged shots to leave a trail of sludge as they fly through the air. However the projectile depletes its mass as it flies, dealing less impact damage as fragments separate and completely expiring once all fragments are dropped."
+  },
+  "4956672ba68d3a439d4ec260f0b98ce4": {
+    "description": "Anti-gravity pellets suspended in the sludge let the projectiles fly further and faster."
+  },
+  "eccab2551405f044a93ffb6c51ff9b39": {
+    "description": "Experimental additive that activates on impact gives a small improvement to the corrosive DoT and slowdown effect of direct hits."
+  },
+  "539f16d0eca50447b21bd3b1add439cb": {
+    "description": "Special mixture greatly increases projectile impact damage. However the volatile compound evaporates quicker, reducing the duration of the corrosive and slowdown effects as well as the puddle lifetime."
+  },
+  "ea7d273b56099b4b9f44768a099a8c1c": {
+    "description": "The charged shot cohesion is disrupted on firing, instantly shooting out fast-moving fragments in a shotgun-like blast. While spectacular the modifications result in reduced ammo capacity and an extended reload process."
+  },
+  "5abf1c487bf3bd4bafdaf2a4428720ec": {
+    "description": "By rewiring the thermal systems into a secondary cell and connecting it to the primary battery, your weapon can convert the energy from overheating into ammo. However this reduces the maximum capacity of the primary battery significantly."
+  },
+  "1bd74059739e094bbe0a3b79f2e94b46": {
+    "description": "Tinkering with the particle density makes your projectiles react on impact with armor and surfaces, making them bounce! However the rate of fire needs to be reduced to keep the gun from exploding in your hands."
+  },
+  "00ea09da14da7646982dd5a1b2467a08": {
+    "description": "With a liquid coolant fitted to the weapons thermal systems it transfers heat more efficiently, accelerating its cooling rate and reducing heat per shot."
+  },
+  "bffe0c3436ac584d890b6efe9124aaf1": {
+    "description": "Feeding the thermal exhaust back into the system transfers the heat generated after a 50% threshold to the plasma, making it increasingly hot. The modifications means more heat generated and it takes longer to get rid of during overheat. "
+  },
+  "9225769777355041bdeb70cacd946a27": {
+    "description": "The particle accelerator has been tuned way over safety standards to push the damage output to the limit! The modifications comes with a price to overall stability of the weapon and increased heat generation."
+  },
+  "d831b000f2a2c84c8749a5b182348574": {
+    "description": "Directional vents burn everything around you and send enemies running when the weapon overheats. They also reduce the overheat recovery time."
+  },
+  "532714b803867c4f8aa6ea78fa4eaaea": {
+    "description": "Plugging your shield directly into the weapon battery boosts the plasma feed and density significantly while at full shield and improves total ammo and rate of fire at all times. However the extra energy generates more heat and overheating the weapon will short circuit your shield."
+  },
+  "b63d1376d90ddd4c986851d791e737ab": {
+    "description": "Shots do extra damage against armor when all locks are engaged."
+  },
+  "538a52e774fcb24c85e5f7f1ce63e3fa": {
+    "description": "Clean up the caves with an expanded magazine combined with the ability to acquire more locks."
+  },
+  "8884ed69b093e44681f36c74fd1e772f": {
+    "description": "Tweaks to the fire control mechanism and camera software bring lightning fast lock acquisition and more weakspot damage when all locks are used. However, the max number of locks is reduced as is the magazine and total ammo capacity."
+  },
+  "6fa83e783551f54a97bc04f09df1a842": {
+    "description": "Every enemy with 3 locks triggers an explosion on the last shot."
+  },
+  "798b9546ab16b34cad766dab554150d9": {
+    "description": "Locked shots will always hit their target even finding their way around heavy armor and the system can maintain locks at more extreme angles. However the extra processing load reduces the rate of fire for locked shots and more care must be taken when reloading the advanced rounds."
+  },
+  "956bb51f4d8f254291a0c0e740bd07cf": {
+    "description": "Slow down enemies by locking on to them, the more locks the slower an enemy gets! However the locks can only be maintained for a limited time before the system resets."
+  },
+  "5f614059b3ada14e930831ef4b609802": {
+    "description": "Extremely efficient cooling system that helps the weapon generate slightly less heat, makes it cool faster and will spend less time jammed."
+  },
+  "79a870ed00c9814a942be4ad49a10b63": {
+    "description": "A lens add-on that focuses the microwaves significantly, enhancing their damage output for up to 4 meters. "
+  },
+  "0cd9e18b85e271449901d38d50ba62b4": {
+    "description": "With some mechanical stress to the heat generator the microwaves can penetrate deeper, being able to go through several enemies at once and slows them down. However the stress takes its toll on the generator and decreases its damage output slightly."
+  },
+  "a3e85790abcbc74abccb3cc636509a1b": {
+    "description": "A bit on the larger side, but with a few modifications to the weapon you can now use the most powerful power source R&D could smuggle back from the black market. The extra energy boosts rate of fire and total ammo at the cost of a lower cooldown and longer unjam duration."
+  },
+  "48648832aa11e04dae9f2e8adf89ad8d": {
+    "description": "Adding an experimental electron tube makes the microwaves generate more heat, boiling the skin of enemies in the shape of large blisters. The blisters bypass armor, enhances incoming direct damage and hurts the target when popped. The large amounts of heat generated comes at the price of a lower cooldown rate."
+  },
+  "5edd2987db047f498add72fceb6c1ee3": {
+    "description": "Installing a lens of uranium glass cranks the radioactivity of your microwaves to 11. Hit targets have a chance to be contaminated with radiation, suffering damage and emitting harmful radioactive waves to nearby enemies. The small size of the lens reduces microwave impact radius and damage, while the amount of power required reduces total ammo."
+  },
+  "f1432f121f68e04da0c5dd8e50cf717d": {
+    "description": "Careful tweaking has resulted in greater charge capacity as well as an increase in total capacity."
+  },
+  "71d81bc3dbc28f4d905a6c9f4a8b55ae": {
+    "description": "Removing manual control and automating the fire sequence improves speed of operation and allows for a significant expansion of the total battery capacity. However the charge capacity had to be reduced to prevent overheating. Manually interrupting the beam stresses the capacitor, resulting in a loss of some of the remaining charge."
+  },
+  "f1880c6f7bef10478e77ee4fc63481f6": {
+    "description": "Heavy modifications to the weapon keeps excess energy within the beam, increasing the radius and damage of the area of effect while the beam is fired. However the changes leave little room for the battery, reducing the maximum energy capacity of the weapon."
+  },
+  "7bb7c21fa1d1e64a8c007ce6a023a412": {
+    "description": "A mixture of high energy and atomic frequency tuning lets you temporarily turn dirt and rock into magma, damaging and potentially igniting any enemy that walks across it."
+  },
+  "d330723969bce44cb1ebe9009a2f6e0d": {
+    "description": "The beam has been finely tuned to violently react with plascrete platforms, significantly increasing AoE damage and range. If the beam is held long enough the reaction becomes unstable causing a powerful explosion damaging everything in a wide area. The tweaks reduce total capacity and come with a limited charge rate to avoid frying the circuits."
+  },
+  "187a18ba5283d24c905a37f4fb123ba0": {
+    "description": "Drastically increase the energy throughput by pressing the reload button while a beam is firing. Unfortunately maintaining control requires that you stand still while firing a boosted beam and the weapon cannot stop firing once boosted until the capacitor is fully discharged. Manually interrupting the beam stresses the capacitor, resulting in a loss of some of the remaining charge."
+  },
+  "8c5d24bd68d5f14a89a6b87a857ccd9b": {
+    "description": "A charge so powerful it splits and rebinds atoms in hit enemies, spreading ailments to other targets behind them."
+  },
+  "26841eb5823a284b81bf7da3792708d7": {
+    "description": "Extremely magnetic coils able to store more energy. The extra energy increases the radius and duration of the trail left behind by the projectile."
+  },
+  "f82f326576e8a74899753cb6316b7c20": {
+    "description": "The electrical flow is reversed by adding a tiny module onto the battery, increasing the amount of power it can store. However the extra efficiency of the reversed flow results in shorter lived trails."
+  },
+  "56471f219be014448dfe5f087cabd447": {
+    "description": "R&D are proud of this one. A bullet that uses the traction from impacting with terrain to generate energy, making it travel further and do more damage. The extra energy required to fire The Mole comes with the cost of charge speed."
+  },
+  "80dea90ad5f3174695138ff47a32a96a": {
+    "description": "By using a highly volatile injection fuel a full charge pushes the trail temperature so high it will quickly ignite almost anything. The huge amounts of energy required increases charge time and reduces battery capacity, while shortening the trail duration."
+  },
+  "a6751da1b87c134ebc5710c7431c1453": {
+    "description": "Prototype chamber tech that allows the weapon to fire off residual energy up to two times in quick succession after shooting, at half the energy cost and 75% damage of a normal shot. The extra shots don't penetrate and the heavy modification takes a toll on the energy flow, reducing charge rate and reload speed."
+  },
+  "1cfa57fa35d0db49a9aaf87caa011ef4": {
+    "description": "R&D improved the reload mechanism of the crossbow, making it pull back sooner for you to put a bolt in the chamber. They also reinforced the string free of charge, enabling the crossbow to fire bolts with little to no drop."
+  },
+  "6c464531820ea849bb3c80c0f190a74f": {
+    "description": "Extra potent special bolts and more of them. What more could you want?"
+  },
+  "75cfd0a90f31c94a9d6a8d02147de1fc": {
+    "description": "A small module based on the Cryo Grenade tech has been strapped to your bolts, enabling them to cool and freeze enemies. Pin them to the ground or the face of enemies and turn any bugs in near proximity into popsicles. The intense cold takes a toll on the bolt, reducing overall damage and destroying it after use."
+  },
+  "ddca81e29c6be8488c2df4f0b0c72a72": {
+    "description": "Bolts with highly advanced cannisters full of volatile chemicals, with the ability to radiate intense heat. Shoot it at your enemies or the ground to activate it. The high temperature comes at a cost though, reducing overall damage and rendering the bolt useless after impact."
+  },
+  "aecb0f241dfa194ab04bbb86563fa840": {
+    "description": "The crossbow has been modified so it can fire a thinner bodkin point bolt with the ability to penetrate targets and ricochet to the nearest target. Its thin frame makes it do less damage and requires a slower reload process. This however does not affect special bolts."
+  },
+  "62fe96de32a5454eb0f1952bd68dbaf4": {
+    "description": "With a few adjustments to the firing mechanism and the string you can load a volley of three bolts into the chamber. The bolts do a tad less damage, but are packed compactly enough for you to carry more of them. The modifications and size of the bolts makes reloading slower, and the bolts are ruined after firing them, making them unretrievable. This does not affect special bolts."
+  },
+  "34b2eb764839c94cb7f96b5567317255": {
+    "description": "R&D has fitted a cam mechanism into the GK2's fire control group, putting the rifle into a fixed 3-round burst fire mode. Additional modifications include a small increase to magazine size, damage and higher stun chance."
+  },
+  "f87380fa4ec44a41a79974f6bac074a6": {
+    "description": "The weapon has been reworked to fire heavy mortar projectiles. These modifications slow down the rate of fire significantly -- but even if you can't carry as many, the high-explosive rounds more than make up for it in damage. Just remember to account for drop."
+  },
+  "4d2acafc30ffb542a645c75948efe75f": {
+    "description": "Focus Shot now fires a dart loaded with an inflammatory catalyst which causes enemies to temporarily take more damage from all sources. While faster to focus, the direct impact of these darts does negligible damage, and requires an increased Focus Shot ammo cost as well as a smaller magazine."
+  },
+  "4ad58615ac68374f819663ad4c510b6d": {
+    "description": "Converts the weapon into a whopping 6-gauge pump action capable of dealing massive damage and punching through multiple enemies. The intrusive old-school pump mechanism requires a smaller magazine, and you can't fit as many of these big ol' shells in your pockets."
+  },
+  "2406e7980f5ccc449b3ff39c9b9f0807": {
+    "description": "A new cryoctane fuel blend creates razor-sharp formations of ice crystals on impact with terrain, which damage and slow enemies attempting to walk through them. These ice crystals melt over time, but can be maintained by cooling them. This modification results in a smaller overall fuel tank capacity to make room for the new fuel injector."
+  },
+  "e5d05e38562b34408054603f41e99091": {
+    "description": "A supercharged injection system and integrated duckbill choke allows the weapon to blast a blistering horizontal wave of flame by holding reload. Using this mechanism eats up additional fuel and makes the weapon unstable, reducing movement speed during charging."
+  },
+  "b6772bcbdab2a8469058b4c0ac876413": {
+    "description": "Overtunes the electric drive to push the fire rate to its limit! But the resulting increase in heat buildup requires a mechanism allowing injections of Quik-Chill coolant fluid by pushing reload. This coolant reduces heat buildup and can take the weapon out of an overheated state. Only a limited amount of coolant can be carried, and must be replenished via resupplies."
+  },
+  "48b4de944d359341920efcbbadd235c5": {
+    "description": "Adding ammonium nitrate to the sludge mixture makes it explode when exposed to high temperatures. This new sludge mix has a thinner consistency, increasing the ammo cost of the pump's charged shot. It also smells even worse."
+  },
+  "4e71a830f4274647a5c763a1e9cbc41a": {
+    "description": "A sleek new operating system from the SmЯt Corporation gives the weapon near-instantaneous lock-on, and automatically fires shots at locked-on targets. This system is quite CPU-intensive, however, lowering the maximum number of lock-ons."
+  },
+  "22b4fa6e4cc458458bc3533e783e202d": {
+    "description": "Each missile has had their explosives replaced with cluster munitions, and will eject these bomblets when you hold the reload button. The heavy payload has reduced the forward propulsion power of the missiles, as well as both total ammo and magazine capacity. On the bright side, all the extra weight and explosives mean the missiles hit like a truck if you don't release their payload before impact."
+  },
+  "943da878eba6f1428b1866736ee08395": {
+    "description": "ElectroCryoThermic™ technology makes the plasma projectiles increase enemies' sensitivity to temperature changes and shock. However, the volatile plasma reaction does less direct damage, and generates more heat per shot."
+  },
+  "464b23599a0dde489b152c4d730b6ef4": {
+    "description": "Precision-tooled hyperalloy components drastically reduce bullet spread. However, the weapon frame no longer absorbs recoil, transferring all force directly to the user's wrist. This means increased recoil, as well as elevated risk of carpal tunnel syndrome."
+  }
+}

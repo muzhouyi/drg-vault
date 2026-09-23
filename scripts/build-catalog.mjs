@@ -4,6 +4,9 @@ import path from 'node:path';
 const root = 'D:/下载暂存/work/za';
 const editorData = path.join(root, '.tools/drg-save-editor/guids.json');
 const completionist = path.join(root, '.tools/drg-completionist/data');
+const overclockUpgradeMapPath = path.join(root, 'drg-vault/data/overclock-upgrade-map.json');
+const overclockDetailsPath = path.join(root, 'drg-vault/data/overclock-upgrade-details.json');
+const weaponModulesPath = path.join(root, 'drg-vault/data/weapon-modules.json');
 const output = path.join(root, 'drg-vault/dist/catalog.json');
 
 const read = (file) => JSON.parse(fs.readFileSync(file, 'utf8'));
@@ -22,6 +25,8 @@ const classIds = {
 };
 
 const coreSource = read(editorData);
+const overclockUpgradeMap = read(overclockUpgradeMapPath);
+const overclockDetails = fs.existsSync(overclockDetailsPath) ? read(overclockDetailsPath) : {};
 const coreItems = Object.entries(coreSource).flatMap(([category, records]) =>
   Object.entries(records).map(([id, record]) => ({
     id: id.toLowerCase(),
@@ -30,19 +35,29 @@ const coreItems = Object.entries(coreSource).flatMap(([category, records]) =>
     weapon: record.weapon ?? '',
     name: record.name,
     cost: record.cost ?? null,
+    upgradeId: overclockUpgradeMap[id.toLowerCase()] ?? null,
+    description: overclockDetails[id.toLowerCase()]?.description ?? '',
   })),
 );
 
 const minerFiles = ['driller', 'engineer', 'gunner', 'scout'];
 const miners = minerFiles.map((name) => read(path.join(completionist, `miners/${name}.json`)));
-const minerByWeapon = new Map(miners.flatMap((miner) => miner.weapons.map((weapon) => [weapon, miner.name])));
+const weaponMetadata = new Map(miners.flatMap((miner) => miner.weapons.map((weapon, index) => [weapon, {
+  dwarf: miner.name,
+  slot: index < 3 ? 'PrimaryWeapon' : 'SecondaryWeapon',
+  starter: index === 0 || index === 3,
+}])));
+const weaponModules = read(weaponModulesPath);
 const weapons = fs.readdirSync(path.join(completionist, 'weapons'))
   .filter((file) => file.endsWith('.json'))
   .map((file) => read(path.join(completionist, 'weapons', file)))
   .map((weapon) => ({
     id: rawGuid(weapon.saveId),
     name: weapon.name,
-    dwarf: minerByWeapon.get(weapon.name) ?? 'Unknown',
+    dwarf: weaponMetadata.get(weapon.name)?.dwarf ?? 'Unknown',
+    slot: weaponMetadata.get(weapon.name)?.slot ?? 'Unknown',
+    starter: weaponMetadata.get(weapon.name)?.starter ?? false,
+    modules: weaponModules.filter((item) => item.weapon.replaceAll('"', "'").toLowerCase() === weapon.name.replaceAll('"', "'").toLowerCase()),
     frameworks: (weapon.frameworks ?? []).map((item) => ({ name: item.framework, id: rawGuid(item.saveId) })),
   }));
 
