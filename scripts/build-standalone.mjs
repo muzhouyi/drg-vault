@@ -8,10 +8,7 @@ const dist = path.join(project, 'dist');
 const entry = path.join(dist, '.standalone-entry.mjs');
 const bundle = path.join(dist, '.standalone-bundle.js');
 const output = path.resolve(project, '..', 'DRG存档编辑器_中文版.html');
-const versionedOutput = path.resolve(project, '..', 'DRG存档编辑器_中文版_v8.html');
-const localHtmlOutput = path.resolve(project, '..', 'DRG-save-editor.html');
-const helperOutput = path.resolve(project, '..', 'DRG-local-helper.ps1');
-const launcherOutput = path.resolve(project, '..', '启动DRG存档编辑器.cmd');
+const versionedOutput = path.resolve(project, '..', 'DRG存档编辑器_中文版_v7.html');
 
 if (process.argv.includes('--prepare')) {
   fs.writeFileSync(entry, `import './app.js';\n`);
@@ -29,9 +26,6 @@ html = html
   .replace('<script type="module" src="./app.js"></script>', `<script>\n${js}\n</script>`);
 fs.writeFileSync(output, html);
 fs.writeFileSync(versionedOutput, html);
-fs.writeFileSync(localHtmlOutput, html);
-fs.writeFileSync(helperOutput, '\uFEFF' + fs.readFileSync(path.join(scripts, 'local-bridge.ps1'), 'utf8'), 'utf8');
-fs.copyFileSync(path.join(scripts, 'launch-local.cmd'), launcherOutput);
 fs.rmSync(entry, { force: true });
 fs.rmSync(bundle, { force: true });
-process.stdout.write(JSON.stringify({ output, versionedOutput, launcherOutput, bytes: fs.statSync(output).size }));
+process.stdout.write(JSON.stringify({ output, versionedOutput, bytes: fs.statSync(output).size }));
