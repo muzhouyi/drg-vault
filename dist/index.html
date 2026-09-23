@@ -18,8 +18,12 @@
       </a>
       <div class="top-actions">
         <span class="privacy"><i></i> 存档仅在本机处理</span>
+        <label class="auto-load-switch" title="记住文件夹授权后，打开网页时自动读取存档"><input id="auto-load-toggle" type="checkbox" checked /><span class="switch-track" aria-hidden="true"></span><span>自动载入</span></label>
+        <button class="button ghost" id="set-game-directory-button" title="选择 Deep Rock Galactic 游戏安装目录">设置游戏目录</button>
+        <button class="button ghost" id="backup-button">备份</button>
         <button class="button ghost" id="reset-button" disabled>撤销全部</button>
         <button class="button primary" id="export-button" disabled>导出修改版</button>
+        <button class="button danger" id="replace-button" disabled>替换当前存档</button>
       </div>
     </header>
 
@@ -32,8 +36,9 @@
         <button class="nav-item" data-view="skins"><span>05</span>武器涂装</button>
         <div class="sidebar-note">
           <b>安全模式</b>
-          <p>所有改动先进入待应用清单。导出新文件前不会触碰原存档。</p>
+          <p>改动先进入待应用清单。替换当前存档前会确认，并在 back 文件夹备份原文件。</p>
         </div>
+        <a class="project-link" href="https://github.com/muzhouyi/drg-vault" target="_blank" rel="noopener noreferrer" aria-label="打开 GitHub 项目，版本 v0.8.0"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg><span>GitHub · v0.8.0</span></a>
       </aside>
 
       <section class="workspace">
@@ -50,11 +55,12 @@
           <input id="save-input" type="file" accept=".sav,application/octet-stream" hidden />
           <div class="drop-icon" aria-hidden="true">⇩</div>
           <div>
-            <h2>载入 Player.sav</h2>
-            <p>拖到这里，或从电脑中选择。文件不会离开浏览器。</p>
+            <h2>选择存档</h2>
+            <p>可以直接选 .sav，或从已设置的游戏目录读取当前存档。</p>
           </div>
-          <button class="button primary" id="choose-button">选择存档</button>
+          <div class="drop-actions"><button class="button primary" id="choose-button">选择存档</button><button class="button ghost" id="connect-folder-button">读取游戏存档</button></div>
         </section>
+        <p class="native-status" id="native-status" role="status"></p>
 
         <section class="catalog-strip" aria-label="可识别内容">
           <article><span>24</span><p>职业武器</p></article>
@@ -78,11 +84,14 @@
           <span>✓</span>
           <p>还没有调整任何内容</p>
         </div>
-        <div class="changes-foot"><p>导出时会生成新文件，原存档保持不变。</p></div>
+        <div class="changes-foot"><p>导出会生成新文件；替换会先备份原存档。</p></div>
       </aside>
     </main>
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <dialog class="backup-dialog" id="backup-dialog" aria-labelledby="backup-dialog-title"><div class="backup-heading"><div><p class="eyebrow">SAVE ARCHIVE</p><h2 id="backup-dialog-title">存档备份</h2><small id="backup-location">选择游戏目录后，可查看和创建备份。</small></div><button class="button mini ghost" id="backup-close" aria-label="关闭备份面板">关闭</button></div><div class="backup-actions"><button class="button mini primary" id="backup-create">备份当前存档</button><button class="button mini ghost" id="backup-import">选择外部备份</button><input id="backup-input" type="file" accept=".sav,application/octet-stream" hidden /></div><div class="backup-layout"><div class="backup-list" id="backup-list"></div><div class="backup-detail" id="backup-detail"></div></div></dialog>
+    <dialog class="replace-dialog" id="restore-dialog" aria-labelledby="restore-dialog-title"><h2 id="restore-dialog-title">确认还原此存档？</h2><p id="restore-description"></p><p class="replace-target" id="restore-target"></p><p>还原前会把当前存档另存到 <strong>FSD\Saved\back</strong> 的日期时间文件夹。请先退出游戏。</p><div class="dialog-actions"><button class="button ghost" id="restore-cancel">取消</button><button class="button danger" id="restore-confirm">备份当前文件并还原</button></div></dialog>
+    <dialog class="replace-dialog" id="replace-dialog" aria-labelledby="replace-dialog-title"><h2 id="replace-dialog-title">确认替换当前存档？</h2><p>即将把本页待应用的改动写入：</p><p class="replace-target" id="replace-target"></p><p>写入前会在 <strong>FSD\Saved\back</strong> 的日期时间文件夹保存原存档。请先退出游戏。</p><div class="dialog-actions"><button class="button ghost" id="replace-cancel">取消</button><button class="button danger" id="replace-confirm">备份并替换</button></div></dialog>
     <script type="module" src="./app.js"></script>
   </body>
 </html>

@@ -38,6 +38,9 @@ const state = {
   selectedWeapon: null,
   selectedCoreIds: new Set(),
   selectedSkinIds: new Set(),
+  bridge: { active: false, info: null, sourceHash: null, token: '' },
+  browserFolder: { gameDirectory: null, directory: null, fileHandle: null, sourceBytes: null, needsPermission: false },
+  backup: { items: [], selected: null, restoreRoot: null, restoreDirectory: null, restoreHandle: null },
   loadoutClass: 'Driller',
   loadoutSlots: {},
   loadoutUi: { weaponSlot: 'PrimaryWeapon', section: 'modules', tier: null, tools: {} },
@@ -53,6 +56,7 @@ setActiveLoadout = recordMutation('setActiveLoadout', setActiveLoadout);
 setLoadoutIcon = recordMutation('setLoadoutIcon', setLoadoutIcon);
 setLoadoutWeapon = recordMutation('setLoadoutWeapon', setLoadoutWeapon);
 setLoadoutModule = recordMutation('setLoadoutModule', setLoadoutModule);
+toggleModulePurchase = recordMutation('toggleModulePurchase', toggleModulePurchase);
 setLoadoutOverclock = recordMutation('setLoadoutOverclock', setLoadoutOverclock);
 setLoadoutSkin = recordMutation('setLoadoutSkin', setLoadoutSkin);
 copyLoadoutSlot = recordMutation('copyLoadoutSlot', copyLoadoutSlot);
@@ -64,13 +68,24 @@ unlockAllWeaponSkins = recordMutation('unlockAllWeaponSkins', unlockAllWeaponSki
 
 const input = selectOne('#save-input');
 const chooseButton = selectOne('#choose-button');
+const connectFolderButton = selectOne('#connect-folder-button');
 const dropPanel = selectOne('#drop-panel');
 const root = selectOne('#view-root');
 const toast = selectOne('#toast');
 const resetButton = selectOne('#reset-button');
 const exportButton = selectOne('#export-button');
+const replaceButton = selectOne('#replace-button');
+const autoLoadToggle = selectOne('#auto-load-toggle');
+const setGameDirectoryButton = selectOne('#set-game-directory-button');
+const backupButton = selectOne('#backup-button');
+const backupDialog = selectOne('#backup-dialog');
+const restoreDialog = selectOne('#restore-dialog');
+const replaceDialog = selectOne('#replace-dialog');
+
+try { autoLoadToggle.checked = localStorage.getItem('drg-auto-load') !== 'false'; } catch {}
 
 chooseButton.disabled = true;
+backupButton.disabled = true;
 init();
 
 async function init() {
@@ -82,6 +97,9 @@ async function init() {
     updateCatalogStrip();
     registerWebMcpTools();
     chooseButton.disabled = false;
+    backupButton.disabled = false;
+    render();
+    await initBridge();
   } catch (error) {
     showToast(error.message, true);
   }
@@ -110,8 +128,218 @@ selectAll('.nav-item').forEach((button) => button.addEventListener('click', () =
 
 resetButton.addEventListener('click', resetAll);
 exportButton.addEventListener('click', exportSave);
+replaceButton.addEventListener('click', () => {
+  if (!canReplaceCurrentSave()) return;
+  selectOne('#replace-target').textContent = state.bridge.sourceHash
+    ? `${state.bridge.info.directory}\\${state.bridge.info.fileName}`
+    : `${state.browserFolder.gameDirectory?.name || 'Deep Rock Galactic'}\\FSD\\Saved\\SaveGames\\${state.browserFolder.fileHandle.name}`;
+  replaceDialog.showModal();
+});
+selectOne('#replace-cancel').addEventListener('click', () => replaceDialog.close());
+selectOne('#replace-confirm').addEventListener('click', replaceCurrentSave);
+setGameDirectoryButton.addEventListener('click', setGameDirectory);
+backupButton.addEventListener('click', openBackupDialog);
+selectOne('#backup-close').addEventListener('click', () => backupDialog.close());
+selectOne('#backup-create').addEventListener('click', createManualBackup);
+selectOne('#backup-import').addEventListener('click', () => selectOne('#backup-input').click());
+selectOne('#backup-input').addEventListener('change', async (event) => { if (event.target.files[0]) await importBackup(event.target.files[0]); event.target.value = ''; });
+selectOne('#restore-cancel').addEventListener('click', () => restoreDialog.close());
+selectOne('#restore-confirm').addEventListener('click', restoreSelectedBackup);
+connectFolderButton.addEventListener('click', async () => {
+  if (state.bridge.active) return loadCurrentFromBridge();
+  if (state.browserFolder.directory && !state.browserFolder.needsPermission) return loadCurrentFromBrowserFolder();
+  if (state.browserFolder.gameDirectory && state.browserFolder.needsPermission) return restoreGameDirectoryPermission();
+  return setGameDirectory();
+});
+autoLoadToggle.addEventListener('change', async () => {
+  try { localStorage.setItem('drg-auto-load', String(autoLoadToggle.checked)); } catch {}
+  if (autoLoadToggle.checked && state.bridge.active && !state.raw) await loadCurrentFromBridge();
+  if (autoLoadToggle.checked && state.browserFolder.directory && !state.browserFolder.needsPermission && !state.raw) await loadCurrentFromBrowserFolder();
+});
+window.addEventListener('resize', positionLoadoutToolPanel);
+document.addEventListener('pointerdown', (event) => {
+  if (selectOne('#loadout-tool-panel') && !event.target.closest('.loadout-utilities')) closeLoadoutToolPanel();
+});
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && selectOne('#loadout-tool-panel')) closeLoadoutToolPanel();
+});
 
-async function loadFile(file) {
+function positionLoadoutToolPanel() {
+  const utilities = selectOne('.loadout-utilities');
+  const panel = selectOne('#loadout-tool-panel');
+  const active = utilities?.querySelector('.loadout-tool-tab.active');
+  if (panel && active) panel.style.top = `${active.offsetTop + active.offsetHeight + 6}px`;
+}
+
+function closeLoadoutToolPanel() {
+  state.loadoutUi.tools = {};
+  selectOne('#loadout-tool-panel')?.remove();
+  const utilities = selectOne('.loadout-utilities');
+  if (utilities) utilities.dataset.activeTool = '';
+  selectAll('.loadout-tool-tab').forEach((button) => { button.classList.remove('active'); button.setAttribute('aria-expanded', 'false'); });
+}
+
+function canReplaceCurrentSave() {
+  return state.changes.size > 0 && ((state.bridge.active && Boolean(state.bridge.sourceHash))
+    || Boolean(state.browserFolder.directory && state.browserFolder.fileHandle && state.browserFolder.sourceBytes));
+}
+
+async function bridgeCall(path, options = {}) {
+  const response = await fetch(path, { ...options, headers: { 'X-DRG-Key': state.bridge.token, ...options.headers } });
+  if (!response.ok) {
+    let detail;
+    try { detail = (await response.json()).error; } catch {}
+    throw new Error(detail || `本地助手返回 ${response.status}`);
+  }
+  return response.headers.get('content-type')?.includes('application/json') ? response.json() : response;
+}
+
+async function initBridge() {
+  const params = new URLSearchParams(location.search);
+  if (location.hostname !== '127.0.0.1' || !params.get('key')) {
+    await restoreBrowserFolder();
+    return;
+  }
+  state.bridge.token = params.get('key');
+  try {
+    state.bridge.info = await bridgeCall('/api/info');
+    state.bridge.active = true;
+    selectOne('#native-status').textContent = `本地模式已连接 · 当前存档：${state.bridge.info.fileName}`;
+    if (autoLoadToggle.checked) await loadCurrentFromBridge();
+  } catch (error) {
+    selectOne('#native-status').textContent = `本地助手未找到当前存档：${error.message}。仍可手动选择 .sav 文件。`;
+  }
+}
+
+async function folderDatabase(mode, value, key = 'gameRoot') {
+  return new Promise((resolve, reject) => {
+    const open = indexedDB.open('drg-vault-folder', 1);
+    open.onupgradeneeded = () => open.result.createObjectStore('handles');
+    open.onerror = () => reject(open.error);
+    open.onsuccess = () => {
+      const db = open.result;
+      const transaction = db.transaction('handles', mode);
+      const request = mode === 'readonly'
+        ? transaction.objectStore('handles').get(key)
+        : transaction.objectStore('handles').put(value, key);
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => reject(request.error);
+      transaction.oncomplete = () => db.close();
+      transaction.onerror = () => db.close();
+    };
+  });
+}
+
+async function restoreBrowserFolder() {
+  const status = selectOne('#native-status');
+  if (!window.showDirectoryPicker || !window.indexedDB) {
+    status.textContent = '当前浏览器不支持游戏目录授权。可用 Chrome 或 Edge 打开此 HTML，或者直接选择 .sav 并导出。';
+    setGameDirectoryButton.disabled = true;
+    return;
+  }
+  try {
+    const gameRoot = await folderDatabase('readonly');
+    const legacySaveDirectory = gameRoot ? null : await folderDatabase('readonly', undefined, 'saveGames');
+    const remembered = gameRoot || legacySaveDirectory;
+    if (!remembered) {
+      status.textContent = '首次使用：点顶部“设置游戏目录”，选择 Deep Rock Galactic 文件夹。网页会自动找到 FSD\\Saved\\SaveGames。';
+      return;
+    }
+    state.browserFolder.gameDirectory = remembered;
+    const permission = await remembered.queryPermission({ mode: 'read' });
+    state.browserFolder.needsPermission = permission !== 'granted';
+    if (permission === 'granted') {
+      state.browserFolder.directory = await resolveSaveDirectory(remembered, Boolean(legacySaveDirectory));
+      status.textContent = `已设置 ${remembered.name} · 存档位置 FSD\\Saved\\SaveGames`;
+      if (autoLoadToggle.checked) await loadCurrentFromBrowserFolder();
+    } else {
+      status.textContent = '已记住游戏目录。浏览器需要你点击“读取游戏存档”恢复访问权限。';
+    }
+  } catch (error) {
+    status.textContent = `浏览器未能恢复游戏目录：${error.message}。点击顶部“设置游戏目录”可重新选择。`;
+  }
+}
+
+async function resolveSaveDirectory(gameRoot, legacy = false) {
+  if (legacy) return gameRoot;
+  try {
+    const fsd = await gameRoot.getDirectoryHandle('FSD');
+    const saved = await fsd.getDirectoryHandle('Saved');
+    return await saved.getDirectoryHandle('SaveGames');
+  } catch (error) {
+    if (error.name === 'NotFoundError') throw new Error('请选择 Deep Rock Galactic 游戏目录（里面应有 FSD 文件夹），不要选 steamapps 或 SaveGames');
+    throw error;
+  }
+}
+
+async function restoreGameDirectoryPermission() {
+  try {
+    const gameRoot = state.browserFolder.gameDirectory;
+    if (await gameRoot.requestPermission({ mode: 'read' }) !== 'granted') throw new Error('浏览器没有获得游戏目录读取权限');
+    state.browserFolder.directory = await resolveSaveDirectory(gameRoot, gameRoot.name === 'SaveGames');
+    state.browserFolder.needsPermission = false;
+    await loadCurrentFromBrowserFolder();
+  } catch (error) { showToast(`恢复游戏目录访问失败：${error.message}`, true); }
+}
+
+async function setGameDirectory() {
+  if (!window.showDirectoryPicker) return showToast('当前浏览器不支持游戏目录授权，请用 Chrome 或 Edge 打开此 HTML', true);
+  try {
+    const gameRoot = await window.showDirectoryPicker({ id: 'drg-game-root', mode: 'read' });
+    const directory = await resolveSaveDirectory(gameRoot);
+    state.browserFolder.gameDirectory = gameRoot;
+    state.browserFolder.directory = directory;
+    state.browserFolder.needsPermission = false;
+    const loaded = await loadCurrentFromBrowserFolder();
+    if (!loaded) return;
+    try { await folderDatabase('readwrite', gameRoot); }
+    catch (error) { selectOne('#native-status').textContent = `当前可编辑；浏览器未能记住游戏目录，下次打开需要重新选择：${error.message}`; }
+  } catch (error) {
+    if (error.name !== 'AbortError') showToast(`设置游戏目录失败：${error.message}`, true);
+  }
+}
+
+async function loadCurrentFromBrowserFolder(preferredName = '') {
+  const directory = state.browserFolder.directory;
+  try {
+    const candidates = [];
+    for await (const [name, handle] of directory.entries()) {
+      if (handle.kind !== 'file' || !/^\d+_Player\.sav$/i.test(name)) continue;
+      const file = await handle.getFile();
+      candidates.push({ handle, file });
+    }
+    if (!candidates.length) throw new Error('所选文件夹里没有 *_Player.sav，请选择 FSD\\Saved\\SaveGames');
+    candidates.sort((a, b) => b.file.lastModified - a.file.lastModified);
+    let remembered = preferredName;
+    if (!remembered) try { remembered = localStorage.getItem('drg-current-save') || ''; } catch {}
+    const selected = candidates.find((item) => item.file.name === remembered) || candidates[0];
+    const loaded = await loadFile(selected.file, { fileHandle: selected.handle });
+    if (!loaded) { state.browserFolder.directory = null; state.browserFolder.fileHandle = null; state.browserFolder.sourceBytes = null; return false; }
+    try { localStorage.setItem('drg-current-save', selected.file.name); } catch {}
+    selectOne('#native-status').textContent = `游戏目录：${state.browserFolder.gameDirectory?.name || directory.name} · 存档：FSD\\Saved\\SaveGames\\${selected.file.name}${candidates.length > 1 ? '（已选最近使用的存档）' : ''}`;
+    return true;
+  } catch (error) {
+    state.browserFolder.directory = null;
+    state.browserFolder.fileHandle = null;
+    state.browserFolder.sourceBytes = null;
+    showToast(`读取存档文件夹失败：${error.message}`, true);
+    selectOne('#native-status').textContent = '未能读取存档，请点顶部“设置游戏目录”重新选择 Deep Rock Galactic。';
+    render();
+    return false;
+  }
+}
+
+async function loadCurrentFromBridge() {
+  try {
+    const info = await bridgeCall('/api/info');
+    const response = await bridgeCall('/api/current');
+    const file = new File([await response.arrayBuffer()], info.fileName, { type: 'application/octet-stream' });
+    state.bridge.info = info;
+    await loadFile(file, { bridgeHash: info.sha256 });
+  } catch (error) { showToast(`自动载入失败：${error.message}`, true); }
+}
+
+async function loadFile(file, options = {}) {
   if (!state.catalog) return showToast('物品目录还在加载，请稍等片刻', true);
   if (!file.name.toLowerCase().endsWith('.sav')) return showToast('请选择 .sav 存档文件', true);
   if (file.size > 25 * 1024 * 1024) return showToast('文件大于 25 MB，看起来不像 DRG 玩家存档', true);
@@ -125,6 +353,9 @@ async function loadFile(file) {
       throw new Error('没有识别到 DRG 玩家存档的关键字段');
     }
     state.file = file;
+    state.bridge.sourceHash = options.bridgeHash || null;
+    state.browserFolder.fileHandle = options.fileHandle || null;
+    state.browserFolder.sourceBytes = options.fileHandle ? bytes : null;
     state.originalJson = json;
     state.raw = raw;
     state.model = deriveModel(raw);
@@ -136,15 +367,17 @@ async function loadFile(file) {
     state.selectedWeapon = state.catalog.weapons[0]?.id || null;
     state.loadoutSlots = Object.fromEntries(state.model.characters.map((item) => [item.dwarf, item.selected]));
     selectOne('#file-chip').classList.add('loaded');
-    selectOne('#file-chip').innerHTML = `<span>${escapeHtml(file.name)}</span><small>${formatBytes(file.size)} · 已在本地载入</small>`;
+    selectOne('#file-chip').innerHTML = `<span>${escapeHtml(file.name)}</span><small>${formatBytes(file.size)} · 修改于 ${formatDateTime(file.lastModified)}<br>已在本地载入</small>`;
     dropPanel.classList.add('compact');
     dropPanel.querySelector('h2').textContent = '换一个存档';
-    dropPanel.querySelector('p').textContent = '当前文件已解析；拖入另一个 .sav 可替换。';
+    dropPanel.querySelector('p').textContent = '可手动选择 .sav，或从游戏目录重新读取。';
     chooseButton.textContent = '重新选择';
     render();
-    showToast('存档解析完成。所有改动只会写入新导出的文件。');
+    showToast(options.bridgeHash || options.fileHandle ? '当前游戏存档已载入' : '存档解析完成，可以编辑并导出修改版');
+    return true;
   } catch (error) {
     showToast(`读取失败：${error.message}`, true);
+    return false;
   }
 }
 
@@ -210,12 +443,57 @@ function deriveModel(raw) {
 function render() {
   if (state.currentAction || state.replayingChanges) return;
   document.body.classList.toggle('loadout-view', state.view === 'classes' && Boolean(state.raw));
-  if (!state.raw) return;
+  if (!state.catalog) return;
+  if (!state.raw) {
+    renderPreview();
+    renderChanges();
+    resetButton.disabled = true;
+    exportButton.disabled = true;
+    replaceButton.disabled = true;
+    return;
+  }
   state.model = deriveModel(state.raw);
   ({ overview: renderOverview, resources: renderResources, classes: renderClasses, cores: renderCores, skins: renderSkins }[state.view] || renderOverview)();
   renderChanges();
   resetButton.disabled = state.changes.size === 0;
   exportButton.disabled = false;
+  replaceButton.disabled = !canReplaceCurrentSave();
+}
+
+function renderPreview() {
+  const previews = {
+    overview: {
+      title: '档案总览预览',
+      lead: '载入存档后，这里会显示信用点、游戏时长、核心收藏进度和四个职业的等级。',
+      cards: [
+        ['信用点与游戏时长', '按当前存档计算'],
+        ['核心收藏进度', `${state.catalog.coreItems.length} 项目录可对照`],
+        ['四职业等级', '精确到等级与经验值'],
+      ],
+    },
+    resources: {
+      title: '资源与进度预览',
+      lead: '可以查看和修改信用点、矿物、天赋点，以及四职业的等级、经验和晋升次数。',
+      cards: state.catalog.resources.filter((item) => item.type === 'resource').slice(0, 8).map((item) => [displayName(item), '载入后显示持有数量']),
+    },
+    classes: {
+      title: '武器与配装预览',
+      lead: '四职业各有 A～G 七个配装槽。可以切换主副武器，再逐层调整模块、超频和外观。',
+      cards: CLASS_ORDER.map((name) => [CLASS_CN[name], `${state.catalog.weapons.filter((item) => item.dwarf === name).length} 把武器 · 7 个配装槽`]),
+    },
+    cores: {
+      title: '核心与超频预览',
+      lead: '完整目录会标出已锻造、待锻造、仅锻造历史和未获得。选择武器可查看超频效果。',
+      cards: state.catalog.coreItems.filter((item) => item.category === 'Weapons').slice(0, 8).map((item) => [displayName(item), item.weaponZh || localizedWeapon(item.weapon)]),
+    },
+    skins: {
+      title: '武器涂装预览',
+      lead: '按武器查看框架和涂装，并可批量获得。载入存档后才会显示拥有状态。',
+      cards: state.catalog.weapons.slice(0, 8).map((item) => [displayName(item), `${(item.frameworks || []).length} 种框架系列`]),
+    },
+  };
+  const preview = previews[state.view] || previews.overview;
+  root.innerHTML = `<section class="preview-page"><div class="section-title"><div><p class="eyebrow">目录预览</p><h2>${preview.title}</h2></div><span>尚未载入存档</span></div><p class="preview-lead">${preview.lead}</p><div class="preview-grid">${preview.cards.map(([name, detail]) => `<article class="preview-card"><b>${escapeHtml(name)}</b><small>${escapeHtml(detail)}</small></article>`).join('')}</div><p class="preview-callout">选择上方的 .sav 文件后，即可查看你已拥有和未获得的内容并开始修改。</p></section>`;
 }
 
 function renderOverview() {
@@ -283,6 +561,8 @@ function renderResources() {
 }
 
 function renderClasses() {
+  clearTimeout(state.loadoutUi.moduleClickTimer);
+  state.loadoutUi.moduleClickTimer = null;
   const dwarf = CLASS_ORDER.includes(state.loadoutClass) ? state.loadoutClass : CLASS_ORDER[0];
   const char = state.model.characters.find((item) => item.dwarf === dwarf);
   if (!char) return;
@@ -294,17 +574,26 @@ function renderClasses() {
   const defaultCopyTarget = slot === 0 ? 1 : 0;
   const iconIndex = Number(directProperty(char.loadoutsProp?.value?.[slot], 'iconIndex')?.value ?? 0);
   const icon = LOADOUT_ICONS[iconIndex];
+  const activeTool = ['icons', 'copy', 'weapons'].find((key) => ui.tools[key]) || null;
+  const toolContent = activeTool === 'icons'
+    ? `<p class="loadout-hint">选择后只修改这个配装槽的图标；符号为网页示意。</p><div class="loadout-icon-grid">${LOADOUT_ICONS.map(([symbol, label], index) => `<button type="button" data-loadout-icon="${index}" class="${iconIndex === index ? 'active' : ''}" aria-pressed="${iconIndex === index}" aria-label="选择${label}图标"><b>${symbol}</b><span>${label}</span></button>`).join('')}</div>`
+    : activeTool === 'copy'
+      ? `<div class="copy-loadout-controls"><p>复制整个配装槽：武器、模块、超频、武器与角色外观、天赋、胜利姿势及图标。</p><div><label for="copy-loadout-target">槽 ${LOADOUT_SLOT_LABELS[slot]} 复制到</label><select id="copy-loadout-target">${LOADOUT_SLOT_LABELS.map((label, index) => `<option value="${index}" ${index === slot ? 'disabled' : ''} ${index === defaultCopyTarget ? 'selected' : ''}>槽 ${label}${index === char.selected ? '（游戏当前）' : ''}</option>`).join('')}</select><button class="button mini primary" id="copy-loadout">复制配装</button></div></div>`
+      : activeTool === 'weapons'
+        ? `<div class="weapon-unlock-grid">${classWeapons.map((weapon) => {
+          const acquired = weaponOwned(weapon);
+          return `<article class="weapon-unlock-card ${acquired ? 'owned' : 'missing'}"><div><small>${weapon.slot === 'PrimaryWeapon' ? '主武器' : '副武器'}${weapon.starter ? ' · 初始武器' : ''}</small><b>${escapeHtml(displayName(weapon))}</b></div><button class="button mini ${acquired ? 'ghost' : 'primary'}" data-grant-weapon="${weapon.id}" ${acquired ? 'disabled' : ''}>${acquired ? '已获得' : '获得武器'}</button></article>`;
+        }).join('')}</div>`
+        : '';
   root.innerHTML = `
     <div class="section-title loadout-title"><div><p class="eyebrow">LOADOUT WORKBENCH</p><h2>武器与职业配装</h2></div><span>先选配装，再调整需要的部分</span></div>
     <div class="class-filter loadout-class-filter" aria-label="选择职业">${CLASS_ORDER.map((name) => `<button data-loadout-class="${name}" class="${dwarf === name ? 'active' : ''}" aria-pressed="${dwarf === name}">${CLASS_CN[name]}</button>`).join('')}</div>
     <section class="panel loadout-toolbar"><div><h3>配装槽 ${LOADOUT_SLOT_LABELS[slot]}</h3><small>当前图标 · ${icon?.[1] || `编号 ${iconIndex}`}</small></div><div class="loadout-slot-tabs" aria-label="选择配装槽">${LOADOUT_SLOT_LABELS.map((label, index) => `<button data-loadout-slot="${index}" class="${slot === index ? 'active' : ''} ${char.selected === index ? 'current' : ''}" aria-pressed="${slot === index}" title="${char.selected === index ? '游戏当前使用' : '编辑配装槽'} ${label}">${label}${char.selected === index ? '<small>当前</small>' : ''}</button>`).join('')}</div><button class="button mini" id="set-active-loadout" ${slot === char.selected ? 'disabled' : ''}>${slot === char.selected ? '游戏当前槽' : '设为游戏当前槽'}</button></section>
-    <div class="loadout-utilities">
-      <details class="loadout-disclosure" data-loadout-tool="icons" ${ui.tools.icons ? 'open' : ''}><summary><span><b>${icon?.[0] || '◇'} 配装图标</b><small>${icon?.[1] || iconIndex}</small></span></summary><div class="disclosure-body"><p class="loadout-hint">选择后只修改这个配装槽的图标；符号为网页示意。</p><div class="loadout-icon-grid">${LOADOUT_ICONS.map(([symbol, label], index) => `<button type="button" data-loadout-icon="${index}" class="${iconIndex === index ? 'active' : ''}" aria-pressed="${iconIndex === index}" aria-label="选择${label}图标"><b>${symbol}</b><span>${label}</span></button>`).join('')}</div></div></details>
-      <details class="loadout-disclosure" data-loadout-tool="copy" ${ui.tools.copy ? 'open' : ''}><summary><span><b>复制配装槽</b><small>包含图标、外观与天赋</small></span></summary><div class="disclosure-body copy-loadout-controls"><p>复制整个配装槽：武器、模块、超频、武器与角色外观、天赋、胜利姿势及图标。</p><div><label for="copy-loadout-target">槽 ${LOADOUT_SLOT_LABELS[slot]} 复制到</label><select id="copy-loadout-target">${LOADOUT_SLOT_LABELS.map((label, index) => `<option value="${index}" ${index === slot ? 'disabled' : ''} ${index === defaultCopyTarget ? 'selected' : ''}>槽 ${label}${index === char.selected ? '（游戏当前）' : ''}</option>`).join('')}</select><button class="button mini primary" id="copy-loadout">复制配装</button></div></div></details>
-      <details class="loadout-disclosure" data-loadout-tool="weapons" ${ui.tools.weapons ? 'open' : ''}><summary><span><b>武器解锁</b><small>${acquiredCount} / ${classWeapons.length} 已获得</small></span></summary><div class="disclosure-body"><div class="weapon-unlock-grid">${classWeapons.map((weapon) => {
-        const acquired = weaponOwned(weapon);
-        return `<article class="weapon-unlock-card ${acquired ? 'owned' : 'missing'}"><div><small>${weapon.slot === 'PrimaryWeapon' ? '主武器' : '副武器'}${weapon.starter ? ' · 初始武器' : ''}</small><b>${escapeHtml(displayName(weapon))}</b></div><button class="button mini ${acquired ? 'ghost' : 'primary'}" data-grant-weapon="${weapon.id}" ${acquired ? 'disabled' : ''}>${acquired ? '已获得' : '获得武器'}</button></article>`;
-      }).join('')}</div></div></details>
+    <div class="loadout-utilities" data-active-tool="${activeTool || ''}">
+      <button type="button" class="loadout-tool-tab ${activeTool === 'icons' ? 'active' : ''}" data-loadout-tool="icons" aria-expanded="${activeTool === 'icons'}"><b>${icon?.[0] || '◇'} 配装图标</b><small>${icon?.[1] || iconIndex}</small></button>
+      <button type="button" class="loadout-tool-tab ${activeTool === 'copy' ? 'active' : ''}" data-loadout-tool="copy" aria-expanded="${activeTool === 'copy'}"><b>复制配装槽</b><small>包含图标、外观与天赋</small></button>
+      <button type="button" class="loadout-tool-tab ${activeTool === 'weapons' ? 'active' : ''}" data-loadout-tool="weapons" aria-expanded="${activeTool === 'weapons'}"><b>武器解锁</b><small>${acquiredCount} / ${classWeapons.length} 已获得</small></button>
+      ${activeTool ? `<div class="loadout-tool-panel" id="loadout-tool-panel"><div class="tool-panel-head"><b>${({ icons: '选择配装图标', copy: '复制配装槽', weapons: '武器解锁' })[activeTool]}</b><button type="button" class="button mini ghost" data-close-loadout-tool>收起</button></div>${toolContent}</div>` : ''}
     </div>
     <div class="weapon-switcher" aria-label="选择要编辑的武器">${['PrimaryWeapon', 'SecondaryWeapon'].map((slotName) => {
       const id = directProperty(char.loadoutsProp?.value?.[slot], slotName)?.value;
@@ -315,20 +604,36 @@ function renderClasses() {
       return `<button data-loadout-weapon-tab="${slotName}" class="${ui.weaponSlot === slotName ? 'active' : ''}" aria-pressed="${ui.weaponSlot === slotName}"><small>${slotName === 'PrimaryWeapon' ? '主武器' : '副武器'}</small><b>${weapon ? escapeHtml(displayName(weapon)) : '尚未配置'}</b><span>${count} 个模块 · ${oc ? escapeHtml(displayName(oc)) : '未装备超频'}</span></button>`;
     }).join('')}</div>
     ${renderWeaponBuildPanel(char, slot, ui.weaponSlot)}`;
+  positionLoadoutToolPanel();
   selectAll('[data-loadout-class]').forEach((el) => el.addEventListener('click', () => { state.loadoutClass = el.dataset.loadoutClass; ui.tier = null; renderClasses(); }));
   selectAll('[data-grant-weapon]').forEach((el) => el.addEventListener('click', () => grantWeapon(el.dataset.grantWeapon)));
   selectAll('[data-loadout-slot]').forEach((el) => el.addEventListener('click', () => { state.loadoutSlots[dwarf] = Number(el.dataset.loadoutSlot); ui.tier = null; renderClasses(); }));
   selectAll('[data-loadout-weapon-tab]').forEach((el) => el.addEventListener('click', () => { ui.weaponSlot = el.dataset.loadoutWeaponTab; ui.tier = null; renderClasses(); }));
   selectAll('[data-loadout-section]').forEach((el) => el.addEventListener('click', () => { ui.section = el.dataset.loadoutSection; renderClasses(); }));
   selectAll('[data-loadout-tier]').forEach((el) => el.addEventListener('click', () => { const tier = Number(el.dataset.loadoutTier); ui.tier = ui.tier === tier ? null : tier; renderClasses(); }));
-  selectAll('[data-loadout-tool]').forEach((el) => el.addEventListener('toggle', () => { ui.tools[el.dataset.loadoutTool] = el.open; }));
+  selectAll('[data-loadout-tool]').forEach((el) => el.addEventListener('click', () => {
+    const wasOpen = Boolean(ui.tools[el.dataset.loadoutTool]);
+    ui.tools = wasOpen ? {} : { [el.dataset.loadoutTool]: true };
+    renderClasses();
+  }));
+  selectOne('[data-close-loadout-tool]')?.addEventListener('click', () => { ui.tools = {}; renderClasses(); });
   selectOne('#set-active-loadout').addEventListener('click', () => setActiveLoadout(dwarf, slot));
   selectAll('[data-loadout-icon]').forEach((el) => el.addEventListener('click', () => setLoadoutIcon(dwarf, slot, Number(el.dataset.loadoutIcon))));
   selectAll('[data-loadout-weapon]').forEach((el) => el.addEventListener('change', () => { ui.tier = null; setLoadoutWeapon(dwarf, slot, el.dataset.loadoutWeapon, el.value); }));
-  selectAll('[data-loadout-module]').forEach((el) => el.addEventListener('click', () => setLoadoutModule(dwarf, slot, el.dataset.weaponId, Number(el.dataset.loadoutModule), el.dataset.moduleId)));
+  selectAll('[data-loadout-module]').forEach((el) => el.addEventListener('click', (event) => {
+    const args = [dwarf, slot, el.dataset.weaponId, Number(el.dataset.loadoutModule), el.dataset.moduleId];
+    if (!el.dataset.moduleId) return setLoadoutModule(...args);
+    if (event.detail >= 2) {
+      clearTimeout(state.loadoutUi.moduleClickTimer);
+      return toggleModulePurchase(el.dataset.weaponId, el.dataset.moduleId);
+    }
+    clearTimeout(state.loadoutUi.moduleClickTimer);
+    if (event.detail === 0) return setLoadoutModule(...args);
+    state.loadoutUi.moduleClickTimer = window.setTimeout(() => setLoadoutModule(...args), 260);
+  }));
   selectAll('[data-loadout-oc]').forEach((el) => el.addEventListener('click', () => setLoadoutOverclock(dwarf, slot, el.dataset.weaponId, el.dataset.upgradeId)));
   selectAll('[data-loadout-skin]').forEach((el) => el.addEventListener('change', () => setLoadoutSkin(dwarf, slot, el.dataset.weaponId, el.dataset.loadoutSkin, el.value)));
-  selectOne('#copy-loadout').addEventListener('click', () => copyLoadoutSlot(dwarf, slot, Number(selectOne('#copy-loadout-target').value)));
+  selectOne('#copy-loadout')?.addEventListener('click', () => copyLoadoutSlot(dwarf, slot, Number(selectOne('#copy-loadout-target').value)));
 }
 
 function renderWeaponBuildPanel(char, slot, slotName) {
@@ -354,7 +659,7 @@ function renderWeaponBuildPanel(char, slot, slotName) {
       const choices = (weapon.modules || []).filter((item) => item.tier === tier);
       const current = choices.find((item) => equippedModules.includes(item.id));
       const expanded = ui.tier === tier;
-      return `<section class="compact-module ${expanded ? 'expanded' : ''}"><button class="module-summary" data-loadout-tier="${tier}" aria-expanded="${expanded}"><span class="tier-number">${tier}</span><span class="module-summary-text"><b>${current ? escapeHtml(displayName(current)) : '未装备模块'}</b><small>${current ? escapeHtml(current.descriptionZh || current.description || '') : `查看本层 ${choices.length} 个可选模块及效果`}</small></span><span class="disclosure-arrow">${expanded ? '收起' : '更换'} <i>${expanded ? '−' : '+'}</i></span></button>${expanded ? `<div class="module-options"><div class="module-options-head"><span>第 ${tier} 层 · ${choices.filter((item) => purchased.has(item.id)).length} / ${choices.length} 已购买</span><button class="text-button" data-loadout-module="${tier}" data-module-id="" data-weapon-id="${weapon.id}">卸下本层模块</button></div><div class="effect-choices">${choices.map((item) => `<button type="button" class="effect-choice ${item.id === current?.id ? 'active' : ''} ${purchased.has(item.id) ? 'owned' : 'missing'}" data-loadout-module="${tier}" data-module-id="${item.id}" data-weapon-id="${weapon.id}" aria-pressed="${item.id === current?.id}"><span class="effect-choice-head"><b>${escapeHtml(displayName(item))}</b><small>${item.id === current?.id ? '已装备' : purchased.has(item.id) ? '已购买' : '未购买 · 点击获得'}</small></span><p>${escapeHtml(item.descriptionZh || item.description || '暂无效果说明')}</p></button>`).join('')}</div></div>` : ''}</section>`;
+      return `<section class="compact-module ${expanded ? 'expanded' : ''}"><button class="module-summary" data-loadout-tier="${tier}" aria-expanded="${expanded}"><span class="tier-number">${tier}</span><span class="module-summary-text"><b>${current ? escapeHtml(displayName(current)) : '未装备模块'}</b><small>${current ? escapeHtml(current.descriptionZh || current.description || '') : `查看本层 ${choices.length} 个可选模块及效果`}</small></span><span class="disclosure-arrow">${expanded ? '收起' : '更换'} <i>${expanded ? '−' : '+'}</i></span></button>${expanded ? `<div class="module-options"><div class="module-options-head"><span>第 ${tier} 层 · ${choices.filter((item) => purchased.has(item.id)).length} / ${choices.length} 已购买 · 单击装备／双击切换购买状态</span><button class="text-button" data-loadout-module="${tier}" data-module-id="" data-weapon-id="${weapon.id}">卸下本层模块</button></div><div class="effect-choices">${choices.map((item) => `<button type="button" class="effect-choice ${item.id === current?.id ? 'active' : ''} ${purchased.has(item.id) ? 'owned' : 'missing'}" data-loadout-module="${tier}" data-module-id="${item.id}" data-weapon-id="${weapon.id}" title="单击装备；双击切换购买状态" aria-pressed="${item.id === current?.id}"><span class="effect-choice-head"><b>${escapeHtml(displayName(item))}</b><small>${item.id === current?.id ? '已装备 · 双击取消购买' : purchased.has(item.id) ? '已购买 · 双击取消购买' : '未购买 · 双击购买'}</small></span><p>${escapeHtml(item.descriptionZh || item.description || '暂无效果说明')}</p></button>`).join('')}</div></div>` : ''}</section>`;
     }).join('')}</div>`;
   } else if (ui.section === 'overclocks') {
     content = `<div class="module-options-head"><span>${overclocks.filter((item) => purchased.has(item.upgradeId)).length} / ${overclocks.length} 已锻造 · 点击卡片装备</span><button class="text-button" data-loadout-oc data-upgrade-id="" data-weapon-id="${weapon.id}">卸下超频</button></div><div class="effect-choices overclock-choices">${overclocks.map((item) => `<button type="button" class="effect-choice ${item.upgradeId === overclockId ? 'active' : ''} ${purchased.has(item.upgradeId) ? 'owned' : 'missing'}" data-loadout-oc data-upgrade-id="${item.upgradeId}" data-weapon-id="${weapon.id}" aria-pressed="${item.upgradeId === overclockId}"><span class="effect-choice-head"><b>${escapeHtml(displayName(item))}</b><small>${item.upgradeId === overclockId ? '已装备' : purchased.has(item.upgradeId) ? '已锻造' : '未锻造 · 点击获得'}</small></span><p>${escapeHtml(item.descriptionZh || item.description || '暂无效果说明')}</p></button>`).join('')}</div>`;
@@ -577,6 +882,7 @@ function setLoadoutModule(dwarf, slot, weaponId, tier, moduleId) {
   const selected = weapon?.modules?.find((item) => item.id === moduleId);
   const purchased = state.model.props.purchasedUpgrades?.value;
   if (!char || !weapon || !purchased || (moduleId && (selected?.tier !== tier))) return showToast('无法识别这个模块', true);
+  if (moduleId && !purchased.includes(moduleId)) return showToast('此模块尚未购买，请先双击模块卡片设为已购买', true);
   ensureWeaponOwnership(weapon);
   const pair = ensureWeaponUpgradeEntry(char, slot, weaponId);
   const equipped = directProperty(pair?.[1], 'EquippedUpgrades')?.value;
@@ -584,10 +890,35 @@ function setLoadoutModule(dwarf, slot, weaponId, tier, moduleId) {
   const moduleById = new Map((weapon.modules || []).map((item) => [item.id, item]));
   for (const id of [...equipped]) if (moduleById.get(id)?.tier === tier) removeFrom(equipped, id);
   if (moduleId) {
-    pushUnique(purchased, moduleId);
     pushUnique(equipped, moduleId);
   }
-  track(`loadout:${dwarf}:${slot}:${weaponId}:tier${tier}`, `${displayName(weapon)}第 ${tier} 层模块 → ${selected ? `${displayName(selected)}（已购买）` : '不装备'}`);
+  track(`loadout:${dwarf}:${slot}:${weaponId}:tier${tier}`, `${displayName(weapon)}第 ${tier} 层装备 → ${selected ? displayName(selected) : '不装备'}`);
+  render();
+}
+
+function toggleModulePurchase(weaponId, moduleId) {
+  const weapon = state.catalog.weapons.find((item) => item.id === weaponId);
+  const module = weapon?.modules?.find((item) => item.id === moduleId);
+  const purchased = state.model.props.purchasedUpgrades?.value;
+  if (!module || !purchased) return showToast('无法识别这个模块的购买记录', true);
+  const wasPurchased = purchased.includes(moduleId);
+  if (wasPurchased) {
+    removeFrom(purchased, moduleId);
+    for (const char of state.model.characters) {
+      for (const loadout of char.upgradeLoadoutsProp?.value || []) {
+        const pairs = directProperty(loadout, 'Loadout')?.value || [];
+        const config = pairs.find((pair) => pair[0] === weaponId)?.[1];
+        if (!config) continue;
+        for (const name of ['EquippedUpgrades', 'PermanentUpgrades']) {
+          const values = directProperty(config, name)?.value;
+          if (values) removeFrom(values, moduleId);
+        }
+      }
+    }
+  } else {
+    pushUnique(purchased, moduleId);
+  }
+  track(`module:${weaponId}:${moduleId}:purchase`, `${displayName(weapon)} · ${displayName(module)} → ${wasPurchased ? '未购买（已从全部配装卸下）' : '已购买'}`);
   render();
 }
 
@@ -956,11 +1287,16 @@ function resetAll() {
   showToast('已撤销全部调整');
 }
 
+function editedSaveBytes() {
+  const bytes = convertJsonToSav(JSON.stringify(state.raw));
+  const check = JSON.parse(convertSavToJson(bytes));
+  if (!findProperty(check, 'CharacterSaves') || !findProperty(check, 'Credits')) throw new Error('导出后的结构校验失败');
+  return bytes;
+}
+
 function exportSave() {
   try {
-    const bytes = convertJsonToSav(JSON.stringify(state.raw));
-    const check = JSON.parse(convertSavToJson(bytes));
-    if (!findProperty(check, 'CharacterSaves') || !findProperty(check, 'Credits')) throw new Error('导出后的结构校验失败');
+    const bytes = editedSaveBytes();
     const blob = new Blob([bytes], { type: 'application/octet-stream' });
     const link = document.createElement('a');
     const base = state.file.name.replace(/\.sav$/i, '');
@@ -972,6 +1308,235 @@ function exportSave() {
   } catch (error) {
     showToast(`导出失败：${error.message}`, true);
   }
+}
+
+async function replaceCurrentSave() {
+  if (!canReplaceCurrentSave()) return;
+  const confirmButton = selectOne('#replace-confirm');
+  confirmButton.disabled = true;
+  try {
+    if (state.bridge.active && state.bridge.sourceHash) {
+      const bytes = editedSaveBytes();
+      const result = await bridgeCall('/api/replace', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/octet-stream', 'X-Expected-Sha256': state.bridge.sourceHash },
+        body: bytes,
+      });
+      replaceDialog.close();
+      await loadCurrentFromBridge();
+      selectOne('#native-status').textContent = `替换完成 · 修改前的存档已备份到 ${result.backup}`;
+    } else {
+      const directory = state.browserFolder.directory;
+      if (await directory.requestPermission({ mode: 'readwrite' }) !== 'granted') throw new Error('浏览器没有获得写入存档文件夹的权限');
+      const bytes = editedSaveBytes();
+      const original = new Uint8Array(await (await state.browserFolder.fileHandle.getFile()).arrayBuffer());
+      if (!sameBytes(original, state.browserFolder.sourceBytes)) throw new Error('游戏存档已在载入后变化，请重新载入后再试');
+      const backupPath = await saveBackupSnapshot(state.browserFolder.gameDirectory, state.browserFolder.fileHandle.name, original);
+      await writeFileHandle(state.browserFolder.fileHandle, bytes);
+      const written = new Uint8Array(await (await state.browserFolder.fileHandle.getFile()).arrayBuffer());
+      if (!sameBytes(written, bytes)) throw new Error(`写入后校验失败。旧存档备份位于 ${backupPath}`);
+      replaceDialog.close();
+      await loadCurrentFromBrowserFolder(state.browserFolder.fileHandle.name);
+      selectOne('#native-status').textContent = `替换完成 · 旧存档已备份：${backupPath}`;
+    }
+    showToast('当前存档已替换，修改前的文件已按时间备份');
+  } catch (error) { showToast(`替换失败：${error.message}`, true); }
+  finally { confirmButton.disabled = false; }
+}
+
+function backupStamp(date = new Date()) {
+  const two = (value) => String(value).padStart(2, '0');
+  return `${date.getFullYear()}-${two(date.getMonth() + 1)}-${two(date.getDate())}_${two(date.getHours())}-${two(date.getMinutes())}-${two(date.getSeconds())}-${String(date.getMilliseconds()).padStart(3, '0')}`;
+}
+
+async function backupDirectory(gameRoot, create = false) {
+  if (!gameRoot || gameRoot.name === 'SaveGames') throw new Error('请先设置 Deep Rock Galactic 游戏目录');
+  const fsd = await gameRoot.getDirectoryHandle('FSD');
+  const saved = await fsd.getDirectoryHandle('Saved');
+  return saved.getDirectoryHandle('back', { create });
+}
+
+async function saveBackupSnapshot(gameRoot, fileName, bytes) {
+  if (!/^\d+_Player\.sav$/i.test(fileName)) throw new Error('只允许备份玩家存档 *_Player.sav');
+  if (await gameRoot.requestPermission({ mode: 'readwrite' }) !== 'granted') throw new Error('没有获得游戏目录的写入权限');
+  const back = await backupDirectory(gameRoot, true);
+  let folderName = backupStamp();
+  for (let number = 1; ; number += 1) {
+    try { await back.getDirectoryHandle(folderName); folderName = `${backupStamp()}_${number}`; }
+    catch (error) { if (error.name === 'NotFoundError') break; throw error; }
+  }
+  const folder = await back.getDirectoryHandle(folderName, { create: true });
+  const handle = await folder.getFileHandle(fileName, { create: true });
+  await writeFileHandle(handle, bytes);
+  const verified = new Uint8Array(await (await handle.getFile()).arrayBuffer());
+  if (!sameBytes(bytes, verified)) throw new Error('备份校验失败，当前存档未写入');
+  return `FSD\\Saved\\back\\${folderName}\\${fileName}`;
+}
+
+function summarizeBackup(file) {
+  if (file.size > 25 * 1024 * 1024) throw new Error('文件大于 25 MB，不像 DRG 玩家存档');
+  return file.arrayBuffer().then((buffer) => {
+    const raw = JSON.parse(convertSavToJson(new Uint8Array(buffer)));
+    if (!findProperty(raw, 'CharacterSaves')) throw new Error('不是可识别的 DRG 玩家存档');
+    const model = deriveModel(raw);
+    const upgrades = new Set(model.props.purchasedUpgrades?.value || []);
+    const moduleIds = new Set(state.catalog.weapons.flatMap((weapon) => (weapon.modules || []).map((item) => item.id)));
+    const unlocked = new Set([...(model.props.unlockedItems?.value || []), ...(model.props.ownedItems?.value || [])]);
+    return {
+      characters: CLASS_ORDER.map((dwarf) => {
+        const char = model.characters.find((item) => item.dwarf === dwarf);
+        return { dwarf, level: xpToLevel(char?.xp?.value || 0), promotions: Number(char?.promotions?.value || 0) };
+      }),
+      modules: [...upgrades].filter((id) => moduleIds.has(id)).length,
+      weapons: state.catalog.weapons.filter((weapon) => unlocked.has(weapon.id)).length,
+      forged: model.props.forged?.value?.length || 0,
+      credits: Number(model.props.credits?.value || 0),
+      playTime: Number(model.props.playTime?.value || 0),
+    };
+  });
+}
+
+async function openBackupDialog() {
+  backupDialog.showModal();
+  selectOne('#backup-list').innerHTML = '<p class="backup-empty">正在读取备份…</p>';
+  selectOne('#backup-detail').innerHTML = '<p class="backup-empty">选择左侧存档查看详情</p>';
+  await refreshBackupList();
+}
+
+async function refreshBackupList() {
+  const external = state.backup.items.filter((item) => item.source === 'external');
+  const items = [];
+  const gameRoot = state.browserFolder.gameDirectory;
+  selectOne('#backup-location').textContent = gameRoot && gameRoot.name !== 'SaveGames'
+    ? `${gameRoot.name}\\FSD\\Saved\\back · 每次备份保存在独立的日期时间文件夹`
+    : '未设置游戏目录 · 仍可选择外部备份；还原时临时选择游戏目录';
+  selectOne('#backup-create').disabled = !gameRoot || !state.browserFolder.fileHandle;
+  if (gameRoot && gameRoot.name !== 'SaveGames') {
+    try {
+      const back = await backupDirectory(gameRoot);
+      for await (const [folderName, folderHandle] of back.entries()) {
+        if (folderHandle.kind === 'directory') {
+          for await (const [name, handle] of folderHandle.entries()) {
+            if (handle.kind !== 'file' || !/^\d+_Player\.sav$/i.test(name)) continue;
+            const file = await handle.getFile();
+            try { items.push({ id: `${folderName}/${name}`, source: 'folder', label: folderName, file, summary: await summarizeBackup(file) }); } catch {}
+          }
+        } else if (folderHandle.kind === 'file' && /\.sav$/i.test(folderName)) {
+          const file = await folderHandle.getFile();
+          try { items.push({ id: `legacy/${folderName}`, source: 'folder', label: `旧版 · ${formatDateTime(file.lastModified)}`, file, summary: await summarizeBackup(file) }); } catch {}
+        }
+      }
+    } catch (error) { if (error.name !== 'NotFoundError') showToast(`读取备份失败：${error.message}`, true); }
+    try {
+      const legacy = await state.browserFolder.directory?.getDirectoryHandle('back');
+      if (legacy) for await (const [name, handle] of legacy.entries()) {
+        if (handle.kind !== 'file' || !/\.sav$/i.test(name)) continue;
+        const file = await handle.getFile();
+        try { items.push({ id: `old/${name}`, source: 'folder', label: `旧版备份 · ${formatDateTime(file.lastModified)}`, file, summary: await summarizeBackup(file) }); } catch {}
+      }
+    } catch (error) { if (error.name !== 'NotFoundError') showToast(`读取旧版备份失败：${error.message}`, true); }
+  }
+  items.sort((a, b) => b.file.lastModified - a.file.lastModified);
+  state.backup.items = [...external, ...items];
+  if (!state.backup.items.some((item) => item.id === state.backup.selected)) state.backup.selected = state.backup.items[0]?.id || null;
+  renderBackupDialog();
+}
+
+function renderBackupDialog() {
+  const selected = state.backup.items.find((item) => item.id === state.backup.selected);
+  selectOne('#backup-list').innerHTML = state.backup.items.length
+    ? state.backup.items.map((item) => `<button class="backup-entry ${item.id === state.backup.selected ? 'active' : ''}" data-backup-id="${escapeHtml(item.id)}"><b>${escapeHtml(item.source === 'external' ? `外部备份 · ${item.label}` : backupDisplayTime(item.label))}</b><small>${escapeHtml(item.file.name)} · ${formatBytes(item.file.size)}</small><span>${item.summary.characters.map((char) => `${CLASS_CN[char.dwarf]} ${char.level} 级`).join(' · ')}</span></button>`).join('')
+    : '<p class="backup-empty">还没有备份。可以创建当前存档备份，或选择外部 .sav 文件。</p>';
+  selectOne('#backup-detail').innerHTML = selected ? `<div class="backup-detail-head"><span>${selected.source === 'external' ? '外部文件' : '备份记录'}</span><h3>${escapeHtml(backupDisplayTime(selected.label))}</h3><small>${escapeHtml(selected.file.name)} · ${formatBytes(selected.file.size)}</small></div><div class="backup-class-grid">${selected.summary.characters.map((char) => `<div><b>${CLASS_CN[char.dwarf]}</b><strong>${char.level} 级</strong><small>晋升 ${char.promotions} 次</small></div>`).join('')}</div><div class="backup-stats"><div><b>${selected.summary.modules}</b><small>已购买武器模块</small></div><div><b>${selected.summary.weapons}</b><small>已获得武器</small></div><div><b>${selected.summary.forged}</b><small>锻造记录</small></div><div><b>${formatNumber(selected.summary.credits)}</b><small>信用点</small></div></div><p class="backup-note">还原将覆盖当前游戏存档；覆盖前会自动再备份一次。</p><button class="button danger" id="backup-restore">用此存档还原</button>` : '<p class="backup-empty">选择左侧存档查看职业等级、模块和更多信息。</p>';
+  selectAll('[data-backup-id]').forEach((button) => button.addEventListener('click', () => { state.backup.selected = button.dataset.backupId; renderBackupDialog(); }));
+  selectOne('#backup-restore')?.addEventListener('click', prepareRestore);
+}
+
+async function importBackup(file) {
+  if (!file.name.toLowerCase().endsWith('.sav')) return showToast('请选择 .sav 备份文件', true);
+  try {
+    const summary = await summarizeBackup(file);
+    const id = `external/${Date.now()}/${file.name}`;
+    state.backup.items.unshift({ id, source: 'external', label: formatDateTime(file.lastModified), file, summary });
+    state.backup.selected = id;
+    renderBackupDialog();
+  } catch (error) { showToast(`外部备份无法读取：${error.message}`, true); }
+}
+
+async function createManualBackup() {
+  try {
+    const gameRoot = state.browserFolder.gameDirectory;
+    const handle = state.browserFolder.fileHandle;
+    if (!gameRoot || !handle) throw new Error('请先设置游戏目录并载入当前存档');
+    const bytes = new Uint8Array(await (await handle.getFile()).arrayBuffer());
+    const path = await saveBackupSnapshot(gameRoot, handle.name, bytes);
+    await refreshBackupList();
+    showToast(`已创建备份：${path}`);
+  } catch (error) { showToast(`创建备份失败：${error.message}`, true); }
+}
+
+async function prepareRestore() {
+  try {
+    const item = state.backup.items.find((entry) => entry.id === state.backup.selected);
+    if (!item) throw new Error('请先选择一个备份');
+    if (!window.showDirectoryPicker) throw new Error('当前浏览器不支持直接还原，请使用 Chrome 或 Edge');
+    const root = state.browserFolder.gameDirectory && state.browserFolder.gameDirectory.name !== 'SaveGames' ? state.browserFolder.gameDirectory
+      : await window.showDirectoryPicker({ id: 'drg-restore-root', mode: 'read' });
+    const directory = await resolveSaveDirectory(root);
+    if (await root.requestPermission({ mode: 'readwrite' }) !== 'granted') throw new Error('没有获得游戏目录的写入权限');
+    const playerId = item.file.name.match(/^(\d+)_Player/i)?.[1];
+    if (!playerId) throw new Error('备份文件名需以 Steam ID_Player 开头，无法安全确定还原目标');
+    const targetName = `${playerId}_Player.sav`;
+    const handle = await directory.getFileHandle(targetName);
+    const original = new Uint8Array(await (await handle.getFile()).arrayBuffer());
+    state.backup.restoreRoot = root;
+    state.backup.restoreDirectory = directory;
+    state.backup.restoreHandle = handle;
+    state.backup.restoreOriginal = original;
+    selectOne('#restore-description').textContent = `将用“${item.label}”中的 ${item.file.name} 还原当前玩家存档。`;
+    selectOne('#restore-target').textContent = `${root.name}\\FSD\\Saved\\SaveGames\\${targetName}`;
+    restoreDialog.showModal();
+  } catch (error) {
+    if (error.name !== 'AbortError') showToast(`无法准备还原：${error.message}`, true);
+  }
+}
+
+async function restoreSelectedBackup() {
+  const button = selectOne('#restore-confirm');
+  button.disabled = true;
+  try {
+    const item = state.backup.items.find((entry) => entry.id === state.backup.selected);
+    const { restoreRoot: root, restoreDirectory: directory, restoreHandle: handle, restoreOriginal: previous } = state.backup;
+    if (!item || !root || !handle) throw new Error('还原目标已失效，请重新选择');
+    const current = new Uint8Array(await (await handle.getFile()).arrayBuffer());
+    if (!sameBytes(current, previous)) throw new Error('当前游戏存档已变化，请重新确认后再还原');
+    const bytes = new Uint8Array(await item.file.arrayBuffer());
+    await summarizeBackup(item.file);
+    const path = await saveBackupSnapshot(root, handle.name, current);
+    await writeFileHandle(handle, bytes);
+    const written = new Uint8Array(await (await handle.getFile()).arrayBuffer());
+    if (!sameBytes(written, bytes)) throw new Error(`写入后校验失败。原存档已备份于 ${path}`);
+    restoreDialog.close();
+    backupDialog.close();
+    state.browserFolder.gameDirectory = root;
+    state.browserFolder.directory = directory;
+    await loadCurrentFromBrowserFolder(handle.name);
+    selectOne('#native-status').textContent = `还原完成 · 原存档已备份：${path}`;
+    showToast('备份存档已还原，覆盖前的存档也已安全备份');
+  } catch (error) { showToast(`还原失败：${error.message}`, true); }
+  finally { button.disabled = false; }
+}
+
+function sameBytes(left, right) {
+  if (!left || !right || left.length !== right.length) return false;
+  for (let index = 0; index < left.length; index += 1) if (left[index] !== right[index]) return false;
+  return true;
+}
+
+async function writeFileHandle(handle, bytes) {
+  const writable = await handle.createWritable();
+  try { await writable.write(bytes); await writable.close(); }
+  catch (error) { try { await writable.abort(); } catch {} throw error; }
 }
 
 function renderChanges() {
@@ -1226,6 +1791,14 @@ function levelProgress(xp) {
 
 function formatNumber(value) { return new Intl.NumberFormat('zh-CN', { maximumFractionDigits: 1 }).format(value); }
 function formatBytes(value) { return `${(value / 1024).toFixed(0)} KB`; }
+function formatDateTime(value) {
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? '时间未知' : new Intl.DateTimeFormat('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false }).format(date);
+}
+function backupDisplayTime(value) {
+  const match = String(value).match(/^(\d{4})-(\d{2})-(\d{2})_(\d{2})-(\d{2})-(\d{2})/);
+  return match ? `${match[1]}/${match[2]}/${match[3]} ${match[4]}:${match[5]}:${match[6]}` : value;
+}
 function percent(value, total) { return total ? Math.round((value / total) * 100) : 0; }
 function shortGuid(value) { return value?.length > 12 ? `${value.slice(0, 6)}…${value.slice(-4)}` : value; }
 function clamp(value, min, max) { return Math.max(min, Math.min(max, value)); }
