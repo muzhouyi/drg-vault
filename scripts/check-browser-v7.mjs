@@ -105,12 +105,13 @@ try {
   const inputNode = await send('DOM.querySelector', { nodeId: documentNode.root.nodeId, selector: '#save-input' });
   await send('DOM.setFileInputFiles', { nodeId: inputNode.nodeId, files: [path.resolve(savePath)] });
   await waitFor("document.querySelector('#file-chip')?.classList.contains('loaded')", '存档载入');
+  assert.match(await evaluate("document.querySelector('#file-chip small').textContent"), /修改于.*\d{4}.*\d{2}.*\d{2}/);
   await click('[data-view="classes"]');
   report.checks.compact = await evaluate(`(() => ({
     moduleSummaries: document.querySelectorAll('[data-loadout-tier]').length,
     expandedTiers: document.querySelectorAll('[data-loadout-tier][aria-expanded="true"]').length,
     moduleCandidates: document.querySelectorAll('[data-loadout-module]').length,
-    openUtilities: document.querySelectorAll('[data-loadout-tool][open]').length,
+    openUtilities: document.querySelectorAll('.loadout-tool-panel').length,
     utilityCount: document.querySelectorAll('[data-loadout-tool]').length,
     weaponTabs: document.querySelectorAll('[data-loadout-weapon-tab]').length,
     activeWeapon: document.querySelector('[data-loadout-weapon-tab].active')?.dataset.loadoutWeaponTab,
@@ -142,6 +143,7 @@ try {
       slot: Number(document.querySelector('[data-loadout-slot].active').dataset.loadoutSlot),
       weaponId: choice.dataset.weaponId,
       moduleId: choice.dataset.moduleId,
+      wasPurchased: choice.classList.contains('owned'),
       tier: Number(choice.dataset.loadoutModule),
       name: choice.querySelector('b')?.textContent
     };
@@ -150,8 +152,25 @@ try {
   assert.equal(report.checks.expandedModule.expandedCount, 1);
   assert.ok(report.checks.expandedModule.descriptions.every((text) => text && text !== '暂无效果说明'), '候选模块缺少效果解释');
   await screenshot('loadout-module-expanded-desktop.png');
-  await click(`[data-loadout-module][data-module-id="${report.checks.expandedModule.moduleId}"]`);
+  const unpurchasedId = await evaluate("document.querySelector('.effect-choice[data-loadout-module].missing')?.dataset.moduleId || null");
+  if (unpurchasedId) {
+    await click(`[data-loadout-module][data-module-id="${unpurchasedId}"]`);
+    assert.equal(await evaluate(`document.querySelector('[data-loadout-module][data-module-id="${unpurchasedId}"]').classList.contains('missing')`), true, '单击未购买模块不应自动购买');
+  }
+  const moduleSelector = `[data-loadout-module][data-module-id="${report.checks.expandedModule.moduleId}"]`;
+  const doubleClickModule = () => evaluate(`(() => { const el=document.querySelector(${JSON.stringify(moduleSelector)}); el.dispatchEvent(new MouseEvent('click',{bubbles:true,detail:1})); el.dispatchEvent(new MouseEvent('click',{bubbles:true,detail:2})); })()`);
+  if (!report.checks.expandedModule.wasPurchased) {
+    await doubleClickModule();
+    assert.equal(await evaluate(`document.querySelector(${JSON.stringify(moduleSelector)}).classList.contains('owned')`), true, '双击应购买未购买模块');
+  }
+  await click(moduleSelector);
   assert.equal(await evaluate(`document.querySelector('[data-loadout-module][data-module-id="${report.checks.expandedModule.moduleId}"]')?.classList.contains('active')`), true, '模块点击后应装备');
+  await doubleClickModule();
+  assert.equal(await evaluate(`document.querySelector(${JSON.stringify(moduleSelector)}).classList.contains('missing')`), true, '再次双击应设为未购买');
+  assert.equal(await evaluate(`document.querySelector(${JSON.stringify(moduleSelector)}).classList.contains('active')`), false, '取消购买应卸下已装备模块');
+  await doubleClickModule();
+  await click(moduleSelector);
+  assert.equal(await evaluate(`document.querySelector(${JSON.stringify(moduleSelector)}).classList.contains('active')`), true, '重新购买后应可装备');
   await click('[data-loadout-section="overclocks"]');
   report.checks.overclocks = await evaluate(`({ count: document.querySelectorAll('.effect-choice[data-loadout-oc]').length, descriptions: [...document.querySelectorAll('.effect-choice[data-loadout-oc] p')].every(item => item.textContent.trim()), moduleSummaries: document.querySelectorAll('[data-loadout-tier]').length })`);
   assert.ok(report.checks.overclocks.count > 0);
@@ -165,10 +184,25 @@ try {
   assert.equal(await evaluate("document.querySelectorAll('[data-loadout-tier]').length"), 5);
   assert.equal(await evaluate("document.querySelectorAll('[data-loadout-tier][aria-expanded=\"true\"]').length"), 0);
   await click('[data-loadout-weapon-tab="PrimaryWeapon"]');
+  const utilityBaseline = await evaluate("Math.round(document.querySelector('.weapon-switcher').getBoundingClientRect().top)");
+  const tabBaseline = await evaluate("[...document.querySelectorAll('[data-loadout-tool]')].map(el => Math.round(el.getBoundingClientRect().top))");
+  report.checks.utilityLayout = {};
   for (const tool of ['icons', 'copy', 'weapons']) {
-    await click(`[data-loadout-tool="${tool}"] > summary`);
-    assert.equal(await evaluate(`document.querySelector('[data-loadout-tool="${tool}"]').open`), true);
-    await click(`[data-loadout-tool="${tool}"] > summary`);
+    await click(`[data-loadout-tool="${tool}"]`);
+    await pause(220);
+    assert.equal(await evaluate(`document.querySelector('[data-loadout-tool="${tool}"]').getAttribute('aria-expanded')`), 'true');
+    report.checks.utilityLayout[tool] = await evaluate("Math.round(document.querySelector('.weapon-switcher').getBoundingClientRect().top)");
+    assert.equal(report.checks.utilityLayout[tool], utilityBaseline, `${tool} 不应移动下方配装内容`);
+    assert.deepEqual(await evaluate("[...document.querySelectorAll('[data-loadout-tool]')].map(el => Math.round(el.getBoundingClientRect().top))"), tabBaseline, '三个工具入口的位置应稳定');
+    assert.equal(await evaluate("(() => { const panel=document.querySelector('#loadout-tool-panel').getBoundingClientRect(); const weapon=document.querySelector('.weapon-switcher').getBoundingClientRect(); return panel.width > 0 && panel.top < weapon.bottom && panel.bottom > weapon.top; })()"), true, '面板应浮在下方内容上层');
+    if (tool === 'icons') {
+      await screenshot('loadout-inline-tools-desktop.png');
+      await evaluate("document.body.dispatchEvent(new PointerEvent('pointerdown',{bubbles:true}))");
+      assert.equal(await evaluate("document.querySelector('#loadout-tool-panel')"), null, '点击面板外应收起');
+      await click('[data-loadout-tool="icons"]');
+    }
+    await click('[data-close-loadout-tool]');
+    assert.equal(await evaluate("document.querySelector('#loadout-tool-panel')"), null);
   }
   report.checks.sectionsAndUtilities = 'primary/secondary, modules/overclocks/skins, icons/copy/weapons passed';
 
@@ -192,7 +226,7 @@ try {
   assert.equal(report.checks.singleUndo.perks, numericAfter.perks, '单项撤销应保留天赋点改动');
   assert.equal(report.checks.singleUndo.creditRowRemoved, true);
   assert.equal(report.checks.singleUndo.perkRowRetained, true);
-  assert.equal(report.checks.singleUndo.remainingRows, 2, '模块及天赋点两项应保留');
+  assert.equal(report.checks.singleUndo.remainingRows, 3, '模块购买、装备及天赋点改动应保留');
 
   await click('[data-view="classes"]');
   await send('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 1, mobile: false });
@@ -200,6 +234,14 @@ try {
   report.checks.narrow = await evaluate(`({ viewportWidth: innerWidth, documentWidth: document.documentElement.scrollWidth, overflowElements: [...document.querySelectorAll('body *')].filter(item => { const rect = item.getBoundingClientRect(); return rect.width && (rect.right > innerWidth + 1 || rect.left < -1); }).slice(0, 12).map(item => ({ tag: item.tagName, className: item.className, width: Math.round(item.getBoundingClientRect().width) })) })`);
   await screenshot('loadout-compact-narrow.png');
   assert.ok(report.checks.narrow.documentWidth <= report.checks.narrow.viewportWidth + 1, `窄屏横向溢出：${JSON.stringify(report.checks.narrow)}`);
+  await click('[data-loadout-tool="icons"]');
+  await pause(220);
+  report.checks.narrow.inlineTool = await evaluate(`(() => { const panel=document.querySelector('#loadout-tool-panel').getBoundingClientRect(); const icon=document.querySelector('[data-loadout-tool="icons"]').getBoundingClientRect(); const copy=document.querySelector('[data-loadout-tool="copy"]').getBoundingClientRect(); return { afterSelected:panel.top >= icon.bottom, overlaysNext:panel.top < copy.bottom && panel.bottom > copy.top, documentWidth:document.documentElement.scrollWidth }; })()`);
+  assert.equal(report.checks.narrow.inlineTool.afterSelected, true);
+  assert.equal(report.checks.narrow.inlineTool.overlaysNext, true);
+  assert.ok(report.checks.narrow.inlineTool.documentWidth <= report.checks.narrow.viewportWidth + 1);
+  await screenshot('loadout-inline-tools-narrow.png');
+  await click('[data-close-loadout-tool]');
   report.checks.narrow.undoAccess = await evaluate(`(() => {
     const button = document.querySelector('[data-undo-change="number:PerkPoints"]');
     button.scrollIntoView({ block: 'center' });
