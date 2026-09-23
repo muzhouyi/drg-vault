@@ -1,6 +1,7 @@
 # 矿工档案库
 
 矿工档案库是一款面向《深岩银河》（Deep Rock Galactic）的中文存档管理工具。它在本地浏览器中读取存档，提供内容查看、配装编辑、备份还原和修改结果导出等功能。存档文件无需上传到服务器。
+
 [编辑器最新地址](https://drg-vault.pages.dev/)
 
 [若打不开可下载最新版本](https://github.com/muzhouyi/drg-vault/releases/latest)
