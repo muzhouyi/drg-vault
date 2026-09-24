@@ -1,0 +1,16 @@
+{
+  "name": "drg-vault",
+  "private": true,
+  "version": "0.8.0",
+  "type": "module",
+  "scripts": {
+    "desktop:ui": "node scripts/build-desktop.mjs",
+    "desktop:dev": "pnpm desktop:ui && tauri dev",
+    "desktop:build": "pnpm desktop:ui && tauri build --bundles nsis",
+    "web:build": "node scripts/build-standalone.mjs --prepare && esbuild dist/.standalone-entry.mjs --bundle --outfile=dist/.standalone-bundle.js --format=iife && node scripts/build-standalone.mjs"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.0.0",
+    "esbuild": "^0.25.0"
+  }
+}

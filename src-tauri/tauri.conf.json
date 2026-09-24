@@ -1,0 +1,20 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "DRG Vault",
+  "version": "0.8.0",
+  "identifier": "io.github.muzhouyi.drgvault",
+  "build": { "frontendDist": "../build/desktop-ui" },
+  "app": {
+    "withGlobalTauri": true,
+    "windows": [{ "label": "main", "title": "矿工档案库 v8", "width": 1440, "height": 900, "minWidth": 1000, "minHeight": 650 }],
+    "security": { "csp": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' ipc: http://ipc.localhost" }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["nsis"],
+    "windows": {
+      "webviewInstallMode": { "type": "embedBootstrapper" },
+      "nsis": { "displayLanguageSelector": false, "languages": ["SimpChinese"], "installMode": "currentUser" }
+    }
+  }
+}

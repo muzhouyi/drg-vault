@@ -1,2 +1,9 @@
 .analysis/
 *.sav
+node_modules/
+build/
+src-tauri/target/
+.build-tools/
+src-tauri/tauri.signing.json
+release/
+src-tauri/gen/

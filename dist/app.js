@@ -1,4 +1,5 @@
 import { convertJsonToSav, convertSavToJson } from './lib/converter/converter.js';
+import { desktop, desktopFile, desktopBytes } from './platform/desktop.js';
 
 const selectOne = (selector, root = document) => root.querySelector(selector);
 const selectAll = (selector, root = document) => [...root.querySelectorAll(selector)];
@@ -39,6 +40,7 @@ const state = {
   selectedCoreIds: new Set(),
   selectedSkinIds: new Set(),
   bridge: { active: false, info: null, sourceHash: null, token: '' },
+  desktop: { active: Boolean(window.__DRG_DESKTOP__), sourceHash: null, path: null, restoreHash: null },
   browserFolder: { gameDirectory: null, directory: null, fileHandle: null, sourceBytes: null, needsPermission: false },
   backup: { items: [], selected: null, restoreRoot: null, restoreDirectory: null, restoreHandle: null },
   loadoutClass: 'Driller',
@@ -99,13 +101,25 @@ async function init() {
     chooseButton.disabled = false;
     backupButton.disabled = false;
     render();
-    await initBridge();
+    if (state.desktop.active) await initDesktop();
+    else await initBridge();
   } catch (error) {
     showToast(error.message, true);
   }
 }
 
-chooseButton.addEventListener('click', () => input.click());
+chooseButton.addEventListener('click', async () => {
+  if (!state.desktop.active) return input.click();
+  if (!confirmDiscard()) return;
+  try {
+    const info = await desktop('choose_save');
+    if (info) {
+      const config = await desktop('startup');
+      await loadDesktopInfo(info, config.selected === info.name && info.path.startsWith(config.gameRoot || '\u0000'));
+    }
+  }
+  catch (error) { showToast(`选择存档失败：${error}`, true); }
+});
 input.addEventListener('change', () => input.files[0] && loadFile(input.files[0]));
 ['dragenter', 'dragover'].forEach((name) => dropPanel.addEventListener(name, (event) => {
   event.preventDefault();
@@ -116,6 +130,7 @@ input.addEventListener('change', () => input.files[0] && loadFile(input.files[0]
   dropPanel.classList.remove('dragging');
 }));
 dropPanel.addEventListener('drop', (event) => {
+  if (state.desktop.active) return;
   const file = event.dataTransfer.files[0];
   if (file) loadFile(file);
 });
@@ -130,7 +145,7 @@ resetButton.addEventListener('click', resetAll);
 exportButton.addEventListener('click', exportSave);
 replaceButton.addEventListener('click', () => {
   if (!canReplaceCurrentSave()) return;
-  selectOne('#replace-target').textContent = state.bridge.sourceHash
+  selectOne('#replace-target').textContent = state.desktop.active ? state.desktop.path : state.bridge.sourceHash
     ? `${state.bridge.info.directory}\\${state.bridge.info.fileName}`
     : `${state.browserFolder.gameDirectory?.name || 'Deep Rock Galactic'}\\FSD\\Saved\\SaveGames\\${state.browserFolder.fileHandle.name}`;
   replaceDialog.showModal();
@@ -139,19 +154,36 @@ selectOne('#replace-cancel').addEventListener('click', () => replaceDialog.close
 selectOne('#replace-confirm').addEventListener('click', replaceCurrentSave);
 setGameDirectoryButton.addEventListener('click', setGameDirectory);
 backupButton.addEventListener('click', openBackupDialog);
+selectOne('.project-link')?.addEventListener('click', async (event) => {
+  if (!state.desktop.active) return;
+  event.preventDefault();
+  try { await desktop('open_project'); }
+  catch (error) { showToast(`打开项目地址失败：${error}`, true); }
+});
 selectOne('#backup-close').addEventListener('click', () => backupDialog.close());
 selectOne('#backup-create').addEventListener('click', createManualBackup);
-selectOne('#backup-import').addEventListener('click', () => selectOne('#backup-input').click());
+selectOne('#backup-import').addEventListener('click', () => { if (!state.desktop.active) selectOne('#backup-input').click(); });
+selectOne('#backup-import').addEventListener('click', async () => {
+  if (!state.desktop.active) return;
+  try { const item = await desktop('choose_external_backup'); if (item) await addDesktopBackup(item, true); }
+  catch (error) { showToast(`外部备份无法读取：${error}`, true); }
+});
 selectOne('#backup-input').addEventListener('change', async (event) => { if (event.target.files[0]) await importBackup(event.target.files[0]); event.target.value = ''; });
 selectOne('#restore-cancel').addEventListener('click', () => restoreDialog.close());
 selectOne('#restore-confirm').addEventListener('click', restoreSelectedBackup);
 connectFolderButton.addEventListener('click', async () => {
+  if (state.desktop.active) return loadCurrentFromDesktop(true);
   if (state.bridge.active) return loadCurrentFromBridge();
   if (state.browserFolder.directory && !state.browserFolder.needsPermission) return loadCurrentFromBrowserFolder();
   if (state.browserFolder.gameDirectory && state.browserFolder.needsPermission) return restoreGameDirectoryPermission();
   return setGameDirectory();
 });
 autoLoadToggle.addEventListener('change', async () => {
+  if (state.desktop.active) {
+    try { await desktop('set_auto_load', { enabled: autoLoadToggle.checked }); if (autoLoadToggle.checked && !state.raw) await loadCurrentFromDesktop(); }
+    catch (error) { showToast(`保存设置失败：${error}`, true); }
+    return;
+  }
   try { localStorage.setItem('drg-auto-load', String(autoLoadToggle.checked)); } catch {}
   if (autoLoadToggle.checked && state.bridge.active && !state.raw) await loadCurrentFromBridge();
   if (autoLoadToggle.checked && state.browserFolder.directory && !state.browserFolder.needsPermission && !state.raw) await loadCurrentFromBrowserFolder();
@@ -180,7 +212,8 @@ function closeLoadoutToolPanel() {
 }
 
 function canReplaceCurrentSave() {
-  return state.changes.size > 0 && ((state.bridge.active && Boolean(state.bridge.sourceHash))
+  return state.changes.size > 0 && ((state.desktop.active && Boolean(state.desktop.sourceHash))
+    || (state.bridge.active && Boolean(state.bridge.sourceHash))
     || Boolean(state.browserFolder.directory && state.browserFolder.fileHandle && state.browserFolder.sourceBytes));
 }
 
@@ -209,6 +242,76 @@ async function initBridge() {
   } catch (error) {
     selectOne('#native-status').textContent = `本地助手未找到当前存档：${error.message}。仍可手动选择 .sav 文件。`;
   }
+}
+
+function confirmDiscard() {
+  return !state.changes.size || window.confirm('当前有未应用的改动。切换存档会丢弃这些改动，确定继续吗？');
+}
+
+async function initDesktop() {
+  selectOne('#native-status').textContent = '正在查找 Steam 游戏目录和玩家存档…';
+  try {
+    const config = await desktop('startup');
+    autoLoadToggle.checked = config.autoLoad;
+    await applyDesktopStartup(config);
+    if (window.__TAURI__?.event?.listen) {
+      await window.__TAURI__.event.listen('tauri://drag-drop', async (event) => {
+        const path = event.payload?.paths?.find((item) => item.toLowerCase().endsWith('.sav'));
+        if (!path || !confirmDiscard()) return;
+        try { await loadDesktopInfo(await desktop('read_dropped', { path }), false); }
+        catch (error) { showToast(`拖入存档失败：${error}`, true); }
+      });
+    }
+    if (window.__TAURI__?.window?.getCurrentWindow) {
+      const appWindow = window.__TAURI__.window.getCurrentWindow();
+      await appWindow.onCloseRequested(async (event) => {
+        event.preventDefault();
+        if (state.changes.size && !window.confirm('有尚未导出或替换的改动，确定退出并丢弃吗？')) return;
+        try { await appWindow.destroy(); }
+        catch (error) { showToast(`关闭窗口失败：${error}`, true); }
+      });
+    }
+  } catch (error) { selectOne('#native-status').textContent = `桌面目录发现失败：${error}。仍可手动选择 .sav。`; }
+}
+
+async function applyDesktopStartup(config) {
+  const root = config.gameRoot;
+  selectOne('#native-status').textContent = root
+    ? `游戏目录：${root} · ${config.candidates.length} 份玩家存档`
+    : config.discovered.length > 1
+      ? `找到 ${config.discovered.length} 个游戏目录，请设置要使用的目录。`
+      : '未找到游戏目录。请点“设置游戏目录”，选择 Deep Rock Galactic 文件夹。';
+  if (config.autoLoad && root && config.selected && !state.raw) await loadCurrentFromDesktop();
+}
+
+async function loadDesktopInfo(info, current) {
+  if (!info) return false;
+  const file = desktopFile(info);
+  const loaded = await loadFile(file, { desktopHash: current ? info.sha256 : null, desktopPath: current ? info.path : null });
+  if (loaded) selectOne('#native-status').textContent = current
+    ? `当前游戏存档：${info.path}`
+    : `已载入外部存档：${info.path} · 可导出修改版`;
+  return loaded;
+}
+
+async function loadCurrentFromDesktop(interactive = false) {
+  try {
+    if (interactive && !confirmDiscard()) return;
+    const config = await desktop('startup');
+    if (!config.gameRoot) return showToast('请先设置游戏目录', true);
+    let name = config.selected;
+    if (!name && config.candidates.length > 1) {
+      const list = config.candidates.map((item, index) => `${index + 1}. ${item.name}`).join('\n');
+      const choice = window.prompt(`发现多份玩家存档，请输入序号：\n${list}`, '1');
+      if (!choice) return;
+      name = config.candidates[Number(choice) - 1]?.name;
+      if (!name) throw new Error('序号无效');
+    }
+    if (!name && config.candidates.length === 1) name = config.candidates[0].name;
+    if (!name) throw new Error('游戏目录中没有 *_Player.sav 玩家存档');
+    const info = name === config.selected ? await desktop('read_current') : await desktop('select_player', { name });
+    await loadDesktopInfo(info, true);
+  } catch (error) { showToast(`读取当前存档失败：${error}`, true); }
 }
 
 async function folderDatabase(mode, value, key = 'gameRoot') {
@@ -283,6 +386,12 @@ async function restoreGameDirectoryPermission() {
 }
 
 async function setGameDirectory() {
+  if (state.desktop.active) {
+    if (!confirmDiscard()) return;
+    try { const config = await desktop('choose_game_root'); if (config) { await applyDesktopStartup(config); if (config.autoLoad) await loadCurrentFromDesktop(); } }
+    catch (error) { showToast(`设置游戏目录失败：${error}`, true); }
+    return;
+  }
   if (!window.showDirectoryPicker) return showToast('当前浏览器不支持游戏目录授权，请用 Chrome 或 Edge 打开此 HTML', true);
   try {
     const gameRoot = await window.showDirectoryPicker({ id: 'drg-game-root', mode: 'read' });
@@ -354,6 +463,8 @@ async function loadFile(file, options = {}) {
     }
     state.file = file;
     state.bridge.sourceHash = options.bridgeHash || null;
+    state.desktop.sourceHash = options.desktopHash || null;
+    state.desktop.path = options.desktopPath || null;
     state.browserFolder.fileHandle = options.fileHandle || null;
     state.browserFolder.sourceBytes = options.fileHandle ? bytes : null;
     state.originalJson = json;
@@ -373,7 +484,7 @@ async function loadFile(file, options = {}) {
     dropPanel.querySelector('p').textContent = '可手动选择 .sav，或从游戏目录重新读取。';
     chooseButton.textContent = '重新选择';
     render();
-    showToast(options.bridgeHash || options.fileHandle ? '当前游戏存档已载入' : '存档解析完成，可以编辑并导出修改版');
+    showToast(options.desktopHash || options.bridgeHash || options.fileHandle ? '当前游戏存档已载入' : '存档解析完成，可以编辑并导出修改版');
     return true;
   } catch (error) {
     showToast(`读取失败：${error.message}`, true);
@@ -1294,9 +1405,15 @@ function editedSaveBytes() {
   return bytes;
 }
 
-function exportSave() {
+async function exportSave() {
   try {
     const bytes = editedSaveBytes();
+    if (state.desktop.active) {
+      const base = state.file.name.replace(/\.sav$/i, '');
+      const path = await desktop('export_save', { name: `${base}_edited.sav`, bytes: desktopBytes(bytes) });
+      if (path) showToast(`已导出：${path}；原存档没有被修改`);
+      return;
+    }
     const blob = new Blob([bytes], { type: 'application/octet-stream' });
     const link = document.createElement('a');
     const base = state.file.name.replace(/\.sav$/i, '');
@@ -1315,7 +1432,12 @@ async function replaceCurrentSave() {
   const confirmButton = selectOne('#replace-confirm');
   confirmButton.disabled = true;
   try {
-    if (state.bridge.active && state.bridge.sourceHash) {
+    if (state.desktop.active && state.desktop.sourceHash) {
+      const backup = await desktop('replace_save', { expectedHash: state.desktop.sourceHash, bytes: desktopBytes(editedSaveBytes()) });
+      replaceDialog.close();
+      await loadCurrentFromDesktop();
+      selectOne('#native-status').textContent = `替换完成 · 修改前的存档已备份：${backup}`;
+    } else if (state.bridge.active && state.bridge.sourceHash) {
       const bytes = editedSaveBytes();
       const result = await bridgeCall('/api/replace', {
         method: 'POST',
@@ -1400,7 +1522,39 @@ async function openBackupDialog() {
   backupDialog.showModal();
   selectOne('#backup-list').innerHTML = '<p class="backup-empty">正在读取备份…</p>';
   selectOne('#backup-detail').innerHTML = '<p class="backup-empty">选择左侧存档查看详情</p>';
-  await refreshBackupList();
+  if (state.desktop.active) await refreshDesktopBackupList();
+  else await refreshBackupList();
+}
+
+async function addDesktopBackup(entry, external = false) {
+  const file = desktopFile({ name: entry.fileName, modified: entry.modified, bytes: entry.bytes });
+  const summary = await summarizeBackup(file);
+  const item = { id: entry.id, source: external ? 'external' : 'folder', label: entry.label, file, summary, sourceHash: entry.sha256 };
+  state.backup.items = [item, ...state.backup.items.filter((other) => other.id !== item.id)];
+  state.backup.selected = item.id;
+  renderBackupDialog();
+}
+
+async function refreshDesktopBackupList() {
+  try {
+    const entries = await desktop('list_backups');
+    const external = state.backup.items.filter((item) => item.source === 'external');
+    const list = [];
+    for (const entry of entries) {
+      const file = desktopFile({ name: entry.fileName, modified: entry.modified, bytes: entry.bytes });
+      try { list.push({ id: entry.id, source: 'folder', label: entry.label, file, summary: await summarizeBackup(file), sourceHash: entry.sha256 }); } catch {}
+    }
+    state.backup.items = [...external, ...list];
+    if (!state.backup.items.some((item) => item.id === state.backup.selected)) state.backup.selected = state.backup.items[0]?.id || null;
+    selectOne('#backup-location').textContent = '游戏目录\\FSD\\Saved\\back · 每份备份保存在独立日期时间文件夹';
+    selectOne('#backup-create').disabled = !state.desktop.sourceHash;
+    renderBackupDialog();
+  } catch (error) {
+    selectOne('#backup-location').textContent = `未设置游戏目录；仍可选择外部备份：${error}`;
+    selectOne('#backup-create').disabled = true;
+    state.backup.items = state.backup.items.filter((item) => item.source === 'external');
+    renderBackupDialog();
+  }
 }
 
 async function refreshBackupList() {
@@ -1465,6 +1619,12 @@ async function importBackup(file) {
 
 async function createManualBackup() {
   try {
+    if (state.desktop.active) {
+      const path = await desktop('create_backup');
+      await refreshDesktopBackupList();
+      showToast(`已创建备份：${path}`);
+      return;
+    }
     const gameRoot = state.browserFolder.gameDirectory;
     const handle = state.browserFolder.fileHandle;
     if (!gameRoot || !handle) throw new Error('请先设置游戏目录并载入当前存档');
@@ -1479,6 +1639,19 @@ async function prepareRestore() {
   try {
     const item = state.backup.items.find((entry) => entry.id === state.backup.selected);
     if (!item) throw new Error('请先选择一个备份');
+    if (state.desktop.active) {
+      const config = await desktop('startup');
+      if (!config.gameRoot) {
+        const chosen = await desktop('choose_game_root');
+        if (!chosen) return;
+      }
+      const target = await desktop('prepare_restore', { id: item.id });
+      state.desktop.restoreHash = target.sha256;
+      selectOne('#restore-description').textContent = `将用“${item.label}”中的 ${item.file.name} 还原对应玩家存档。`;
+      selectOne('#restore-target').textContent = target.path;
+      restoreDialog.showModal();
+      return;
+    }
     if (!window.showDirectoryPicker) throw new Error('当前浏览器不支持直接还原，请使用 Chrome 或 Edge');
     const root = state.browserFolder.gameDirectory && state.browserFolder.gameDirectory.name !== 'SaveGames' ? state.browserFolder.gameDirectory
       : await window.showDirectoryPicker({ id: 'drg-restore-root', mode: 'read' });
@@ -1506,6 +1679,16 @@ async function restoreSelectedBackup() {
   button.disabled = true;
   try {
     const item = state.backup.items.find((entry) => entry.id === state.backup.selected);
+    if (state.desktop.active) {
+      if (!item || !state.desktop.restoreHash) throw new Error('还原目标已失效，请重新选择');
+      const path = await desktop('restore_save', { id: item.id, expectedHash: state.desktop.restoreHash, sourceHash: item.sourceHash });
+      restoreDialog.close(); backupDialog.close();
+      const config = await desktop('startup');
+      if (config.selected === item.file.name) await loadCurrentFromDesktop();
+      selectOne('#native-status').textContent = `还原完成 · 原存档已备份：${path}`;
+      showToast('备份存档已还原，覆盖前的存档也已安全备份');
+      return;
+    }
     const { restoreRoot: root, restoreDirectory: directory, restoreHandle: handle, restoreOriginal: previous } = state.backup;
     if (!item || !root || !handle) throw new Error('还原目标已失效，请重新选择');
     const current = new Uint8Array(await (await handle.getFile()).arrayBuffer());
