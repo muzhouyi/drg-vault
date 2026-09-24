@@ -1,8 +1,8 @@
 # 矿工档案库
 
-矿工档案库是一款面向《深岩银河》（Deep Rock Galactic）的中文存档管理工具。提供网页版和 Windows 桌面版，在本地读取存档，支持内容查看、配装编辑、备份还原和修改结果导出。存档文件无需上传到服务器。
+矿工档案库是一款面向《深岩银河》（Deep Rock Galactic）的中文存档管理工具。提供网页版，并开发了 Windows 桌面测试版，在本地读取存档，支持内容查看、配装编辑、备份还原和修改结果导出。存档文件无需上传到服务器。
 
-可在 [Releases](https://github.com/muzhouyi/drg-vault/releases) 下载网页版、Windows 安装包或直接运行的 EXE。Windows 桌面版 v8（0.8.0）的使用、构建及签名状态见 [WINDOWS-DESKTOP.md](WINDOWS-DESKTOP.md)。
+可访问下方的网页版地址，或在 [Releases](https://github.com/muzhouyi/drg-vault/releases) 下载单文件网页。Windows 桌面测试版 v8（0.8.0）的使用、构建及签名状态见 [WINDOWS-DESKTOP.md](WINDOWS-DESKTOP.md)。
 
 [编辑器最新地址](https://drg-vault.pages.dev/)
 
@@ -18,10 +18,9 @@
 
 ## 获取与使用
 
-可访问上方的网页版地址，或在 [Releases](https://github.com/muzhouyi/drg-vault/releases) 页面选择适合的版本：
+可访问上方的网页版地址，或在 [Releases](https://github.com/muzhouyi/drg-vault/releases) 页面下载单文件 HTML，使用 Chrome 或 Edge 打开，无需安装其他程序。
 
-- **Windows 桌面版：**推荐下载安装包 `DRGVault-v8-windows-x64-setup.exe`；也可下载 `DRGVault.exe` 直接运行。桌面版会尝试自动查找 Steam 游戏目录。
-- **网页版：**下载单文件 HTML，使用 Chrome 或 Edge 打开，无需安装其他程序。
+Windows 桌面测试版会尝试自动查找 Steam 游戏目录。其安装包 `DRGVault-v8-windows-x64-setup.exe` 和直接运行文件 `DRGVault.exe` 以 v8 Release 页面实际提供的附件为准。
 
 Windows 可执行文件版尚未经过充分的实际使用测试，请在使用前备份存档，谨慎使用。
 
