@@ -4,9 +4,9 @@
 
 可访问下方的网页版地址，或在 [Releases](https://github.com/muzhouyi/drg-vault/releases) 下载单文件网页。Windows 桌面测试版 v8（0.8.0）的使用、构建及签名状态见 [WINDOWS-DESKTOP.md](WINDOWS-DESKTOP.md)。
 
-[编辑器最新地址](https://drg-vault.pages.dev/)
+[在线网页版](https://drg-vault.pages.dev/)
 
-[若打不开可下载最新版本](https://github.com/muzhouyi/drg-vault/releases/latest)
+[网页文件以及桌面版](https://github.com/muzhouyi/drg-vault/releases/latest)
 
 ## 主要功能
 
