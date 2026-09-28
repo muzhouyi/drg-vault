@@ -1,3 +1,5 @@
+import { version } from './sync-version.mjs';
+
 const port = Number(process.argv[2] || 9231);
 const targets = await fetch(`http://127.0.0.1:${port}/json`).then((res) => res.json());
 const page = targets.find((item) => item.type === 'page' && item.url.startsWith('http://tauri.localhost'));
@@ -52,7 +54,7 @@ try {
   } else
   if (process.argv.includes('--readonly')) {
     const view = await evaluate(`({ title: document.title, pageLoaded: document.querySelector('#file-chip')?.classList.contains('loaded'), chooseEnabled: !document.querySelector('#choose-button')?.disabled, version: document.querySelector('.project-link')?.textContent.trim(), status: document.querySelector('#native-status')?.textContent })`);
-    if (!view?.pageLoaded || !view?.chooseEnabled || !view?.version?.includes('v0.8.1')) throw new Error(`Release 页面未正常载入：${JSON.stringify(view)}`);
+    if (!view?.pageLoaded || !view?.chooseEnabled || !view?.version?.includes(version)) throw new Error(`Release 页面未正常载入：${JSON.stringify(view)}`);
     console.log(JSON.stringify(view, null, 2));
     process.exitCode = 0;
   } else {

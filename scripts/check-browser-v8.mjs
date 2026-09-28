@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { version } from './sync-version.mjs';
 
 const [portText, htmlPath, bridgeUrl, fixturePath, outputDir] = process.argv.slice(2);
 if (!outputDir) throw new Error('用法：node scripts/check-browser-v8.mjs <CDP端口> <HTML> <本地助手URL> <测试副本> <输出目录>');
@@ -60,7 +61,7 @@ try {
   await until("!document.querySelector('#choose-button').disabled", '单文件网页载入');
   assert.equal(await evaluate("document.querySelector('#auto-load-toggle').checked"), true);
   assert.equal(await evaluate("document.querySelector('.project-link').href"), 'https://github.com/muzhouyi/drg-vault');
-  assert.match(await evaluate("document.querySelector('.project-link').textContent"), /v0\.8\.0/);
+  assert.equal((await evaluate("document.querySelector('.project-link').textContent")).trim(), `GitHub · ${version}`);
   for (const view of ['overview', 'resources', 'classes', 'cores', 'skins']) {
     await click(`[data-view="${view}"]`);
     const cards = await evaluate("document.querySelectorAll('.preview-card').length");

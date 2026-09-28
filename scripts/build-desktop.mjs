@@ -1,11 +1,13 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { build } from 'esbuild';
+import { syncVersion } from './sync-version.mjs';
 
 const project = path.resolve(import.meta.dirname, '..');
 const source = path.join(project, 'dist');
 const target = path.join(project, 'build', 'desktop-ui');
 fs.mkdirSync(target, { recursive: true });
+syncVersion();
 let html = fs.readFileSync(path.join(source, 'index.html'), 'utf8');
 html = html.replace('<script type="module" src="./app.js"></script>', '<script>window.__DRG_DESKTOP__=true;</script><script type="module" src="./app.js"></script>');
 fs.writeFileSync(path.join(target, 'index.html'), html);

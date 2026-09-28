@@ -1,13 +1,14 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import { version } from './sync-version.mjs';
 
 const project = path.resolve(import.meta.dirname, '..');
-const release = path.join(project, 'release', 'v0.8.1');
+const release = path.join(project, 'release', `v${version}`);
 fs.mkdirSync(release, { recursive: true });
 const files = [
   [path.join(project, 'src-tauri', 'target', 'release', 'drg-vault.exe'), 'DRGVault.exe'],
-  [path.join(project, 'src-tauri', 'target', 'release', 'bundle', 'nsis', 'DRG Vault_0.8.1_x64-setup.exe'), 'DRGVault-v0.8.1-windows-x64-setup.exe'],
+  [path.join(project, 'src-tauri', 'target', 'release', 'bundle', 'nsis', `DRG Vault_${version}_x64-setup.exe`), `DRGVault-v${version}-windows-x64-setup.exe`],
   [path.join(project, 'dist', 'licenses', 'DRG-Save-Editor-LICENSE.txt'), 'DRG-Save-Editor-LICENSE.txt'],
 ];
 const checksums = [];

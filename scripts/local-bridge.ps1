@@ -1,5 +1,5 @@
 param(
-  [string]$HtmlPath = (Join-Path $PSScriptRoot 'DRG存档编辑器_中文版_v8.html'),
+  [string]$HtmlPath = (Join-Path $PSScriptRoot 'DRG-save-editor.html'),
   [string]$SaveFile = '',
   [int]$Port = 0,
   [string]$AccessKey = '',
