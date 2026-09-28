@@ -1,7 +1,7 @@
 [package]
 name = "drg-vault"
-version = "0.8.0"
-description = "DRG Vault v8"
+version = "0.8.1"
+description = "DRG Vault v0.8.1"
 authors = ["drg-vault contributors"]
 edition = "2021"
 

@@ -11,5 +11,6 @@ html = html.replace('<script type="module" src="./app.js"></script>', '<script>w
 fs.writeFileSync(path.join(target, 'index.html'), html);
 fs.copyFileSync(path.join(source, 'styles.css'), path.join(target, 'styles.css'));
 fs.copyFileSync(path.join(source, 'catalog.json'), path.join(target, 'catalog.json'));
+fs.copyFileSync(path.join(source, 'loadout-icons.js'), path.join(target, 'loadout-icons.js'));
 await build({ entryPoints: [path.join(source, 'app.js')], outfile: path.join(target, 'app.js'), bundle: true, format: 'esm', target: 'chrome110', minify: true, sourcemap: false });
 console.log(`Desktop UI built: ${target}`);

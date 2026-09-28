@@ -7,12 +7,25 @@ const ZERO_GUID = '00000000000000000000000000000000';
 const LOADOUT_SLOT_COUNT = 7;
 const LOADOUT_SLOT_LABELS = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
 const LOADOUT_ICONS = [
-  ['▤', '弹药'], ['◎', '瞄准'], ['➤', '博斯科火箭'], ['✹', '爆炸'], ['♨', '火焰'],
-  ['✦', '眩晕'], ['❄', '冰冻'], ['◆', '手雷'], ['◇', '博斯科'], ['◉', '蓄力'],
-  ['▣', '弹匣'], ['⬟', '护盾'], ['⛏', '定点提取'], ['☠', '歼灭'], ['◈', '虫蛋搜集'],
-  ['▰', '护送'], ['⚙', '破坏行动'], ['✧', '采矿远征'], ['✚', '抢救行动'],
-  ['◍', '液态莫凯石精炼'], ['⬡', '重型提取'],
+  ['', '无图标'],
+  ['Icon_Upgrade_Ammo', '弹药'], ['Icon_Upgrade_Aim', '瞄准'], ['Icon_Upgrade_Bosco_Rocket_Upgrade', '博斯科火箭'],
+  ['Icon_Upgrade_Explosive', '爆炸'], ['Icon_Upgrade_GroundFlames', '地面火焰'], ['Icon_Upgrade_Stun', '眩晕'],
+  ['Icon_Upgrade_Cold', '冰冻'], ['Icon_Upgrade_Grenade', '手雷'], ['Icons_Bosco', '博斯科'],
+  ['Icon_Upgrade_ChargeUp', '蓄力'], ['Icon_Upgrade_ClipSize', '弹匣'], ['Icon_Shield', '护盾'],
+  ['MissionIcon_Type_Extraction_HD_Loadout', '定点提取'], ['MissionIcon_Type_Elimination_HD_Loadout', '消灭任务'],
+  ['MissionIcon_Type_EggCollection_HD_Loadout', '虫蛋收集'], ['MissionIcon_Type_Escort_HD_Loadout', '执勤护送'],
+  ['MissionIcon_Type_Facility_HD_Loadout', '设施破坏'], ['MissionIcon_Type_MotherLode_HD_Loadout', '采矿探险'],
+  ['MissionIcon_Type_Salvage_HD_Loadout', '搜救行动'], ['MissionIcon_Type_Refinery_HD_Loadout', '就地精炼'],
+  ['MissionIcon_Type_HeavyExtraction_HD_Loadout', '重型探采'],
 ];
+const LOADOUT_ICON_IMAGES = Array.isArray(window.__DRG_LOADOUT_ICON_IMAGES__) ? window.__DRG_LOADOUT_ICON_IMAGES__ : [];
+function loadoutIconMarkup(index, className = '') {
+  if (index === 0) return `<span class="loadout-icon-empty ${className}" aria-hidden="true"></span>`;
+  const src = LOADOUT_ICON_IMAGES[index - 1];
+  return src?.startsWith('data:image/png;base64,')
+    ? `<img class="loadout-icon-image ${className}" src="${src}" alt="" aria-hidden="true">`
+    : `<span class="loadout-icon-fallback ${className}">${index}</span>`;
+}
 const CLASS_ORDER = ['Driller', 'Engineer', 'Gunner', 'Scout'];
 const CLASS_CN = { Driller: '钻机手', Engineer: '工程师', Gunner: '枪手', Scout: '侦察兵' };
 const STATUS_CN = { forged: '已锻造', history: '仅锻造历史（不可装备）', owned: '待锻造', missing: '未获得' };
@@ -671,6 +684,15 @@ function renderResources() {
   selectAll('[data-character-level]').forEach((el) => el.addEventListener('change', () => setCharacterLevel(el.dataset.characterLevel, el.value)));
 }
 
+function loadoutSlotTabsMarkup(char, activeSlot) {
+  return LOADOUT_SLOT_LABELS.map((label, index) => {
+    const iconIndex = Number(directProperty(char.loadoutsProp?.value?.[index], 'iconIndex')?.value ?? 0);
+    const icon = LOADOUT_ICONS[iconIndex];
+    const description = `配装槽 ${label}，${icon?.[1] || `图标编号 ${iconIndex}`}${char.selected === index ? '，游戏当前使用' : ''}`;
+    return `<button data-loadout-slot="${index}" class="${activeSlot === index ? 'active' : ''} ${char.selected === index ? 'current' : ''}" aria-pressed="${activeSlot === index}" aria-label="${description}" title="${description}"><span class="loadout-slot-letter">${label}</span>${iconIndex > 0 && icon ? loadoutIconMarkup(iconIndex, 'slot') : ''}${char.selected === index ? '<small>当前</small>' : ''}</button>`;
+  }).join('');
+}
+
 function renderClasses() {
   clearTimeout(state.loadoutUi.moduleClickTimer);
   state.loadoutUi.moduleClickTimer = null;
@@ -687,7 +709,7 @@ function renderClasses() {
   const icon = LOADOUT_ICONS[iconIndex];
   const activeTool = ['icons', 'copy', 'weapons'].find((key) => ui.tools[key]) || null;
   const toolContent = activeTool === 'icons'
-    ? `<p class="loadout-hint">选择后只修改这个配装槽的图标；符号为网页示意。</p><div class="loadout-icon-grid">${LOADOUT_ICONS.map(([symbol, label], index) => `<button type="button" data-loadout-icon="${index}" class="${iconIndex === index ? 'active' : ''}" aria-pressed="${iconIndex === index}" aria-label="选择${label}图标"><b>${symbol}</b><span>${label}</span></button>`).join('')}</div>`
+    ? `<p class="loadout-hint">编号 0 为空白；其余图标按游戏存档编号排列，只修改当前配装槽。</p><div class="loadout-icon-grid">${LOADOUT_ICONS.map(([asset, label], index) => `<button type="button" data-loadout-icon="${index}" class="${iconIndex === index ? 'active' : ''}" aria-pressed="${iconIndex === index}" aria-label="选择${label}图标，编号 ${index}" title="${label} · ${asset || '空白'} · 存档编号 ${index}">${loadoutIconMarkup(index)}<span>${label}</span><small>${index}</small></button>`).join('')}</div>`
     : activeTool === 'copy'
       ? `<div class="copy-loadout-controls"><p>复制整个配装槽：武器、模块、超频、武器与角色外观、天赋、胜利姿势及图标。</p><div><label for="copy-loadout-target">槽 ${LOADOUT_SLOT_LABELS[slot]} 复制到</label><select id="copy-loadout-target">${LOADOUT_SLOT_LABELS.map((label, index) => `<option value="${index}" ${index === slot ? 'disabled' : ''} ${index === defaultCopyTarget ? 'selected' : ''}>槽 ${label}${index === char.selected ? '（游戏当前）' : ''}</option>`).join('')}</select><button class="button mini primary" id="copy-loadout">复制配装</button></div></div>`
       : activeTool === 'weapons'
@@ -699,9 +721,9 @@ function renderClasses() {
   root.innerHTML = `
     <div class="section-title loadout-title"><div><p class="eyebrow">LOADOUT WORKBENCH</p><h2>武器与职业配装</h2></div><span>先选配装，再调整需要的部分</span></div>
     <div class="class-filter loadout-class-filter" aria-label="选择职业">${CLASS_ORDER.map((name) => `<button data-loadout-class="${name}" class="${dwarf === name ? 'active' : ''}" aria-pressed="${dwarf === name}">${CLASS_CN[name]}</button>`).join('')}</div>
-    <section class="panel loadout-toolbar"><div><h3>配装槽 ${LOADOUT_SLOT_LABELS[slot]}</h3><small>当前图标 · ${icon?.[1] || `编号 ${iconIndex}`}</small></div><div class="loadout-slot-tabs" aria-label="选择配装槽">${LOADOUT_SLOT_LABELS.map((label, index) => `<button data-loadout-slot="${index}" class="${slot === index ? 'active' : ''} ${char.selected === index ? 'current' : ''}" aria-pressed="${slot === index}" title="${char.selected === index ? '游戏当前使用' : '编辑配装槽'} ${label}">${label}${char.selected === index ? '<small>当前</small>' : ''}</button>`).join('')}</div><button class="button mini" id="set-active-loadout" ${slot === char.selected ? 'disabled' : ''}>${slot === char.selected ? '游戏当前槽' : '设为游戏当前槽'}</button></section>
+    <section class="panel loadout-toolbar"><div><h3>配装槽 ${LOADOUT_SLOT_LABELS[slot]}</h3><small>当前图标 · ${icon?.[1] || `编号 ${iconIndex}`}</small></div><div class="loadout-slot-tabs" aria-label="选择配装槽">${loadoutSlotTabsMarkup(char, slot)}</div><button class="button mini" id="set-active-loadout" ${slot === char.selected ? 'disabled' : ''}>${slot === char.selected ? '游戏当前槽' : '设为游戏当前槽'}</button></section>
     <div class="loadout-utilities" data-active-tool="${activeTool || ''}">
-      <button type="button" class="loadout-tool-tab ${activeTool === 'icons' ? 'active' : ''}" data-loadout-tool="icons" aria-expanded="${activeTool === 'icons'}"><b>${icon?.[0] || '◇'} 配装图标</b><small>${icon?.[1] || iconIndex}</small></button>
+      <button type="button" class="loadout-tool-tab ${activeTool === 'icons' ? 'active' : ''}" data-loadout-tool="icons" aria-expanded="${activeTool === 'icons'}"><b>${icon ? loadoutIconMarkup(iconIndex, 'toolbar') : ''} 配装图标</b><small>${icon?.[1] || `编号 ${iconIndex}`}</small></button>
       <button type="button" class="loadout-tool-tab ${activeTool === 'copy' ? 'active' : ''}" data-loadout-tool="copy" aria-expanded="${activeTool === 'copy'}"><b>复制配装槽</b><small>包含图标、外观与天赋</small></button>
       <button type="button" class="loadout-tool-tab ${activeTool === 'weapons' ? 'active' : ''}" data-loadout-tool="weapons" aria-expanded="${activeTool === 'weapons'}"><b>武器解锁</b><small>${acquiredCount} / ${classWeapons.length} 已获得</small></button>
       ${activeTool ? `<div class="loadout-tool-panel" id="loadout-tool-panel"><div class="tool-panel-head"><b>${({ icons: '选择配装图标', copy: '复制配装槽', weapons: '武器解锁' })[activeTool]}</b><button type="button" class="button mini ghost" data-close-loadout-tool>收起</button></div>${toolContent}</div>` : ''}

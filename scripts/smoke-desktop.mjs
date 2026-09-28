@@ -52,7 +52,7 @@ try {
   } else
   if (process.argv.includes('--readonly')) {
     const view = await evaluate(`({ title: document.title, pageLoaded: document.querySelector('#file-chip')?.classList.contains('loaded'), chooseEnabled: !document.querySelector('#choose-button')?.disabled, version: document.querySelector('.project-link')?.textContent.trim(), status: document.querySelector('#native-status')?.textContent })`);
-    if (!view?.pageLoaded || !view?.chooseEnabled || !view?.version?.includes('v0.8.0')) throw new Error(`Release 页面未正常载入：${JSON.stringify(view)}`);
+    if (!view?.pageLoaded || !view?.chooseEnabled || !view?.version?.includes('v0.8.1')) throw new Error(`Release 页面未正常载入：${JSON.stringify(view)}`);
     console.log(JSON.stringify(view, null, 2));
     process.exitCode = 0;
   } else {

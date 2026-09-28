@@ -1,6 +1,6 @@
-# 矿工档案库 v8 · Windows 桌面版
+# 矿工档案库 v0.8.1 · Windows 桌面版
 
-版本为 0.8.0。桌面版使用 Tauri 2/WebView2；页面和存档转换器继续来自 `dist/`，桌面构建资源输出到 `build/desktop-ui/`。运行时不需要 Node、Rust、PowerShell 助手或本地 HTTP 服务。
+版本为 0.8.1。桌面版使用 Tauri 2/WebView2；页面和存档转换器继续来自 `dist/`，桌面构建资源输出到 `build/desktop-ui/`。运行时不需要 Node、Rust、PowerShell 助手或本地 HTTP 服务。
 
 ## 构建
 

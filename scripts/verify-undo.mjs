@@ -15,10 +15,10 @@ const element = {
 };
 const context = vm.createContext({
   console, structuredClone, convertSavToJson, convertJsonToSav, setTimeout, clearTimeout,
-  window: { __DRG_CATALOG__: catalog, setTimeout: () => 0 }, navigator: {},
-  document: { querySelector: () => element, querySelectorAll: () => [], body: element },
+  window: { __DRG_CATALOG__: catalog, setTimeout: () => 0, addEventListener() {} }, navigator: {},
+  document: { querySelector: () => element, querySelectorAll: () => [], addEventListener() {}, body: element },
 });
-const source = fs.readFileSync(new URL('dist/app.js', project), 'utf8').replace(/^import .*\r?\n/, '');
+const source = fs.readFileSync(new URL('dist/app.js', project), 'utf8').replace(/^import .*\r?\n/gm, '');
 vm.runInContext(`${source}\nrender = () => { if (state.raw) state.model = deriveModel(state.raw); };`, context);
 context.testOriginalJson = originalJson;
 vm.runInContext(`state.originalJson = testOriginalJson; resetAll();`, context);
@@ -26,6 +26,27 @@ const run = (source) => vm.runInContext(source, context);
 const asJson = (source) => JSON.parse(run(`JSON.stringify(${source})`));
 const check = (name, fn) => { run('state.originalJson = testOriginalJson; resetAll()'); fn(); console.log(`✓ ${name}`); };
 const original = JSON.parse(originalJson);
+
+check('配装图标编号 0 为空白，7 对应雪花', () => {
+  assert.equal(run('LOADOUT_ICONS.length'), 22);
+  assert.equal(run('LOADOUT_ICONS[0][1]'), '无图标');
+  assert.equal(run('LOADOUT_ICONS[7][0]'), 'Icon_Upgrade_Cold');
+  assert.equal(run('LOADOUT_ICONS[21][0]'), 'MissionIcon_Type_HeavyExtraction_HD_Loadout');
+  assert.equal(run('loadoutIconMarkup(0).includes("loadout-icon-empty")'), true);
+  run('LOADOUT_ICON_IMAGES[6] = "data:image/png;base64,Y29sZA=="');
+  assert.equal(run('loadoutIconMarkup(7).includes("Y29sZA==")'), true);
+});
+
+check('每个配装槽显示自己的图标，空白槽不显示图案', () => {
+  run(`setLoadoutIcon('Driller', 2, 7)`);
+  const markup = run(`loadoutSlotTabsMarkup(state.model.characters.find(item => item.dwarf === 'Driller'), 2)`);
+  assert.equal((markup.match(/data-loadout-slot=/g) || []).length, 7);
+  const slotC = markup.match(/<button data-loadout-slot="2"[\s\S]*?<\/button>/)?.[0] || '';
+  const slotE = markup.match(/<button data-loadout-slot="4"[\s\S]*?<\/button>/)?.[0] || '';
+  assert.match(slotC, /配装槽 C，冰冻/);
+  assert.match(slotC, /Y29sZA==/);
+  assert.doesNotMatch(slotE, /loadout-icon-image|loadout-icon-fallback/);
+});
 
 check('重复修改同字段一起撤销，保留其他数字调整', () => {
   const credits = run('state.model.props.credits.value');
